@@ -1,0 +1,320 @@
+{
+  "categories": [
+    {
+      "id": "whey",
+      "name": "Whey Protein",
+      "products": [
+        {
+          "description": "Whey protein isolate chất lượng cao, 24g protein mỗi khẩu phần",
+          "id": "whey-gold",
+          "image": "https://th.bing.com/th/id/OIP.H_gHAhG_Yk0LKz1wEfg4egHaHa?rs=1&pid=ImgDetMain",
+          "name": "Whey Protein Gold Standard",
+          "price": 1500000
+        },
+        {
+          "description": "Whey protein isolate tinh khiết, ít lactose, 27g protein mỗi khẩu phần",
+          "id": "whey-isolate",
+          "image": "https://n1.sdlcdn.com/imgs/i/2/o/SOS-Nutrition-Premium-Whey-Isolate-SDL946978167-3-3f56a.jpg",
+          "name": "Whey Protein Isolate",
+          "price": 1800000
+        },
+        {
+          "description": "Whey protein thủy phân, hấp thu nhanh, 25g protein mỗi khẩu phần",
+          "id": "whey-hydro",
+          "image": "https://i5.walmartimages.com/asr/1008d443-0348-4b22-a059-bc7938fa4f14.64d534dd892097c6661833e24a54c60d.png?odnWidth=1000&odnHeight=1000&odnBg=ffffff",
+          "name": "Whey Protein Hydrolyzed",
+          "price": 2000000
+        },
+        {
+          "description": "Kết hợp whey concentrate và isolate, 26g protein mỗi khẩu phần",
+          "id": "whey-blend",
+          "image": "https://www.iafstore.com/imgp/big/a41821.jpg",
+          "name": "Whey Protein Blend",
+          "price": 1600000
+        },
+        {
+          "description": "100% thực vật, phù hợp cho người ăn chay, 22g protein mỗi khẩu phần",
+          "id": "whey-vegan",
+          "image": "https://th.bing.com/th/id/OIP.TvrnuJBPIg99eTpD3t2CbwHaMe?rs=1&pid=ImgDetMain",
+          "name": "Whey Protein Vegan",
+          "price": 2000000
+        },
+        {
+          "description": "Tăng cân và cơ bắp, 50g protein và 600 calo mỗi khẩu phần",
+          "id": "whey-mass",
+          "image": "https://fullydosed.in/wp-content/uploads/2019/11/mass-gainer.png",
+          "name": "Whey Protein Mass Gainer",
+          "price": 1800000
+        },
+        {
+          "description": "Hấp thụ chậm, lý tưởng cho việc phục hồi qua đêm, 24g protein mỗi khẩu phần",
+          "id": "whey-casein",
+          "image": "https://th.bing.com/th/id/R.39da8627a4687b6f1f05b1c40f48b276?rik=USzEDnR%2fEon1iQ&pid=ImgRaw&r=0",
+          "name": "Whey Protein Casein",
+          "price": 1900000
+        },
+        {
+          "description": "Dạng nước, hấp thụ nhanh, 20g protein mỗi khẩu phần",
+          "id": "whey-clear",
+          "image": "https://th.bing.com/th/id/OIP.wnfgAAFNqWVidfZHYyhGkAHaHa?rs=1&pid=ImgDetMain",
+          "name": "Whey Protein Clear",
+          "price": 1700000
+        }
+      ]
+    },
+    {
+      "id": "bcaa",
+      "name": "BCAA",
+      "products": [
+        {
+          "description": "Tỷ lệ 2:1:1 Leucine:Isoleucine:Valine, 5g mỗi khẩu phần",
+          "id": "bcaa-211",
+          "image": "https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0",
+          "name": "BCAA 2:1:1",
+          "price": 800000
+        },
+        {
+          "description": "Tỷ lệ 4:1:1 Leucine:Isoleucine:Valine, 7g mỗi khẩu phần",
+          "id": "bcaa-411",
+          "image": "https://th.bing.com/th/id/OIP.IbAceuvnVouuV8nzbN9M1wHaJd?rs=1&pid=ImgDetMain",
+          "name": "BCAA 4:1:1",
+          "price": 950000
+        },
+        {
+          "description": "Tỷ lệ 8:1:1 Leucine:Isoleucine:Valine, 10g mỗi khẩu phần",
+          "id": "bcaa-811",
+          "image": "https://th.bing.com/th/id/R.d801a3792858bb3eee570954ee36ad2f?rik=AwqJXb9rDA3Kbw&pid=ImgRaw&r=0",
+          "name": "BCAA 8:1:1",
+          "price": 1200000
+        },
+        {
+          "description": "BCAA kết hợp caffeine, tăng năng lượng và sức bền",
+          "id": "bcaa-energy",
+          "image": "https://th.bing.com/th/id/OIP.WM2QWW6nyznBpyN_JMsCZAHaHa?rs=1&pid=ImgDetMain",
+          "name": "BCAA Energy",
+          "price": 1100000
+        },
+        {
+          "description": "BCAA với Glutamine, hỗ trợ phục hồi cơ bắp nhanh chóng",
+          "id": "bcaa-recovery",
+          "image": "https://th.bing.com/th/id/OIP.2AyKD-2-nAYNRIBQm-ZG8QHaLH?rs=1&pid=ImgDetMain",
+          "name": "BCAA Recovery",
+          "price": 1300000
+        },
+        {
+          "description": "BCAA dạng nước, hấp thụ nhanh trong quá trình tập luyện",
+          "id": "bcaa-intra",
+          "image": "https://th.bing.com/th/id/R.8862c960a70dd787b1a1599a8d467f40?rik=aBXfNktyleeH2w&pid=ImgRaw&r=0",
+          "name": "BCAA Intra",
+          "price": 950000
+        },
+        {
+          "description": "BCAA với các axit amin thiết yếu khác, 10g mỗi khẩu phần",
+          "id": "bcaa-complex",
+          "image": "https://th.bing.com/th/id/OIP.H1CewAPkROukc7xqiD4SgAHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "BCAA Complex",
+          "price": 1400000
+        }
+      ]
+    },
+    {
+      "id": "pre-workout",
+      "name": "Pre-workout",
+      "products": [
+        {
+          "description": "Tăng sức mạnh và sức bền, 300mg caffeine mỗi khẩu phần",
+          "id": "pre-explosion",
+          "image": "https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Explosion",
+          "price": 1200000
+        },
+        {
+          "description": "Tăng cường bơm máu và sức mạnh, 250mg caffeine mỗi khẩu phần",
+          "id": "pre-pump",
+          "image": "https://th.bing.com/th/id/OIP.uGdVtLvjE__BLyiUH0WYewHaIq?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Pump",
+          "price": 1100000
+        },
+        {
+          "description": "Tăng tập trung và năng lượng, 200mg caffeine mỗi khẩu phần",
+          "id": "pre-focus",
+          "image": "https://th.bing.com/th/id/OIP.lb3F5PpPXaBQ8bFTsxZTAwHaHa?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Focus",
+          "price": 1000000
+        },
+        {
+          "description": "Tăng sức bền và phục hồi, 150mg caffeine mỗi khẩu phần",
+          "id": "pre-endurance",
+          "image": "https://th.bing.com/th/id/OIP.5QqP-oTnxCTe-1SPT2s08gHaHa?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Endurance",
+          "price": 950000
+        },
+        {
+          "description": "Tăng cường NO, cải thiện bơm máu và sức mạnh",
+          "id": "pre-nitro",
+          "image": "https://th.bing.com/th/id/OIP.0u7Hzum8cQ6lbSRkeXVarAHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Nitro",
+          "price": 1300000
+        },
+        {
+          "description": "Không chứa caffeine, tăng sức mạnh và bơm máu",
+          "id": "pre-stim-free",
+          "image": "https://th.bing.com/th/id/OIP.SQGOT-NpIEbW1P0O_W_1OgHaHa?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Stim-Free",
+          "price": 1100000
+        },
+        {
+          "description": "Công thức tối ưu cho bơm máu và sức mạnh",
+          "id": "pre-pump-max",
+          "image": "https://th.bing.com/th/id/OIP.8xmDb44DhzFLVOCbWxtecQHaHa?rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Pump Max",
+          "price": 1400000
+        },
+        {
+          "description": "Tăng năng lượng và sức bền, 350mg caffeine",
+          "id": "pre-energy",
+          "image": "https://th.bing.com/th/id/OIP.Qr0x_rdqj_DGCoY0beC_jwHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Pre-workout Energy",
+          "price": 1250000
+        }
+      ]
+    },
+    {
+      "id": "vitamins",
+      "name": "Vitamin & Khoáng chất",
+      "products": [
+        {
+          "description": "Hỗ trợ xương chắc khỏe và tăng cường hệ miễn dịch",
+          "id": "vitamin-d3",
+          "image": "https://th.bing.com/th/id/OIP.sDrvw3NzDjwilQB7RQLxEAHaHa?rs=1&pid=ImgDetMain",
+          "name": "Vitamin D3 1000IU",
+          "price": 350000
+        },
+        {
+          "description": "Tốt cho tim mạch và não bộ",
+          "id": "omega-3",
+          "image": "https://th.bing.com/th/id/OIP.9IjMVZ7bSbEK1TnUbiOnTwHaJQ?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Omega 3 Fish Oil",
+          "price": 450000
+        },
+        {
+          "description": "Tăng cường sức đề kháng và làm đẹp da",
+          "id": "vitamin-c",
+          "image": "https://th.bing.com/th/id/OIP.VHQ2vXlMe-DHnx-ImU9QDQHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Vitamin C 1000mg",
+          "price": 280000
+        },
+        {
+          "description": "Hỗ trợ cơ bắp và hệ thần kinh",
+          "id": "magnesium",
+          "image": "https://th.bing.com/th/id/OIP.IYUOWsT68JnKzMQDj6pqwQHaHa?rs=1&pid=ImgDetMain",
+          "name": "Magnesium 400mg",
+          "price": 320000
+        },
+        {
+          "description": "Hỗ trợ chuyển hóa năng lượng và hệ thần kinh",
+          "id": "vitamin-b",
+          "image": "https://th.bing.com/th/id/OIP.8Mnp1endbc2SnBi4FPtwOwHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Vitamin B Complex",
+          "price": 380000
+        },
+        {
+          "description": "Tăng cường miễn dịch và sức khỏe sinh lý",
+          "id": "zinc",
+          "image": "https://th.bing.com/th/id/OIP.eYX-vHhqk2xezl5KslDZ0AHaHa?rs=1&pid=ImgDetMain",
+          "name": "Zinc 50mg",
+          "price": 290000
+        },
+        {
+          "description": "Hỗ trợ xương chắc khỏe và phát triển chiều cao",
+          "id": "calcium",
+          "image": "https://th.bing.com/th/id/OIP.UwRLGJXhTlM9-ADGkweBIwAAAA?rs=1&pid=ImgDetMain",
+          "name": "Calcium + D3",
+          "price": 320000
+        },
+        {
+          "description": "Bổ sung đầy đủ vitamin và khoáng chất thiết yếu",
+          "id": "multivitamin",
+          "image": "https://th.bing.com/th/id/OIP.7LALHE5WPkBuHydsJtFZnQHaHa?o=7rm=3&rs=1&pid=ImgDetMain",
+          "name": "Multivitamin Premium",
+          "price": 450000
+        }
+      ]
+    },
+    {
+      "id": "weight-loss",
+      "name": "Sản phẩm giảm cân",
+      "products": [
+        {
+          "description": "Hỗ trợ đốt mỡ và tăng cường năng lượng",
+          "id": "l-carnitine",
+          "image": "https://th.bing.com/th/id/OIP.iWwVzO6oetTF-hcI9k28uwHaHa?w=800&h=800&rs=1&pid=ImgDetMain",
+          "name": "L-Carnitine 1000mg",
+          "price": 550000
+        },
+        {
+          "description": "Giảm mỡ và tăng cơ hiệu quả",
+          "id": "cla",
+          "image": "https://th.bing.com/th/id/OIP.cgq3tU9HtCSJnRoUFAC58AHaHa?rs=1&pid=ImgDetMain",
+          "name": "CLA 1000mg",
+          "price": 680000
+        },
+        {
+          "description": "Tăng cường trao đổi chất và đốt mỡ",
+          "id": "green-tea",
+          "image": "https://i5.walmartimages.com/seo/Green-Tea-Extract-Capsules-1000mg-98-Standardized-EGCG-3X-Strength-Natural-Energy-Heart-Support-Polyphenols-Gentle-Caffeine-240_c8a3b3e0-1ed9-41e8-b68d-44eed17ce23b.31fda483fe805b0c8267e8d6d4d395d9.jpeg",
+          "name": "Green Tea Extract",
+          "price": 420000
+        },
+        {
+          "description": "Hỗ trợ giảm cân toàn diện",
+          "id": "fat-burner",
+          "image": "https://th.bing.com/th/id/OIP.x-JYjUTV7Am2DqXMx-yHkgHaOV?rs=1&pid=ImgDetMain",
+          "name": "Fat Burner Pro",
+          "price": 750000
+        },
+        {
+          "description": "Công thức mạnh mẽ cho giảm mỡ nhanh chóng",
+          "id": "fat-burner-xtreme",
+          "image": "https://th.bing.com/th/id/OIP.S71MrTqkX8OWi-GITVO-NgHaHa?rs=1&pid=ImgDetMain",
+          "name": "Fat Burner Xtreme",
+          "price": 850000
+        },
+        {
+          "description": "Kiểm soát cơn đói và giảm cảm giác thèm ăn",
+          "id": "appetite-control",
+          "image": "https://th.bing.com/th/id/OIP.x4a_z60xmWXFGLwpv0ylwAHaHa?w=500&h=500&rs=1&pid=ImgDetMain",
+          "name": "Appetite Control",
+          "price": 680000
+        },
+        {
+          "description": "Tăng cường trao đổi chất và đốt mỡ",
+          "id": "metabolism",
+          "image": "https://th.bing.com/th/id/OIP.8sxvLMfGbDvYtPi8z6yBLwHaNh?rs=1&pid=ImgDetMain",
+          "name": "Metabolism Booster",
+          "price": 720000
+        },
+        {
+          "description": "Ngăn chặn hấp thụ carbohydrate dư thừa",
+          "id": "carb-blocker",
+          "image": "https://th.bing.com/th/id/OIP.sBBxnDXUeD3yu12nPi291QHaJ4?rs=1&pid=ImgDetMain",
+          "name": "Carb Blocker",
+          "price": 650000
+        }
+      ]
+    }
+  ],
+  "users": {
+    "KrrIsbVNW7cp2cbEkYEYU0wK2Ss1": {
+      "displayName": "Chương Đặng",
+      "email": "dangthienchuong250604@gmail.com",
+      "googleData": {
+        "created_at": "Tue, 10 Jun 2025 05:46:23 GMT",
+        "email_verified": true
+      },
+      "lastLogin": "2025-06-14T12:49:13.391Z",
+      "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLTsa2Ey6iTRBYB6jdE6sQQbz-ueo9FRW4FPvKAgeDuOUd1OQ=s96-c",
+      "provider": "google"
+    }
+  }
+}
