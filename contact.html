@@ -78,7 +78,7 @@
     .nav-links {
         display: flex;
         list-style: none;
-        gap: 2.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links a {
@@ -2204,55 +2204,22 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
-                <li><a href="promotion.html">Khuyến mãi</a></li>
+                <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
-                <li><a href="contact.html" class="active">Liên hệ</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
             </ul>
             <div class="search-container">
                 <input type="text" placeholder="Tìm kiếm..." class="search-input">
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart">
+                    <div class="btn-cart" onclick="window.location.href='products.html'">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </div>
-                    <div class="cart-dropdown">
-                        <div class="cart-header">
-                            <h3>
-                                <i class="fas fa-shopping-cart"></i>
-                                Giỏ hàng
-                                <span class="cart-count-badge">0 sản phẩm</span>
-                            </h3>
-                        </div>
-                        <div class="cart-items">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="cart-summary">
-                            <div class="cart-summary-row">
-                                <span>Tạm tính:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row">
-                                <span>Phí vận chuyển:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row total">
-                                <span>Tổng cộng:</span>
-                                <span>0₫</span>
-                            </div>
-                        </div>
-                        <div class="cart-buttons">
-                            <button class="btn-continue">Tiếp tục mua</button>
-                            <button class="btn-checkout">Thanh toán</button>
-                        </div>
-                        <div class="empty-cart" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <p>Giỏ hàng của bạn đang trống</p>
-                            <a href="#products" class="btn-shop">Thanh toán ngay</a>
-                        </div>
-                    </div>
+                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
+                    <div class="cart-dropdown" style="display:none !important;"></div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
@@ -2319,7 +2286,10 @@
                 <p>Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều</p>
                 <p>0847 788 360</p>
                 <p>8:00 - 22:00</p>
-                <p><a href="https://maps.google.com" target="_blank">Xem Bản Đồ</a></p>
+                <div style="width: 100%; height: 300px; margin-bottom: 1rem; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <iframe src="https://www.google.com/maps?q=Hẻm+112/12,+Đường+3/2,+Hưng+Lợi,+Ninh+Kiều,+Cần+Thơ&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <p><a href="https://maps.google.com/?q=Hẻm+112/12,+Đường+3/2,+Hưng+Lợi,+Ninh+Kiều,+Cần+Thơ" target="_blank">Xem Bản Đồ</a></p>
             </div>
     </section>
 
@@ -3047,6 +3017,57 @@
                     });
                 }
             });
+        });
+
+        // Gửi form liên hệ lên Firebase
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const name = document.getElementById('name').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const phone = document.getElementById('phone').value.trim();
+                    const message = document.getElementById('message').value.trim();
+
+                    if (!name || !email || !phone || !message) {
+                        Swal.fire({
+                            title: 'Lỗi!',
+                            text: 'Vui lòng điền đầy đủ thông tin!',
+                            icon: 'error',
+                            confirmButtonColor: '#FF6B00'
+                        });
+                        return;
+                    }
+
+                    try {
+                        const database = firebase.database();
+                        const newContactRef = database.ref('contacts').push();
+                        await newContactRef.set({
+                            name,
+                            email,
+                            phone,
+                            message,
+                            createdAt: new Date().toISOString()
+                        });
+                        Swal.fire({
+                            title: 'Thành công!',
+                            text: 'Tin nhắn của bạn đã được gửi. Chúng tôi sẽ liên hệ lại sớm nhất!',
+                            icon: 'success',
+                            confirmButtonColor: '#FF6B00',
+                            timer: 2500
+                        });
+                        contactForm.reset();
+                    } catch (error) {
+                        Swal.fire({
+                            title: 'Lỗi!',
+                            text: 'Gửi tin nhắn thất bại: ' + error.message,
+                            icon: 'error',
+                            confirmButtonColor: '#FF6B00'
+                        });
+                    }
+                });
+            }
         });
     </script>
 </body>

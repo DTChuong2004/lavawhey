@@ -78,7 +78,7 @@
     .nav-links {
         display: flex;
         list-style: none;
-        gap: 2.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links a {
@@ -2559,9 +2559,10 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Trang chủ</a></li>
-                <li><a href="products.html">Sản phẩm</a></li>
-                <li><a href="promotion.html">Khuyến mãi</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
+                <li><a href="products.html" class="active">Sản phẩm</a></li>
+                <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
             </ul>
@@ -3141,6 +3142,25 @@
                             }
                             
                             input.value = value;
+                        });
+                    });
+
+                    // Gán lại sự kiện click cho các link danh mục
+                    categoryList.querySelectorAll('a[data-category]').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            // Xóa class active ở tất cả danh mục
+                            categoryList.querySelectorAll('a').forEach(a => a.classList.remove('active'));
+                            this.classList.add('active');
+                            const selectedCategory = this.getAttribute('data-category');
+                            // Ẩn/hiện các section sản phẩm
+                            document.querySelectorAll('.product-category').forEach(section => {
+                                if (selectedCategory === 'all' || section.getAttribute('data-category') === selectedCategory) {
+                                    section.style.display = '';
+                                } else {
+                                    section.style.display = 'none';
+                                }
+                            });
                         });
                     });
                 })

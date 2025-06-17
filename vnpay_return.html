@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả thanh toán VNPay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+        .result-container {
+            max-width: 480px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px #0002;
+            padding: 36px 28px 32px 28px;
+            animation: fadeIn 0.7s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .result-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #22c55e;
+            letter-spacing: 1px;
+        }
+        .result-fail {
+            color: #f44336;
+        }
+        .icon-success, .icon-fail {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .icon-success svg {
+            width: 64px; height: 64px;
+            stroke: #22c55e;
+            stroke-width: 3.5;
+            fill: none;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: dash 1s forwards;
+        }
+        .icon-fail svg {
+            width: 64px; height: 64px;
+            stroke: #f44336;
+            stroke-width: 3.5;
+            fill: none;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: dash 1s forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        .result-section {
+            margin-bottom: 18px;
+        }
+        .result-section h3 {
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #333;
+            border-left: 4px solid #6366f1;
+            padding-left: 8px;
+        }
+        .result-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .result-table td {
+            padding: 6px 0;
+            vertical-align: top;
+        }
+        .result-table .label {
+            color: #666;
+            width: 140px;
+        }
+        .result-table .value {
+            font-weight: 500;
+            color: #222;
+        }
+        .btn-home {
+            display: block;
+            width: 100%;
+            margin-top: 28px;
+            padding: 13px 0;
+            background: linear-gradient(90deg, #6366f1 0%, #22c55e 100%);
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-align: center;
+            box-shadow: 0 2px 8px #6366f133;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .btn-home:hover {
+            background: linear-gradient(90deg, #22c55e 0%, #6366f1 100%);
+            transform: translateY(-2px) scale(1.03);
+        }
+        @media (max-width: 600px) {
+            .result-container { padding: 18px 4vw 18px 4vw; }
+            .result-title { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+<div id="result" class="result-container" style="display:none;"></div>
+<script>
+    // Firebase config (copy từ checkout.html)
+    const firebaseConfig = {
+        apiKey: "AIzaSyDPdSUkT56drPQGE9N4KvjM3ZoQaeamdao",
+        authDomain: "lavawhey.firebaseapp.com",
+        projectId: "lavawhey",
+        storageBucket: "lavawhey.firebasestorage.app",
+        messagingSenderId: "261576736130",
+        appId: "1:261576736130:web:9d8b878a50e01c9591a39b",
+        measurementId: "G-BR9VJHPJGL"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function getQueryParams() {
+        const params = {};
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+            params[key] = decodeURIComponent(value);
+        });
+        return params;
+    }
+
+    async function handleVNPayReturn() {
+        const params = getQueryParams();
+        const txnRef = params['vnp_TxnRef'];
+        const responseCode = params['vnp_ResponseCode'];
+        const vnp_Amount = params['vnp_Amount'];
+        const vnp_BankCode = params['vnp_BankCode'];
+        const vnp_PayDate = params['vnp_PayDate'];
+        const vnp_OrderInfo = params['vnp_OrderInfo'];
+        const vnp_TransactionNo = params['vnp_TransactionNo'];
+
+        // Ưu tiên lấy orderKey từ localStorage, nếu không có thì lấy từ vnp_OrderInfo
+        let orderKey = localStorage.getItem('pendingOrderKey');
+        if (!orderKey && vnp_OrderInfo) {
+            // Giả sử vnp_OrderInfo = 'Thanh toan don hang ORDER_123456789'
+            const match = vnp_OrderInfo.match(/ORDER_\d+/);
+            if (match) orderKey = match[0];
+        }
+        if (!orderKey) {
+            document.getElementById('result').innerHTML = `
+                <div class="icon-fail"><svg viewBox="0 0 64 64"><line x1="16" y1="16" x2="48" y2="48"/><line x1="48" y1="16" x2="16" y2="48"/></svg></div>
+                <div class="result-title result-fail">Không tìm thấy đơn hàng!</div>
+                <a href="index.html" class="btn-home">Về trang chủ</a>
+            `;
+            document.getElementById('result').style.display = '';
+            return;
+        }
+
+        const orderSnap = await firebase.database().ref('orders/' + orderKey).once('value');
+        const order = orderSnap.val();
+        if (!order) {
+            document.getElementById('result').innerHTML = `
+                <div class="icon-fail"><svg viewBox="0 0 64 64"><line x1="16" y1="16" x2="48" y2="48"/><line x1="48" y1="16" x2="16" y2="48"/></svg></div>
+                <div class="result-title result-fail">Không tìm thấy chi tiết đơn hàng!</div>
+                <a href="index.html" class="btn-home">Về trang chủ</a>
+            `;
+            document.getElementById('result').style.display = '';
+            return;
+        }
+
+        if (responseCode === '00') {
+            await firebase.database().ref('orders/' + orderKey).update({
+                status: 'paid',
+                paymentStatus: 'success',
+                vnp_TransactionNo: vnp_TransactionNo,
+                vnp_TxnRef: txnRef,
+                vnp_PayDate: vnp_PayDate,
+                vnp_BankCode: vnp_BankCode
+            });
+            await firebase.database().ref('invoices/' + txnRef).set({
+                orderKey,
+                vnp_TransactionNo,
+                vnp_TxnRef: txnRef,
+                vnp_Amount,
+                vnp_BankCode,
+                vnp_PayDate,
+                vnp_OrderInfo,
+                createdAt: new Date().toISOString(),
+                customer: order.customer || order.customerInfo || {},
+                items: order.items || [],
+                total: order.total || order.grandTotal || 0,
+                coupon: order.coupon || null,
+                discountAmount: order.discountAmount || 0
+            });
+            localStorage.removeItem('cart_guest');
+            if (order.userId) {
+                localStorage.removeItem('cart_' + order.userId);
+            }
+            localStorage.removeItem('pendingOrderKey');
+            localStorage.removeItem('vnpayTxnRef');
+
+            document.getElementById('result').innerHTML = `
+                <div class="icon-success">
+                    <svg viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="30" stroke="#e0e7ff" stroke-width="4" fill="none"/>
+                        <polyline points="18,34 28,44 46,22" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="result-title">Thanh toán thành công!</div>
+                <div class="result-section">
+                    <h3>Thông tin giao dịch</h3>
+                    <table class="result-table">
+                        <tr><td class="label">Mã giao dịch VNPay:</td><td class="value">${txnRef}</td></tr>
+                        <tr><td class="label">Số giao dịch ngân hàng:</td><td class="value">${vnp_TransactionNo || '-'}</td></tr>
+                        <tr><td class="label">Số tiền:</td><td class="value">${(Number(vnp_Amount)/100).toLocaleString('vi-VN')} VND</td></tr>
+                        <tr><td class="label">Ngân hàng:</td><td class="value">${vnp_BankCode || '-'}</td></tr>
+                        <tr><td class="label">Thời gian thanh toán:</td><td class="value">${vnp_PayDate || '-'}</td></tr>
+                        <tr><td class="label">Nội dung:</td><td class="value">${vnp_OrderInfo || '-'}</td></tr>
+                    </table>
+                </div>
+                <div class="result-section">
+                    <h3>Thông tin người đặt</h3>
+                    <table class="result-table">
+                        <tr><td class="label">Họ tên:</td><td class="value">${order.customer?.firstName || order.customerInfo?.fullName || '-'} ${order.customer?.lastName || ''}</td></tr>
+                        <tr><td class="label">Email:</td><td class="value">${order.customer?.email || order.customerInfo?.email || '-'}</td></tr>
+                        <tr><td class="label">SĐT:</td><td class="value">${order.customer?.phone || order.customerInfo?.phone || '-'}</td></tr>
+                        <tr><td class="label">Địa chỉ:</td><td class="value">${order.customer?.address || order.customerInfo?.address || '-'}</td></tr>
+                    </table>
+                </div>
+                <div class="result-section">
+                    <h3>Chi tiết đơn hàng</h3>
+                    <table class="result-table">
+                        ${(order.items||[]).map(item => `<tr><td class="label">${item.name}</td><td class="value">${item.quantity} x ${(item.price).toLocaleString('vi-VN')} VND</td></tr>`).join('')}
+                        <tr><td class="label">Tổng cộng:</td><td class="value">${(order.total || order.grandTotal || 0).toLocaleString('vi-VN')} VND</td></tr>
+                        ${order.coupon ? `<tr><td class="label">Mã giảm giá:</td><td class="value">${order.coupon} (-${(order.discountAmount||0).toLocaleString('vi-VN')} VND)</td></tr>` : ''}
+                    </table>
+                </div>
+                <a href="index.html" class="btn-home">Về trang chủ</a>
+            `;
+            document.getElementById('result').style.display = '';
+        } else {
+            document.getElementById('result').innerHTML = `
+                <div class="icon-fail"><svg viewBox="0 0 64 64"><line x1="16" y1="16" x2="48" y2="48"/><line x1="48" y1="16" x2="16" y2="48"/></svg></div>
+                <div class="result-title result-fail">Thanh toán thất bại!</div>
+                <div class="result-section">
+                    <h3>Thông tin giao dịch</h3>
+                    <table class="result-table">
+                        <tr><td class="label">Mã giao dịch VNPay:</td><td class="value">${txnRef}</td></tr>
+                        <tr><td class="label">Số giao dịch ngân hàng:</td><td class="value">${vnp_TransactionNo || '-'}</td></tr>
+                        <tr><td class="label">Số tiền:</td><td class="value">${(Number(vnp_Amount)/100).toLocaleString('vi-VN')} VND</td></tr>
+                        <tr><td class="label">Ngân hàng:</td><td class="value">${vnp_BankCode || '-'}</td></tr>
+                        <tr><td class="label">Thời gian thanh toán:</td><td class="value">${vnp_PayDate || '-'}</td></tr>
+                        <tr><td class="label">Nội dung:</td><td class="value">${vnp_OrderInfo || '-'}</td></tr>
+                    </table>
+                </div>
+                <a href="index.html" class="btn-home">Về trang chủ</a>
+            `;
+            document.getElementById('result').style.display = '';
+        }
+    }
+
+    handleVNPayReturn();
+</script>
+</body>
+</html>

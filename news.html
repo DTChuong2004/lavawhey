@@ -78,7 +78,7 @@
     .nav-links {
         display: flex;
         list-style: none;
-        gap: 2.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links a {
@@ -2066,21 +2066,37 @@
 
     .product-buttons {
         display: flex;
-        gap: 10px;
-        padding: 0 1.5rem;
+        gap: 12px;
+        margin-top: 20px;
+        padding: 0 10px 10px;
+        width: 100%;
     }
 
-    .btn-add-cart {
+    .btn-add-cart, .btn-buy-now {
         flex: 1;
-        padding: 10px;
-        background-color: white;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
+        height: 44px;
+        padding: 0 15px;
         border-radius: 8px;
         cursor: pointer;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         transition: all 0.3s ease;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 140px;
+    }
+
+    .btn-add-cart {
+        background-color: white;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        gap: 8px;
+    }
+
+    .btn-add-cart i {
+        font-size: 1rem;
     }
 
     .btn-add-cart:hover {
@@ -2090,21 +2106,477 @@
     }
 
     .btn-buy-now {
-        flex: 1;
-        padding: 10px;
         background-color: var(--primary-color);
         color: white;
         border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s ease;
     }
 
     .btn-buy-now:hover {
         background-color: var(--secondary-color);
         transform: translateY(-2px);
+    }
+
+    @media (max-width: 1200px) {
+        .btn-add-cart, .btn-buy-now {
+            font-size: 0.9rem;
+            padding: 0 10px;
+            min-width: 120px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .product-buttons {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-add-cart, .btn-buy-now {
+            width: 100%;
+        }
+    }
+
+    /* Promotion Section Styles */
+    .promotion-section {
+        padding: 80px 5%;
+        background: linear-gradient(135deg, #fff5f5 0%, #fff0f6 100%);
+        margin-top: 120px;
+    }
+
+    .promotion-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .promotion-header h1 {
+        font-size: 2.5rem;
+        color: var(--dark-color);
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .promotion-header p {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .promotion-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .promotion-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .promotion-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+
+    .promotion-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        z-index: 1;
+    }
+
+    .promotion-image {
+        width: 100%;
+        height: 300px;
+        object-fit: contain;
+        background: #f8f9fa;
+        padding: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .promotion-content {
+        padding: 25px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .promotion-title {
+        font-size: 1.3rem;
+        color: var(--dark-color);
+        margin-bottom: 10px;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    .promotion-description {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+        flex: 1;
+    }
+
+    .promotion-price {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .original-price {
+        color: #999;
+        text-decoration: line-through;
+        font-size: 1rem;
+    }
+
+    .discounted-price {
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    .product-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        padding: 0 10px 10px;
+        width: 100%;
+    }
+
+    .btn-add-cart, .btn-buy-now {
+        flex: 1;
+        height: 44px;
+        padding: 0 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 140px;
+    }
+
+    .btn-add-cart {
+        background-color: white;
+        color: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        gap: 8px;
+    }
+
+    .btn-add-cart i {
+        font-size: 1rem;
+    }
+
+    .btn-add-cart:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-buy-now {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+    }
+
+    .btn-buy-now:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 1200px) {
+        .btn-add-cart, .btn-buy-now {
+            font-size: 0.9rem;
+            padding: 0 10px;
+            min-width: 120px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .product-buttons {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .btn-add-cart, .btn-buy-now {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .promotion-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .promotion-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .promotion-header h1 {
+            font-size: 2rem;
+        }
+
+        .promotion-card {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+
+    /* Flash Sale Banner Enhancement */
+    .sale-banner {
+        background: linear-gradient(135deg, #ff4e50, #f9d423);
+        padding: 60px 20px;
+        text-align: center;
+        color: white;
+        margin: 40px auto;
+        max-width: 1200px;
+        border-radius: 30px;
+        box-shadow: 0 15px 40px rgba(255,78,80,0.3);
+    }
+
+    .sale-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .sale-banner h2 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .sale-banner p {
+        font-size: 1.3em;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin: 30px 0;
+    }
+
+    .countdown-item {
+        background: rgba(255,255,255,0.2);
+        padding: 20px;
+        border-radius: 15px;
+        min-width: 100px;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .countdown-item span:first-child {
+        font-size: 2.5em;
+        font-weight: 800;
+        display: block;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .countdown-item span:last-child {
+        font-size: 1em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+        .promotion-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .countdown {
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .countdown-item {
+            min-width: 80px;
+            padding: 15px;
+        }
+        
+        .sale-banner h2 {
+            font-size: 2em;
+        }
+        
+        .promotion-header h1 {
+            font-size: 2.2rem;
+        }
+    }
+
+    /* Modal nâng cấp phong cách web lớn */
+    #news-modal.modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(3px);
+      align-items: center; justify-content: center;
+      transition: background 0.3s;
+      animation: fadeInModalBg 0.3s;
+    }
+    #news-modal.modal.show { display: flex; }
+    @keyframes fadeInModalBg { from { opacity: 0; } to { opacity: 1; } }
+    #news-modal .modal-content {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 700px;
+      width: 98vw;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.22);
+      animation: modalZoomIn 0.38s cubic-bezier(.77,0,.18,1);
+      position: relative;
+      padding: 0 0 28px 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes modalZoomIn { from { transform: scale(0.85) translateY(60px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    #news-modal .close-modal {
+      position: absolute;
+      top: 18px; right: 18px;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.85);
+      border-radius: 50%;
+      color: #FF6B00;
+      font-size: 2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      border: none;
+      transition: background 0.2s, color 0.2s;
+      z-index: 10;
+    }
+    #news-modal .close-modal:hover {
+      background: #FF6B00;
+      color: #fff;
+    }
+    #news-modal .modal-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 270px;
+      overflow: hidden;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    }
+    #news-modal .modal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(.77,0,.18,1);
+    }
+    #news-modal.show .modal-img {
+      transform: scale(1.04);
+    }
+    #news-modal .modal-img-overlay {
+      position: absolute;
+      left: 0; right: 0; bottom: 0; top: 0;
+      background: linear-gradient(to bottom,rgba(0,0,0,0.08) 40%,rgba(0,0,0,0.55) 100%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 0 24px 0;
+    }
+    #news-modal .modal-title {
+      font-size: 2.1rem;
+      color: #fff;
+      font-weight: 800;
+      margin: 0 28px 6px 28px;
+      line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      z-index: 3;
+    }
+    #news-modal .modal-meta {
+      font-size: 1em;
+      color: #ffe0c2;
+      margin: 0 28px 0 28px;
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      z-index: 3;
+    }
+    #news-modal .modal-meta i { color: #FFB266; margin-right: 4px; }
+    #modal-body {
+      padding: 60px 50px 0 50px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    #news-modal .modal-content-text {
+      color: #333;
+      font-size: 1.15em;
+      line-height: 1.8;
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+    #news-modal .modal-tags {
+      margin-top: 10px;
+    }
+    #news-modal .modal-tag {
+      display: inline-block;
+      background: #FFF3E6;
+      color: #FF6B00;
+      padding: 6px 16px;
+      border-radius: 16px;
+      margin-right: 8px;
+      font-size: 1em;
+      font-weight: 500;
+      margin-bottom: 4px;
+      box-shadow: 0 1px 4px rgba(255,107,0,0.07);
+    }
+    @media (max-width: 700px) {
+      #news-modal .modal-content { max-width: 99vw; }
+      #modal-body { padding: 18px 8px 0 8px; }
+      #news-modal .modal-title, #news-modal .modal-meta { margin-left: 12px; margin-right: 12px; }
+      #news-modal .modal-img-wrap { height: 180px; }
+    }
+    @media (max-width: 480px) {
+      #news-modal .modal-title { font-size: 1.1rem; }
+      #modal-body { font-size: 0.98em; }
+    }
+
+    #news-modal .modal-content {
+      max-width: 900px; /* tăng chiều rộng tối đa */
+    }
+    #news-modal .modal-img-wrap {
+      height: 340px; /* tăng chiều cao ảnh đầu bài */
+    }
+    #news-modal .modal-title {
+      font-size: 2.6rem; /* tiêu đề lớn hơn */
+    }
+    #news-modal .modal-content-text {
+      font-size: 1.22em; /* nội dung lớn hơn */
+    }
+    @media (max-width: 1000px) {
+      #news-modal .modal-content { max-width: 99vw; }
+      #modal-body { padding: 30px 10px 0 10px; }
+      #news-modal .modal-img-wrap { height: 180px; }
     }
 </style>
 
@@ -2120,8 +2592,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
-                <li><a href="promotion.html">Khuyến mãi</a></li>
+                <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
             </ul>
@@ -2129,52 +2602,48 @@
                 <input type="text" placeholder="Tìm kiếm..." class="search-input">
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart">
+                    <div class="btn-cart" onclick="window.location.href='products.html'">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </div>
-                    <div class="cart-dropdown">
-                        <div class="cart-header">
-                            <h3>
-                                <i class="fas fa-shopping-cart"></i>
-                                Giỏ hàng
-                                <span class="cart-count-badge">0 sản phẩm</span>
-                            </h3>
-                        </div>
-                        <div class="cart-items">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="cart-summary">
-                            <div class="cart-summary-row">
-                                <span>Tạm tính:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row">
-                                <span>Phí vận chuyển:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row total">
-                                <span>Tổng cộng:</span>
-                                <span>0₫</span>
-                            </div>
-                        </div>
-                        <div class="cart-buttons">
-                            <button class="btn-continue">Tiếp tục mua</button>
-                            <button class="btn-checkout">Thanh toán</button>
-                        </div>
-                        <div class="empty-cart" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <p>Giỏ hàng của bạn đang trống</p>
-                            <a href="#products" class="btn-shop">Thanh toán ngay</a>
-                        </div>
-                    </div>
+                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
+                    <div class="cart-dropdown" style="display:none !important;"></div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
         </nav>
     </header>
 
-    
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Promotion Hero" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Khuyến Mãi Đặc Biệt</h1>
+            <p>Giảm giá lên đến 30% cho các sản phẩm thực phẩm bổ sung chất lượng cao</p>
+            <a href="#promotion-section" class="cta-button">Xem Ngay</a>
+        </div>
+    </section>
+
+    <!-- Promotion Section -->
+    <section class="promotion-section" id="promotion-section">
+   
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="news-section">
+        <h2>Tin tức mới nhất</h2>
+        <div class="news-grid" id="news-list">
+            <!-- Tin tức sẽ được render ở đây -->
+        </div>
+        <div id="news-detail" style="display:none;"></div>
+    </section>
+
+    <div id="news-modal" class="modal">
+        <div class="modal-content" style="max-width:600px;">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -2640,13 +3109,15 @@
                             
                             try {
                                 await userRef.update(userData);
+                                console.log('User data updated successfully');
                             } catch (dbError) {
+                                // Don't show error to user, just log it
                                 console.warn('Failed to update user data:', dbError);
+                                // Still proceed with the login flow
+                                hideModal(loginModal);
+                                showSuccessMessage('Đăng nhập thành công!');
+                                updateUIForLoggedInUser(result.user);
                             }
-                            
-                            hideModal(loginModal);
-                            showSuccessMessage('Đăng nhập thành công!');
-                            updateUIForLoggedInUser(result.user);
                         }
                     } catch (error) {
                         if (error.code === 'auth/popup-closed-by-user') {
@@ -2823,7 +3294,8 @@
 
             function updateCartSummary() {
                 const subtotal = cart.reduce((sum, item) => {
-                    const price = parseInt(item.price.replace(/[^\d]/g, ''));
+                    const priceStr = typeof item.price === 'string' ? item.price : String(item.price);
+                    const price = parseInt(priceStr.replace(/[^\d]/g, ''));
                     return sum + (price * item.quantity);
                 }, 0);
 
@@ -2874,6 +3346,183 @@
                     });
                 }
             });
+        });
+
+        // Hiển thị danh sách mã giảm giá đang hoạt động
+        function renderActiveCoupons() {
+            const promoSection = document.getElementById('promotion-section') || document.querySelector('.promotion-section');
+            if (!promoSection) return;
+            const now = new Date();
+            firebase.database().ref('coupons').once('value').then(snap => {
+                const coupons = snap.val() || {};
+                const activeCoupons = Object.values(coupons).filter(coupon => {
+                    if (coupon.status !== 'active') return false;
+                    const start = new Date(coupon.startDate);
+                    const end = new Date(coupon.endDate);
+                    return now >= start && now <= end;
+                });
+                if (activeCoupons.length === 0) {
+                    promoSection.innerHTML = '<div style="text-align:center;font-size:1.2rem;color:#888;">Hiện chưa có mã giảm giá nào đang hoạt động.</div>';
+                    return;
+                }
+                promoSection.innerHTML = `
+                    <h2 style="text-align:center;margin-bottom:32px;color:#FF6B00;">Mã giảm giá đang hoạt động</h2>
+                    <div class="voucher-container">
+                        ${activeCoupons.map(coupon => `
+                            <div class="voucher-card">
+                                <div class="voucher-left">
+                                    <div class="discount">${coupon.type === 'percent' ? coupon.discount + '%' : coupon.discount.toLocaleString('vi-VN') + '₫'}</div>
+                                    <div class="discount-text">${coupon.type === 'percent' ? 'Giảm giá' : 'Giảm trực tiếp'}</div>
+                                </div>
+                                <div class="voucher-right">
+                                    <h3>${coupon.code}</h3>
+                                    <p>${coupon.description || ''}</p>
+                                    <div class="voucher-info">
+                                        <span><i class="fas fa-calendar-alt"></i> ${coupon.startDate} - ${coupon.endDate}</span>
+                                        <span><i class="fas fa-tag"></i> ${coupon.type === 'percent' ? 'Phần trăm' : 'Số tiền'}</span>
+                                    </div>
+                                    <button class="copy-button" data-code="${coupon.code}"><i class="fas fa-copy"></i> Sao chép mã</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                // Thêm sự kiện copy mã
+                promoSection.querySelectorAll('.copy-button').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const code = this.getAttribute('data-code');
+                        navigator.clipboard.writeText(code);
+                        Swal.fire('Đã sao chép!', `Mã <b>${code}</b> đã được sao chép.`, 'success');
+                    });
+                });
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            renderActiveCoupons();
+        });
+
+        // Hiển thị tin tức từ Firebase
+        function renderNewsList() {
+            const newsList = document.getElementById('news-list');
+            newsList.innerHTML = '<div style="text-align:center;color:#888;">Đang tải tin tức...</div>';
+            firebase.database().ref('news').once('value').then(snap => {
+                const news = snap.val() || {};
+                const newsArr = Object.values(news).sort((a, b) => new Date(b.date) - new Date(a.date));
+                if (newsArr.length === 0) {
+                    newsList.innerHTML = '<div style="text-align:center;color:#888;">Chưa có tin tức nào.</div>';
+                    return;
+                }
+                newsList.innerHTML = newsArr.map(item => `
+                    <div class="news-card" data-id="${item.id}" style="background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow 0.2s;margin-bottom:24px;cursor:pointer;">
+                        <img src="${item.image}" alt="${item.title}" style="width:100%;height:200px;object-fit:cover;">
+                        <div style="padding:20px;flex:1;display:flex;flex-direction:column;">
+                            <h3 style="font-size:1.3rem;color:#FF6B00;margin-bottom:10px;">${item.title}</h3>
+                            <p style="color:#555;flex:1;">${item.description}</p>
+                            <div style="font-size:0.95em;color:#888;margin:10px 0 0;">
+                                <i class="fas fa-calendar-alt"></i> ${item.date} &nbsp;|&nbsp; <i class="fas fa-user"></i> ${item.author}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                // Sự kiện click vào card để đọc chi tiết
+                document.querySelectorAll('.news-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const newsItem = newsArr.find(n => n.id === id);
+                        if (newsItem) showNewsModal(newsItem);
+                    });
+                });
+            });
+        }
+        function showNewsModal(item) {
+            const modal = document.getElementById('news-modal');
+            const body = document.getElementById('modal-body');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            body.innerHTML = `
+                <div class="modal-img-wrap">
+                    <img src="${item.image}" alt="${item.title}" class="modal-img">
+                    <div class="modal-img-overlay">
+                        <div class="modal-title">${item.title}</div>
+                        <div class="modal-meta">
+                            <span><i class='fas fa-calendar-alt'></i> ${item.date}</span>
+                            <span><i class='fas fa-user'></i> ${item.author}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-content-text">${item.content}</div>
+                <div class="modal-tags">
+                    ${(item.tags||[]).map(tag=>`<span class='modal-tag'>#${tag}</span>`).join('')}
+                </div>
+            `;
+            modal.querySelector('.close-modal').onclick = function() {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            };
+            window.onclick = function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            };
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            renderNewsList();
+        });
+
+        // Lấy tham số id trên URL
+        function getQueryParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        // Hiển thị chi tiết tin tức nếu có id trên URL
+        async function renderNewsDetailById(id) {
+            const newsList = document.getElementById('news-list');
+            const newsDetail = document.getElementById('news-detail');
+            newsList.style.display = 'none';
+            newsDetail.style.display = 'block';
+            newsDetail.innerHTML = '<div style="text-align:center;color:#888;">Đang tải chi tiết tin...</div>';
+            try {
+                const snap = await firebase.database().ref('news/' + id).once('value');
+                const item = snap.val();
+                if (!item) {
+                    newsDetail.innerHTML = '<div style="text-align:center;color:#888;">Không tìm thấy tin tức.</div>';
+                    return;
+                }
+                newsDetail.innerHTML = `
+                    <div style="background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden;max-width:800px;margin:32px auto 32px auto;padding:0 0 32px 0;">
+                        <div style="width:100%;height:320px;overflow:hidden;border-radius:16px 16px 0 0;">
+                            <img src="${item.image}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">
+                        </div>
+                        <div style="padding:32px 24px 0 24px;">
+                            <h1 style="font-size:2.2rem;color:#FF6B00;margin-bottom:12px;">${item.title}</h1>
+                            <div style="color:#888;font-size:1.05em;margin-bottom:18px;">
+                                <i class="fas fa-calendar-alt"></i> ${item.date} &nbsp;|&nbsp; <i class="fas fa-user"></i> ${item.author}
+                            </div>
+                            <div style="font-size:1.18em;color:#333;margin-bottom:18px;">${item.description}</div>
+                            <div style="font-size:1.15em;line-height:1.8;color:#222;margin-bottom:18px;">${item.content}</div>
+                            <div style="margin-top:10px;">${(item.tags||[]).map(tag=>`<span style='display:inline-block;background:#FFF3E6;color:#FF6B00;padding:6px 16px;border-radius:16px;margin-right:8px;font-size:1em;font-weight:500;margin-bottom:4px;box-shadow:0 1px 4px rgba(255,107,0,0.07);'>#${tag}</span>`).join('')}</div>
+                            <div style="margin-top:32px;"><a href="news.html" style="color:#FF6B00;font-weight:600;text-decoration:underline;font-size:1.1em;">← Quay lại danh sách tin tức</a></div>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                newsDetail.innerHTML = '<div style="text-align:center;color:#888;">Lỗi tải chi tiết tin tức.</div>';
+            }
+        }
+
+        // Nếu có id trên URL thì hiển thị chi tiết, ngược lại hiển thị danh sách
+        const newsId = getQueryParam('id');
+        document.addEventListener('DOMContentLoaded', function() {
+            if (newsId) {
+                renderNewsDetailById(newsId);
+            } else {
+                document.getElementById('news-list').style.display = 'block';
+                const newsDetail = document.getElementById('news-detail');
+                if (newsDetail) newsDetail.style.display = 'none';
+                renderNewsList();
+            }
         });
     </script>
 </body>

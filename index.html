@@ -78,7 +78,7 @@
     .nav-links {
         display: flex;
         list-style: none;
-        gap: 2.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links a {
@@ -932,28 +932,43 @@
             grid-template-columns: 1fr;
         }
     }
+    .news-grid.news-slider {
+        min-height: 420px;
+        /* Đảm bảo chiều cao tối thiểu cho grid slider, có thể điều chỉnh nếu cần */
+    }
     .news-card {
+        height: 100%;
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         background: var(--gray-color);
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         overflow: hidden;
         transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .news-card a {
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
     .news-card img {
         width: 100%;
         height: 180px;
         object-fit: cover;
+        flex-shrink: 0;
     }
     .news-card h3 {
         font-size: 1.3rem;
         margin: 1rem 1.2rem 0.5rem 1.2rem;
         color: var(--dark-color);
+        min-height: 48px;
     }
     .news-card p {
         margin: 0 1.2rem 1rem 1.2rem;
         color: #555;
+        min-height: 48px;
         flex: 1;
     }
     .read-more {
@@ -963,6 +978,8 @@
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s;
+        align-self: flex-start;
+        margin-top: auto;
     }
     .read-more:hover {
         color: var(--secondary-color);
@@ -2106,6 +2123,33 @@
         background-color: var(--secondary-color);
         transform: translateY(-2px);
     }
+
+    .news-pagination .news-page-btn {
+        background: #fff;
+        border: 2px solid #FF6B00;
+        color: #FF6B00;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .news-pagination .news-page-btn.active {
+        background: #FF6B00;
+        color: #fff;
+    }
+    .news-next-btn:hover {
+        background: #FF8533 !important;
+    }
+    @media (max-width: 900px) {
+        .news-next-btn { right: -20px !important; }
+    }
+    @media (max-width: 600px) {
+        .news-next-btn { right: 0 !important; top: 100%; transform: translateY(0); margin-top: 10px; }
+        .news-pagination { margin-bottom: 20px; }
+    }
 </style>
 
 </head>
@@ -2120,8 +2164,9 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
-                <li><a href="promotion.html">Khuyến mãi</a></li>
+                <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
             </ul>
@@ -2129,45 +2174,11 @@
                 <input type="text" placeholder="Tìm kiếm..." class="search-input">
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart">
+                    <div class="btn-cart" onclick="window.location.href='products.html'">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </div>
-                    <div class="cart-dropdown">
-                        <div class="cart-header">
-                            <h3>
-                                <i class="fas fa-shopping-cart"></i>
-                                Giỏ hàng
-                                <span class="cart-count-badge">0 sản phẩm</span>
-                            </h3>
-                        </div>
-                        <div class="cart-items">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="cart-summary">
-                            <div class="cart-summary-row">
-                                <span>Tạm tính:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row">
-                                <span>Phí vận chuyển:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row total">
-                                <span>Tổng cộng:</span>
-                                <span>0₫</span>
-                            </div>
-                        </div>
-                        <div class="cart-buttons">
-                            <button class="btn-continue">Tiếp tục mua</button>
-                            <button class="btn-checkout">Thanh toán</button>
-                        </div>
-                        <div class="empty-cart" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <p>Giỏ hàng của bạn đang trống</p>
-                            <a href="#products" class="btn-shop">Thanh toán ngay</a>
-                        </div>
-                    </div>
+                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
+                    <div class="cart-dropdown" style="display:none !important;"></div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
@@ -2211,122 +2222,13 @@
         </div>
     </section>
 
-    <!-- Discounted Products Section -->
-    <section class="discounted-products">
-        <h2>Sản phẩm giảm giá</h2>
-        <div class="product-grid">
-            <div class="product-card sale">
-                <div class="sale-badge">-30%</div>
-                <img src="https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain" alt="Whey Protein Gold Standard">
-                <h3>Whey Protein Gold Standard</h3>
-                <p class="original-price">1,500,000₫</p>
-                <p class="price">1,050,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(7, 'Whey Protein Gold Standard (SALE)', 1050000, 'https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card sale">
-                <div class="sale-badge">-30%</div>
-                <img src="https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0" alt="BCAA 2:1:1">
-                <h3>BCAA 2:1:1</h3>
-                <p class="original-price">800,000₫</p>
-                <p class="price">560,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(8, 'BCAA 2:1:1 (SALE)', 560000, 'https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card sale">
-                <div class="sale-badge">-30%</div>
-                <img src="https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain" alt="Pre-workout Explosion">
-                <h3>Pre-workout Explosion</h3>
-                <p class="original-price">1,200,000₫</p>
-                <p class="price">840,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(9, 'Pre-workout Explosion (SALE)', 840000, 'https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
     <!-- Featured Products -->
     <section class="featured-products">
         <h2>Sản phẩm nổi bật</h2>
         <div class="product-grid">
-            <div class="product-card">
-                <img src="https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain" alt="Whey Protein Gold Standard">
-                <h3>Whey Protein Gold Standard</h3>
-                <p class="price">1,500,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(1, 'Whey Protein Gold Standard', 1500000, 'https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0" alt="BCAA 2:1:1">
-                <h3>BCAA 2:1:1</h3>
-                <p class="price">800,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(2, 'BCAA 2:1:1', 800000, 'https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain" alt="Pre-workout Explosion">
-                <h3>Pre-workout Explosion</h3>
-                <p class="price">1,200,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(3, 'Pre-workout Explosion', 1200000, 'https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://i5.walmartimages.com/asr/654f6ce1-d604-4648-8e50-8b0c1a7f670f.e13a170b961ab1af87b0ca7417bbd94d.jpeg" alt="Vitamin D3">
-                <h3>Vitamin D3 1000IU</h3>
-                <p class="price">350,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(4, 'Vitamin D3 1000IU', 350000, 'https://i5.walmartimages.com/asr/654f6ce1-d604-4648-8e50-8b0c1a7f670f.e13a170b961ab1af87b0ca7417bbd94d.jpeg')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://s3.images-iherb.com/now/now00068/l/5.jpg" alt="L-Carnitine">
-                <h3>L-Carnitine 1000mg</h3>
-                <p class="price">550,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(5, 'L-Carnitine 1000mg', 550000, 'https://s3.images-iherb.com/now/now00068/l/5.jpg')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://th.bing.com/th/id/OIP.gq3LPcdVrKiWWv6RAx088gHaHa?rs=1&pid=ImgDetMain" alt="Whey Protein Isolate">
-                <h3>Whey Protein Isolate</h3>
-                <p class="price">1,800,000₫</p>
-                <div class="product-buttons">
-                    <button class="btn-add-cart" onclick="addToCart(6, 'Whey Protein Isolate', 1800000, 'https://th.bing.com/th/id/OIP.gq3LPcdVrKiWWv6RAx088gHaHa?rs=1&pid=ImgDetMain')">
-                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                    </button>
-                    <button class="btn-buy-now">Mua ngay</button>
-                </div>
-            </div>
+            <!-- Sản phẩm nổi bật sẽ được render bằng JS -->
         </div>
     </section>
 
@@ -2377,83 +2279,20 @@
         </div>
     </section>
 
-    <!-- Voucher Section -->
-    <section class="voucher-section">
-        <h2>Voucher Giảm Giá</h2>
-        <div class="voucher-container">
-            <div class="voucher-card">
-                <div class="voucher-left">
-                    <div class="discount">30%</div>
-                    <div class="discount-text">GIẢM GIÁ</div>
-                </div>
-                <div class="voucher-right">
-                    <h3>Mã: WELCOME30</h3>
-                    <p>Giảm 30% cho đơn hàng đầu tiên</p>
-                    <div class="voucher-info">
-                        <span><i class="fas fa-clock"></i> Còn 3 ngày</span>
-                        <span><i class="fas fa-tag"></i> Tối đa 500.000đ</span>
-                    </div>
-                    <button class="copy-button">Sao chép mã</button>
-                </div>
-            </div>
-
-            <div class="voucher-card">
-                <div class="voucher-left">
-                    <div class="discount">50%</div>
-                    <div class="discount-text">GIẢM GIÁ</div>
-                </div>
-                <div class="voucher-right">
-                    <h3>Mã: WHEY50</h3>
-                    <p>Giảm 50% cho sản phẩm Whey Protein</p>
-                    <div class="voucher-info">
-                        <span><i class="fas fa-clock"></i> Còn 5 ngày</span>
-                        <span><i class="fas fa-tag"></i> Tối đa 1.000.000đ</span>
-                    </div>
-                    <button class="copy-button">Sao chép mã</button>
-                </div>
-            </div>
-
-            <div class="voucher-card">
-                <div class="voucher-left">
-                    <div class="discount">20%</div>
-                    <div class="discount-text">GIẢM GIÁ</div>
-                </div>
-                <div class="voucher-right">
-                    <h3>Mã: SUMMER20</h3>
-                    <p>Giảm 20% cho tất cả sản phẩm</p>
-                    <div class="voucher-info">
-                        <span><i class="fas fa-clock"></i> Còn 7 ngày</span>
-                        <span><i class="fas fa-tag"></i> Không giới hạn</span>
-                    </div>
-                    <button class="copy-button">Sao chép mã</button>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- News Section -->
     <section id="news" class="news-section">
         <h2>Tin tức mới nhất</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png" alt="Tin tức 1">
-                <h3>Whey Protein: Lợi ích và cách sử dụng hiệu quả</h3>
-                <p>Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.</p>
-                <a href="#" class="read-more">Đọc thêm</a>
+        <div class="news-slider-wrapper" style="position:relative;">
+            <div class="news-grid news-slider" style="transition: transform 0.5s cubic-bezier(.77,0,.18,1); will-change: transform;">
+                <!-- Các tin tức sẽ được render bằng JS -->
             </div>
-            <div class="news-card">
-                <img src="https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png" alt="Tin tức 2">
-                <h3>BCAA là gì? Tác dụng của BCAA trong tập luyện</h3>
-                <p>Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.</p>
-                <a href="#" class="read-more">Đọc thêm</a>
-            </div>
-            <div class="news-card">
-                <img src="https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png" alt="Tin tức 3">
-                <h3>Pre-workout: Bí quyết tăng năng lượng trước khi tập</h3>
-                <p>Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!</p>
-                <a href="#" class="read-more">Đọc thêm</a>
-            </div>
+            <!-- Ẩn nút next vì chỉ hiển thị 3 tin -->
+            <button class="news-next-btn" style="display:none;"></button>
         </div>
+        <!-- Ẩn phân trang vì chỉ hiển thị 3 tin -->
+        <div class="news-pagination" style="display:none;"></div>
     </section>
 
     <!-- Contact Section -->
@@ -2479,8 +2318,8 @@
                     <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="name">Số điện thoại</label>
-                    <input type="text" id="numer" name="numer" required>
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email của bạn</label>
@@ -3007,215 +2846,493 @@
             });
         });
 
-        // Cart functionality
+        // --- CART GLOBAL LOGIC ---
+        let cart = [];
+        // Cart DOM elements and event listeners must be set after DOMContentLoaded
         document.addEventListener('DOMContentLoaded', function() {
-            const cartBtn = document.querySelector('.btn-cart');
-            const cartDropdown = document.querySelector('.cart-dropdown');
-            const cartItems = document.querySelector('.cart-items');
-            const cartCount = document.querySelector('.cart-count');
-            const cartCountBadge = document.querySelector('.cart-count-badge');
-            const emptyCart = document.querySelector('.empty-cart');
-            const cartSummary = document.querySelector('.cart-summary');
-            const cartButtons = document.querySelector('.cart-buttons');
-            
-            let cart = [];
-            
+            window.cartBtn = document.querySelector('.btn-cart');
+            window.cartDropdown = document.querySelector('.cart-dropdown');
+            window.cartItems = document.querySelector('.cart-items');
+            window.cartCount = document.querySelector('.cart-count');
+            window.cartCountBadge = document.querySelector('.cart-count-badge');
+            window.emptyCart = document.querySelector('.empty-cart');
+            window.cartSummary = document.querySelector('.cart-summary');
+            window.cartButtons = document.querySelector('.cart-buttons');
+
             // Toggle cart dropdown
             cartBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 cartDropdown.classList.toggle('show');
                 updateCartDisplay();
             });
-
+            // Prevent dropdown from closing when clicking inside
+            cartDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
             // Close cart when clicking outside
             document.addEventListener('click', function(e) {
                 if (!cartDropdown.contains(e.target) && !cartBtn.contains(e.target)) {
                     cartDropdown.classList.remove('show');
                 }
             });
-
-            // Add to cart functionality
-            document.querySelectorAll('.buy-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const product = this.closest('.product-card');
-                    const productId = product.dataset.id;
-                    const productName = product.querySelector('h3').textContent;
-                    const productPrice = product.querySelector('.price').textContent;
-                    const productImage = product.querySelector('img').src;
-
-                    addToCart({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        image: productImage,
-                        quantity: 1
-                    });
-
-                    // Show success notification
-                    Swal.fire({
-                        title: 'Thêm vào giỏ hàng thành công!',
-                        text: productName,
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        position: 'top-end',
-                        toast: true
-                    });
-                });
-            });
-
-            function addToCart(product) {
-                const existingItem = cart.find(item => item.id === product.id);
-                
-                if (existingItem) {
-                    existingItem.quantity++;
-                } else {
-                    cart.push(product);
-                }
-                
-                updateCartDisplay();
-                saveCart();
-            }
-
-            function updateCartDisplay() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                cartCount.textContent = totalItems;
-                cartCountBadge.textContent = `${totalItems} sản phẩm`;
-
-                if (totalItems === 0) {
-                    emptyCart.style.display = 'block';
-                    cartSummary.style.display = 'none';
-                    cartButtons.style.display = 'none';
-                    cartItems.innerHTML = '';
-                } else {
-                    emptyCart.style.display = 'none';
-                    cartSummary.style.display = 'block';
-                    cartButtons.style.display = 'flex';
-                    renderCartItems();
-                }
-
-                updateCartSummary();
-            }
-
-            function renderCartItems() {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <h4 class="cart-item-name">${item.name}</h4>
-                            <div class="cart-item-price">${item.price}</div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn minus" ${item.quantity === 1 ? 'disabled' : ''}>-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99">
-                                <button class="quantity-btn plus">+</button>
-                            </div>
-                        </div>
-                        <i class="fas fa-times cart-item-remove"></i>
-                    </div>
-                `).join('');
-
-                // Add event listeners for quantity buttons
-                cartItems.querySelectorAll('.quantity-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        const cartItem = cart.find(i => i.id === id);
-                        
-                        if (this.classList.contains('plus')) {
-                            cartItem.quantity++;
-                        } else if (this.classList.contains('minus') && cartItem.quantity > 1) {
-                            cartItem.quantity--;
-                        }
-                        
-                        updateCartDisplay();
-                        saveCart();
-                    });
-                });
-
-                // Add event listeners for quantity input
-                cartItems.querySelectorAll('.quantity-input').forEach(input => {
-                    input.addEventListener('change', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        const cartItem = cart.find(i => i.id === id);
-                        const newQuantity = parseInt(this.value);
-                        
-                        if (newQuantity > 0 && newQuantity < 100) {
-                            cartItem.quantity = newQuantity;
-                            updateCartDisplay();
-                            saveCart();
-                        } else {
-                            this.value = cartItem.quantity;
-                        }
-                    });
-                });
-
-                // Add event listeners for remove buttons
-                cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        cart = cart.filter(i => i.id !== id);
-                        updateCartDisplay();
-                        saveCart();
-                    });
-                });
-            }
-
-            function updateCartSummary() {
-                const subtotal = cart.reduce((sum, item) => {
-                    const price = parseInt(item.price.replace(/[^\d]/g, ''));
-                    return sum + (price * item.quantity);
-                }, 0);
-
-                const shipping = subtotal > 0 ? 30000 : 0; // Phí ship 30k cho đơn hàng có sản phẩm
-                const total = subtotal + shipping;
-
-                const summaryRows = cartDropdown.querySelectorAll('.cart-summary-row');
-                summaryRows[0].querySelector('span:last-child').textContent = formatPrice(subtotal);
-                summaryRows[1].querySelector('span:last-child').textContent = formatPrice(shipping);
-                summaryRows[2].querySelector('span:last-child').textContent = formatPrice(total);
-            }
-
-            function formatPrice(price) {
-                return new Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(price);
-            }
-
-            function saveCart() {
-                localStorage.setItem('cart', JSON.stringify(cart));
-            }
-
-            function loadCart() {
-                const savedCart = localStorage.getItem('cart');
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    updateCartDisplay();
-                }
-            }
-
-            // Load cart on page load
-            loadCart();
-
             // Handle continue shopping button
             document.querySelector('.btn-continue').addEventListener('click', function() {
                 cartDropdown.classList.remove('show');
             });
-
             // Handle checkout button
             document.querySelector('.btn-checkout').addEventListener('click', function() {
                 if (cart.length > 0) {
-                    // Implement checkout logic here
+                    window.location.href = 'checkout.html';
+                }
+            });
+            // Load cart on page load
+            loadCart();
+        });
+        // --- END CART GLOBAL LOGIC ---
+
+        function getCartKey() {
+            const user = firebase.auth().currentUser;
+            return user ? `cart_${user.uid}` : 'cart_guest';
+        }
+        function saveCart() {
+            localStorage.setItem(getCartKey(), JSON.stringify(cart));
+        }
+        function loadCart() {
+            const savedCart = localStorage.getItem(getCartKey());
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartDisplay();
+            } else {
+                cart = [];
+                updateCartDisplay();
+            }
+        }
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            // Đảm bảo price là số trước khi thêm vào giỏ hàng
+            const price = typeof product.price === 'string'
+                ? parseInt(product.price.replace(/[^\d]/g, ''))
+                : product.price;
+            if (existingItem) {
+                existingItem.quantity += product.quantity || 1;
+            } else {
+                cart.push({
+                    ...product,
+                    price: price // Lưu price dưới dạng số
+                });
+            }
+            updateCartDisplay();
+            saveCart();
+        }
+        function updateCartDisplay() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCountBadge.textContent = `${totalItems} sản phẩm`;
+            if (totalItems === 0) {
+                emptyCart.style.display = 'block';
+                cartSummary.style.display = 'none';
+                cartButtons.style.display = 'none';
+                cartItems.innerHTML = '';
+            } else {
+                emptyCart.style.display = 'none';
+                cartSummary.style.display = 'block';
+                cartButtons.style.display = 'flex';
+                renderCartItems();
+            }
+            updateCartSummary();
+        }
+        function renderCartItems() {
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-name">${item.name}</h4>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" ${item.quantity === 1 ? 'disabled' : ''}>-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                    <i class="fas fa-times cart-item-remove"></i>
+                </div>
+            `).join('');
+            // Add event listeners for quantity buttons
+            cartItems.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    const cartItem = cart.find(i => i.id === id);
+                    if (this.classList.contains('plus')) {
+                        cartItem.quantity++;
+                    } else if (this.classList.contains('minus') && cartItem.quantity > 1) {
+                        cartItem.quantity--;
+                    }
+                    updateCartDisplay();
+                    saveCart();
+                });
+            });
+            // Add event listeners for quantity input
+            cartItems.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    const cartItem = cart.find(i => i.id === id);
+                    const newQuantity = parseInt(this.value);
+                    if (newQuantity > 0 && newQuantity < 100) {
+                        cartItem.quantity = newQuantity;
+                        updateCartDisplay();
+                        saveCart();
+                    } else {
+                        this.value = cartItem.quantity;
+                    }
+                });
+            });
+            // Add event listeners for remove buttons
+            cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    cart = cart.filter(i => i.id !== id);
+                    updateCartDisplay();
+                    saveCart();
+                });
+            });
+        }
+        function updateCartSummary() {
+            const subtotal = cart.reduce((sum, item) => {
+                const price = typeof item.price === 'string' 
+                    ? parseInt(item.price.replace(/[^\d]/g, ''))
+                    : item.price;
+                return sum + (price * item.quantity);
+            }, 0);
+            const shipping = subtotal > 0 ? 30000 : 0;
+            const total = subtotal + shipping;
+            const summaryRows = cartDropdown.querySelectorAll('.cart-summary-row');
+            summaryRows[0].querySelector('span:last-child').textContent = formatPrice(subtotal);
+            summaryRows[1].querySelector('span:last-child').textContent = formatPrice(shipping);
+            summaryRows[2].querySelector('span:last-child').textContent = formatPrice(total);
+        }
+        // --- END CART GLOBAL LOGIC ---
+
+        // Function to format price
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+
+        // News slider logic
+        const newsData = [
+            // 9 tin mẫu, bạn có thể thêm nhiều hơn nếu muốn
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: Lợi ích và cách sử dụng hiệu quả',
+                desc: 'Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA là gì? Tác dụng của BCAA trong tập luyện',
+                desc: 'Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Bí quyết tăng năng lượng trước khi tập',
+                desc: 'Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!'
+            },
+            // Tin 4-9 mẫu
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: Có nên dùng hàng ngày?',
+                desc: 'Chuyên gia dinh dưỡng nói gì về việc dùng whey protein mỗi ngày?'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA và phục hồi cơ bắp',
+                desc: 'BCAA giúp phục hồi cơ bắp nhanh hơn sau tập luyện.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Thành phần và lưu ý',
+                desc: 'Những thành phần chính trong pre-workout và lưu ý khi sử dụng.'
+            },
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: So sánh các loại phổ biến',
+                desc: 'So sánh Whey Concentrate, Isolate và Hydrolyzed.'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA: Khi nào nên dùng?',
+                desc: 'Thời điểm tốt nhất để bổ sung BCAA cho người tập gym.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Có nên dùng cho người mới?',
+                desc: 'Lời khuyên cho người mới bắt đầu sử dụng pre-workout.'
+            }
+        ];
+
+        const newsPerPage = 3;
+        let newsPage = 0;
+
+        function renderNewsSlider(page) {
+            const grid = document.querySelector('.news-slider');
+            grid.innerHTML = '';
+            const start = page * newsPerPage;
+            const end = start + newsPerPage;
+            const items = newsData.slice(start, end);
+            items.forEach(news => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <a href="${news.link}" style="text-decoration:none; color:inherit; display:block;">
+                        <img src="${news.img}" alt="${news.title}">
+                        <h3>${news.title}</h3>
+                        <p>${news.desc}</p>
+                        <span class="read-more" style="color:#FF6B00; font-weight:500; display:inline-block; margin-top:8px;">Đọc thêm</span>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function setActiveNewsPage(page) {
+            document.querySelectorAll('.news-page-btn').forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === page);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderNewsSlider(newsPage);
+            setActiveNewsPage(newsPage);
+            // Nút số
+            document.querySelectorAll('.news-page-btn').forEach((btn, idx) => {
+                btn.addEventListener('click', function() {
+                    newsPage = idx;
+                    renderNewsSlider(newsPage);
+                    setActiveNewsPage(newsPage);
+                });
+            });
+            // Nút trượt phải
+            document.querySelector('.news-next-btn').addEventListener('click', function() {
+                newsPage = (newsPage + 1) % Math.ceil(newsData.length / newsPerPage);
+                renderNewsSlider(newsPage);
+                setActiveNewsPage(newsPage);
+            });
+        });
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Hiển thị mã khuyến mãi động thay cho banner Siêu Sale Tháng 3
+    document.addEventListener('DOMContentLoaded', async function() {
+        const saleBanner = document.querySelector('.sale-banner .sale-content');
+        if (saleBanner) {
+            // Xóa nội dung cũ
+            saleBanner.innerHTML = '<h2>Đang tải khuyến mãi...</h2>';
+            try {
+                const db = firebase.database();
+                const snapshot = await db.ref('coupons').once('value');
+                const coupons = snapshot.val();
+                let found = false;
+                if (coupons) {
+                    const now = new Date();
+                    for (const key in coupons) {
+                        const coupon = coupons[key];
+                        // Kiểm tra trạng thái và thời gian
+                        const start = new Date(coupon.startDate);
+                        const end = new Date(coupon.endDate);
+                        if (coupon.status === 'active' && now >= start && now <= end) {
+                            found = true;
+                            saleBanner.innerHTML = `
+                                <h2>Mã khuyến mãi: <span style="color:#FF6B00">${coupon.code}</span></h2>
+                                <p style="font-size:1.3em;font-weight:600;">${coupon.description || ''}</p>
+                                <div style="font-size:1.1em;margin:18px 0;">
+                                    <b>Giảm giá:</b> ${coupon.discount}${coupon.type === 'percent' ? '%' : '₫'}<br>
+                                    <b>Thời gian áp dụng:</b> ${coupon.startDate} - ${coupon.endDate}<br>
+                                    <b>Trạng thái:</b> <span style="color:${coupon.status==='active'?'#4CAF50':'#d33'}">${coupon.status==='active'?'Đang diễn ra':'Không hoạt động'}</span>
+                                </div>
+                                <button class="cta-button" onclick="navigator.clipboard.writeText('${coupon.code}');Swal.fire({title:'Đã sao chép mã!',text:'${coupon.code}',icon:'success',timer:1200,showConfirmButton:false})">Sao chép mã</button>
+                            `;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    saleBanner.innerHTML = '<h2>Hiện chưa có khuyến mãi nào đang diễn ra</h2>';
+                }
+            } catch (err) {
+                saleBanner.innerHTML = '<h2>Lỗi tải khuyến mãi</h2>';
+            }
+        }
+    });
+    // ... existing code ...
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Gửi form liên hệ trên trang chủ lên Firebase
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.querySelector('form.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !phone || !email || !message) {
                     Swal.fire({
-                        title: 'Tiến hành thanh toán',
-                        text: 'Chức năng đang được phát triển',
-                        icon: 'info'
+                        title: 'Lỗi!',
+                        text: 'Vui lòng điền đầy đủ thông tin!',
+                        icon: 'error',
+                        confirmButtonColor: '#FF6B00'
+                    });
+                    return;
+                }
+
+                try {
+                    const database = firebase.database();
+                    const newContactRef = database.ref('contacts').push();
+                    await newContactRef.set({
+                        name,
+                        phone,
+                        email,
+                        message,
+                        createdAt: new Date().toISOString()
+                    });
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Tin nhắn của bạn đã được gửi. Chúng tôi sẽ liên hệ lại sớm nhất!',
+                        icon: 'success',
+                        confirmButtonColor: '#FF6B00',
+                        timer: 2500
+                    });
+                    contactForm.reset();
+                } catch (error) {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Gửi tin nhắn thất bại: ' + error.message,
+                        icon: 'error',
+                        confirmButtonColor: '#FF6B00'
                     });
                 }
             });
-        });
+        }
+    });
+    // ... existing code ...
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Lấy 3 tin mới nhất từ Firebase và render ra slider
+    async function fetchAndRenderNews() {
+        const grid = document.querySelector('.news-slider');
+        grid.innerHTML = '<div style="text-align:center;width:100%">Đang tải tin tức...</div>';
+        try {
+            const db = firebase.database();
+            // Lấy tất cả tin, sắp xếp theo date giảm dần, lấy 3 tin mới nhất
+            const snapshot = await db.ref('news').once('value');
+            const newsObj = snapshot.val();
+            if (!newsObj) {
+                grid.innerHTML = '<div style="text-align:center;width:100%">Chưa có tin tức</div>';
+                return;
+            }
+            // Chuyển object thành array và sort theo date giảm dần
+            const newsArr = Object.values(newsObj)
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
+
+            grid.innerHTML = '';
+            newsArr.forEach(news => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <a href="news.html?id=${news.id}" style="text-decoration:none; color:inherit; display:block;">
+                        <img src="${news.image}" alt="${news.title}">
+                        <h3>${news.title}</h3>
+                        <p>${news.description}</p>
+                        <span class="read-more" style="color:#FF6B00; font-weight:500; display:inline-block; margin-top:8px;">Đọc thêm</span>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        } catch (err) {
+            grid.innerHTML = '<div style="text-align:center;width:100%">Lỗi tải tin tức</div>';
+        }
+    }
+
+    // Gọi hàm khi DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchAndRenderNews();
+    });
+    // ... existing code ...
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Lấy mỗi loại 1 sản phẩm nổi bật từ Firebase và render ra trang chủ
+    async function fetchAndRenderFeaturedProducts() {
+        const grid = document.querySelector('.featured-products .product-grid');
+        grid.innerHTML = '<div style="text-align:center;width:100%">Đang tải sản phẩm...</div>';
+        try {
+            const db = firebase.database();
+            // Lấy tất cả category và sản phẩm
+            const snapshot = await db.ref('categories').once('value');
+            const categories = snapshot.val();
+            if (!categories || !Array.isArray(categories)) {
+                grid.innerHTML = '<div style="text-align:center;width:100%">Chưa có sản phẩm</div>';
+                return;
+            }
+            // Lấy mỗi loại 1 sản phẩm đầu tiên
+            const featured = [];
+            categories.forEach(cat => {
+                if (cat.products && cat.products.length > 0) {
+                    featured.push({
+                        ...cat.products[0],
+                        category: cat.name
+                    });
+                }
+            });
+            grid.innerHTML = '';
+            featured.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${product.price.toLocaleString('vi-VN')}₫</p>
+                    <div class="product-buttons">
+                        <button class="btn-add-cart" onclick="addToCart({id: '${product.id}', name: '${product.name}', price: ${product.price}, image: '${product.image}', quantity: 1})">
+                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+                        <button class="btn-buy-now">Mua ngay</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        } catch (err) {
+            grid.innerHTML = '<div style="text-align:center;width:100%">Lỗi tải sản phẩm</div>';
+        }
+    }
+    // Gọi hàm khi DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchAndRenderFeaturedProducts();
+        // ... các hàm khác ...
+    });
+    // ... existing code ...
     </script>
 </body>
 </html> 

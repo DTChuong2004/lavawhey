@@ -78,7 +78,7 @@
     .nav-links {
         display: flex;
         list-style: none;
-        gap: 2.5rem;
+        gap: 1.5rem;
     }
 
     .nav-links a {
@@ -2066,37 +2066,21 @@
 
     .product-buttons {
         display: flex;
-        gap: 12px;
-        margin-top: 20px;
-        padding: 0 10px 10px;
-        width: 100%;
-    }
-
-    .btn-add-cart, .btn-buy-now {
-        flex: 1;
-        height: 44px;
-        padding: 0 15px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 0.95rem;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 140px;
+        gap: 10px;
+        padding: 0 1.5rem;
     }
 
     .btn-add-cart {
+        flex: 1;
+        padding: 10px;
         background-color: white;
         color: var(--primary-color);
         border: 2px solid var(--primary-color);
-        gap: 8px;
-    }
-
-    .btn-add-cart i {
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
         font-size: 1rem;
+        transition: all 0.3s ease;
     }
 
     .btn-add-cart:hover {
@@ -2106,9 +2090,16 @@
     }
 
     .btn-buy-now {
+        flex: 1;
+        padding: 10px;
         background-color: var(--primary-color);
         color: white;
         border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
     }
 
     .btn-buy-now:hover {
@@ -2116,318 +2107,740 @@
         transform: translateY(-2px);
     }
 
-    @media (max-width: 1200px) {
-        .btn-add-cart, .btn-buy-now {
-            font-size: 0.9rem;
-            padding: 0 10px;
-            min-width: 120px;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .product-buttons {
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .btn-add-cart, .btn-buy-now {
-            width: 100%;
-        }
-    }
-
-    /* Promotion Section Styles */
-    .promotion-section {
-        padding: 80px 5%;
-        background: linear-gradient(135deg, #fff5f5 0%, #fff0f6 100%);
-        margin-top: 120px;
-    }
-
-    .promotion-header {
-        text-align: center;
-        margin-bottom: 60px;
-    }
-
-    .promotion-header h1 {
-        font-size: 2.5rem;
-        color: var(--dark-color);
-        margin-bottom: 20px;
-        font-weight: 700;
-    }
-
-    .promotion-header p {
-        font-size: 1.1rem;
-        color: #666;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .promotion-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .promotion-card {
-        background: white;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-        position: relative;
-        height: 100%;
+    .member-main {
+        max-width: 1100px;
+        margin: 140px auto 40px auto;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
     }
-
-    .promotion-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-    }
-
-    .promotion-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        color: white;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        z-index: 1;
-    }
-
-    .promotion-image {
+    .card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+        padding: 3rem 3.5rem;
+        margin-bottom: 1.5rem;
         width: 100%;
-        height: 300px;
-        object-fit: contain;
-        background: #f8f9fa;
-        padding: 20px;
-        transition: transform 0.3s ease;
+        max-width: none;
+        min-height: 320px;
+        font-size: 1.15rem;
+        box-sizing: border-box;
     }
-
-    .promotion-content {
-        padding: 25px;
-        flex: 1;
+    .member-content {
+        width: 100%;
+        padding-right: 0;
+    }
+    .member-profile.card {
         display: flex;
         flex-direction: column;
-    }
-
-    .promotion-title {
-        font-size: 1.3rem;
-        color: var(--dark-color);
-        margin-bottom: 10px;
-        font-weight: 600;
-        line-height: 1.4;
-    }
-
-    .promotion-description {
-        color: #666;
-        margin-bottom: 20px;
-        line-height: 1.6;
-        font-size: 0.95rem;
-        flex: 1;
-    }
-
-    .promotion-price {
-        display: flex;
         align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
     }
-
-    .original-price {
-        color: #999;
-        text-decoration: line-through;
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+    .profile-avatar {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid var(--primary-color);
+        background: #f4f4f4;
+        font-size: 2.5rem;
+    }
+    .profile-details {
+        text-align: center;
+        width: 100%;
+    }
+    .profile-details p {
+        margin-bottom: 1.2rem;
+        font-size: 1.18rem;
+    }
+    .edit-profile-btn {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-weight: 500;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background 0.2s;
+    }
+    .edit-profile-btn:hover {
+        background: var(--secondary-color);
+    }
+    .orders-table-wrapper {
+        overflow-x: auto;
+    }
+    .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    .orders-table th, .orders-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #eee;
+        text-align: center;
+    }
+    .orders-table th {
+        background: #f4f4f4;
+        color: var(--primary-color);
+    }
+    .orders-table tr:last-child td {
+        border-bottom: none;
+    }
+    .address-list, .voucher-list {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1rem;
+    }
+    .address-item, .voucher-item {
+        background: #f4f4f4;
+        border-radius: 8px;
+        padding: 10px 16px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .add-address-btn {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+    .add-address-btn:hover {
+        background: var(--secondary-color);
+    }
+    .points-info {
+        margin-top: 1rem;
+    }
+    .rank-progress {
+        background: #eee;
+        border-radius: 8px;
+        height: 16px;
+        margin: 10px 0 8px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .rank-bar {
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        height: 100%;
+        border-radius: 8px;
+        transition: width 0.5s;
+    }
+    .rank-benefit {
+        color: #888;
+        font-size: 0.95rem;
+    }
+    .change-password-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 1rem;
+    }
+    .change-password-form input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
         font-size: 1rem;
     }
+    .change-password-form button {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 0;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+    .change-password-form button:hover {
+        background: var(--secondary-color);
+    }
+    .member-logout {
+        text-align: center;
+        margin: 2rem 0 0 0;
+    }
+    .logout-btn {
+        background: #ff4444;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(255,68,68,0.08);
+        transition: background 0.2s;
+    }
+    .logout-btn:hover {
+        background: #d32f2f;
+    }
+    @media (max-width: 900px) {
+        .member-main {
+            flex-direction: column;
+            align-items: center;
+        }
+        .card {
+            max-width: 98vw;
+            padding: 2rem 1rem;
+        }
+    }
+    @media (max-width: 600px) {
+        .card {
+            padding: 1.2rem 0.5rem;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            font-size: 1.5rem;
+        }
+    }
 
-    .discounted-price {
+    .member-main-2col {
+        max-width: 1200px;
+        margin: 140px auto 40px auto;
+        display: flex;
+        gap: 2.5rem;
+        align-items: flex-start;
+    }
+    .member-sidebar {
+        width: 260px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        padding: 2.5rem 1.5rem 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: sticky;
+        top: 120px;
+        min-height: 400px;
+    }
+    .sidebar-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .sidebar-profile img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary-color);
+        margin-bottom: 10px;
+    }
+    .sidebar-name {
+        font-weight: 600;
+        font-size: 1.1rem;
         color: var(--primary-color);
+    }
+    .sidebar-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .sidebar-menu .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        color: #333;
+        font-size: 1.05rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-bottom: 6px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .sidebar-menu .menu-item i {
+        width: 22px;
+        text-align: center;
+        color: var(--primary-color);
+    }
+    .sidebar-menu .menu-item.active, .sidebar-menu .menu-item:hover {
+        background: linear-gradient(90deg, #FF6B00 0%, #FF8533 100%);
+        color: #fff;
+    }
+    .sidebar-menu .menu-item.logout-item {
+        color: #ff4444;
+    }
+    .sidebar-menu .menu-item.logout-item.active, .sidebar-menu .menu-item.logout-item:hover {
+        background: #ff4444;
+        color: #fff;
+    }
+    .member-content {
+        flex: 1;
+        min-width: 0;
+    }
+    .member-section {
+        width: 100%;
+    }
+    /* Card, profile, orders, address, voucher, points, password giữ nguyên như cũ */
+    @media (max-width: 900px) {
+        .member-main-2col {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .member-sidebar {
+            width: 100%;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 1.2rem 0.5rem;
+            margin-bottom: 1.5rem;
+            position: static;
+            min-height: unset;
+        }
+        .sidebar-profile {
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 0;
+            margin-right: 1.5rem;
+        }
+        .sidebar-profile img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+        .sidebar-menu ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .sidebar-menu .menu-item {
+            padding: 8px 10px;
+            font-size: 0.98rem;
+            margin-bottom: 0;
+        }
+    }
+    @media (max-width: 600px) {
+        .member-main-2col {
+            margin: 120px 0 20px 0;
+        }
+        .member-sidebar {
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 0.2rem;
+        }
+        .sidebar-menu ul {
+            flex-direction: column;
+            gap: 0;
+        }
+        .sidebar-menu .menu-item {
+            width: 100%;
+            text-align: left;
+        }
+    }
+    .member-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        padding: 2.2rem 2.5rem 1.5rem 2.5rem;
+        margin: 140px auto 30px auto;
+        max-width: 1200px;
+        position: relative;
+        z-index: 2;
+    }
+    .member-header-left {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .header-avatar {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--primary-color);
+        background: #f4f4f4;
+    }
+    .header-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+    .header-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    .header-row {
+        display: flex;
+        gap: 2.5rem;
+        color: #444;
+        font-size: 1.08rem;
+    }
+    .header-row i {
+        color: var(--primary-color);
+        margin-right: 5px;
+    }
+    .member-header-right {
+        display: flex;
+        align-items: center;
+        gap: 2.2rem;
+    }
+    .header-balance {
+        text-align: right;
+    }
+    .balance-label {
+        color: #888;
+        font-size: 0.98rem;
+    }
+    .balance-value {
+        color: #FF6B00;
         font-size: 1.4rem;
         font-weight: 700;
+        display: block;
     }
-
-    .product-buttons {
+    .header-actions {
         display: flex;
-        gap: 12px;
-        margin-top: 20px;
-        padding: 0 10px 10px;
-        width: 100%;
+        gap: 0.7rem;
     }
-
-    .btn-add-cart, .btn-buy-now {
-        flex: 1;
-        height: 44px;
-        padding: 0 15px;
+    .header-btn {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
         border-radius: 8px;
-        cursor: pointer;
+        padding: 10px 22px;
         font-weight: 600;
+        font-size: 1.05rem;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .header-btn:hover {
+        background: var(--secondary-color);
+    }
+    .pay-btn {
+        background: #FF6B00;
+    }
+    .history-btn {
+        background: #FF8533;
+    }
+    .member-main-fpt {
+        margin-top: 0;
+    }
+    .sidebar-section {
+        margin-bottom: 2.2rem;
+    }
+    .sidebar-title {
+        font-size: 1.08rem;
+        font-weight: 700;
+        color: #888;
+        margin-bottom: 0.7rem;
+        margin-left: 8px;
+    }
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .sidebar-menu .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        color: #333;
+        font-size: 1.05rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-bottom: 6px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .sidebar-menu .menu-item i {
+        width: 22px;
+        text-align: center;
+        color: var(--primary-color);
+    }
+    .sidebar-menu .menu-item.active, .sidebar-menu .menu-item:hover {
+        background: linear-gradient(90deg, #FF6B00 0%, #FF8533 100%);
+        color: #fff;
+    }
+    .sidebar-menu .menu-item.logout-item {
+        color: #ff4444;
+    }
+    .sidebar-menu .menu-item.logout-item.active, .sidebar-menu .menu-item.logout-item:hover {
+        background: #ff4444;
+        color: #fff;
+    }
+    .service-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #FF6B00;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .service-title i {
+        color: #FF6B00;
+    }
+    .contract-count {
+        background: #eee;
+        color: #FF6B00;
+        border-radius: 16px;
+        padding: 2px 12px;
+        font-size: 0.98rem;
+        margin-left: 10px;
+    }
+    .service-contract {
+        background: #fff;
+        border-radius: 14px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+    }
+    .contract-row {
+        display: flex;
+        gap: 2.5rem;
+        margin-bottom: 1.2rem;
+        font-size: 1.08rem;
+    }
+    .service-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+    }
+    .service-card {
+        background: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        padding: 1.2rem 1.5rem;
+        min-width: 220px;
+        flex: 1 1 220px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        position: relative;
+    }
+    .card-title {
+        font-weight: 600;
+        color: #FF6B00;
+        font-size: 1.08rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .card-content {
+        color: #333;
+        font-size: 1.05rem;
+    }
+    .card-link {
+        color: #FF6B00;
+        font-size: 0.98rem;
+        text-decoration: none;
+        font-weight: 500;
+        margin-top: 4px;
+        display: inline-block;
+    }
+    .card-link i {
+        margin-left: 4px;
+    }
+    .pay-type-btn {
+        background: #FF6B00;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 18px;
+        font-weight: 500;
+        margin-right: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    .pay-type-btn.active {
+        background: #FF6B00;
+    }
+    .pay-type-btn[disabled] {
+        background: #eee;
+        color: #aaa;
+        cursor: not-allowed;
+    }
+    .card-note {
+        color: #888;
         font-size: 0.95rem;
-        transition: all 0.3s ease;
-        white-space: nowrap;
+    }
+    .renew-btn {
+        background: #aaa;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 18px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        cursor: not-allowed;
+        font-size: 1rem;
+    }
+    @media (max-width: 900px) {
+        .member-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.2rem;
+            padding: 1.2rem 1rem 1rem 1rem;
+        }
+        .member-main-2col {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .service-cards {
+            flex-direction: column;
+        }
+    }
+    @media (max-width: 600px) {
+        .member-header {
+            margin: 110px 0 18px 0;
+            padding: 1rem 0.5rem;
+        }
+        .service-contract {
+            padding: 1rem 0.5rem;
+        }
+    }
+    .member-main-whey { margin-top: 0; }
+    .dashboard-stats {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1.5rem;
+    }
+    .stat-item {
+        background: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        padding: 1.2rem 1.5rem;
+        min-width: 160px;
+        flex: 1 1 160px;
+        text-align: center;
+    }
+    .stat-label { color: #888; font-size: 1.05rem; margin-bottom: 6px; }
+    .stat-value { color: #FF6B00; font-size: 1.3rem; font-weight: 700; }
+
+    /* Modal đẹp hiện đại */
+    .custom-modal-bg {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.25);
+        z-index: 9998;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-width: 140px;
+        animation: fadeIn 0.2s;
     }
-
-    .btn-add-cart {
-        background-color: white;
+    .custom-modal {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 2.5rem 2.5rem 2rem 2.5rem;
+        min-width: 340px;
+        max-width: 95vw;
+        position: relative;
+        animation: popIn 0.2s;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes popIn { from { transform: scale(0.95); opacity: 0.5; } to { transform: scale(1); opacity: 1; } }
+    .custom-modal h2 {
+        margin-bottom: 1.2rem;
+        font-size: 1.4rem;
+        font-weight: 700;
         color: var(--primary-color);
-        border: 2px solid var(--primary-color);
-        gap: 8px;
-    }
-
-    .btn-add-cart i {
-        font-size: 1rem;
-    }
-
-    .btn-add-cart:hover {
-        background-color: var(--primary-color);
-        color: white;
-        transform: translateY(-2px);
-    }
-
-    .btn-buy-now {
-        background-color: var(--primary-color);
-        color: white;
-        border: none;
-    }
-
-    .btn-buy-now:hover {
-        background-color: var(--secondary-color);
-        transform: translateY(-2px);
-    }
-
-    @media (max-width: 1200px) {
-        .btn-add-cart, .btn-buy-now {
-            font-size: 0.9rem;
-            padding: 0 10px;
-            min-width: 120px;
-        }
-    }
-
-    @media (max-width: 992px) {
-        .product-buttons {
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .btn-add-cart, .btn-buy-now {
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 1024px) {
-        .promotion-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .promotion-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .promotion-header h1 {
-            font-size: 2rem;
-        }
-
-        .promotion-card {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-    }
-
-    /* Flash Sale Banner Enhancement */
-    .sale-banner {
-        background: linear-gradient(135deg, #ff4e50, #f9d423);
-        padding: 60px 20px;
         text-align: center;
-        color: white;
-        margin: 40px auto;
-        max-width: 1200px;
-        border-radius: 30px;
-        box-shadow: 0 15px 40px rgba(255,78,80,0.3);
     }
-
-    .sale-content {
-        max-width: 800px;
-        margin: 0 auto;
+    .custom-modal label {
+        font-weight: 500;
+        color: #333;
     }
-
-    .sale-banner h2 {
-        font-size: 3em;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        font-weight: 800;
-        letter-spacing: 2px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    .custom-modal input {
+        width: 100%;
+        padding: 10px;
+        border: 1.5px solid #eee;
+        border-radius: 8px;
+        margin-top: 4px;
+        margin-bottom: 1rem;
+        font-size: 1.08rem;
+        background: #fafafa;
+        transition: border 0.2s;
     }
-
-    .sale-banner p {
-        font-size: 1.3em;
-        margin-bottom: 30px;
-        opacity: 0.9;
+    .custom-modal input:focus {
+        border: 1.5px solid var(--primary-color);
+        outline: none;
     }
-
-    .countdown {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        margin: 30px 0;
-    }
-
-    .countdown-item {
-        background: rgba(255,255,255,0.2);
-        padding: 20px;
-        border-radius: 15px;
-        min-width: 100px;
-        backdrop-filter: blur(5px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    .countdown-item span:first-child {
-        font-size: 2.5em;
-        font-weight: 800;
+    .custom-modal .modal-btn {
+        background: var(--primary-color);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 32px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 8px;
+        transition: background 0.2s;
         display: block;
-        line-height: 1;
-        margin-bottom: 5px;
+        width: 100%;
     }
-
-    .countdown-item span:last-child {
-        font-size: 1em;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        opacity: 0.9;
+    .custom-modal .modal-btn:hover {
+        background: var(--secondary-color);
     }
-
-    @media (max-width: 768px) {
-        .promotion-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .countdown {
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .countdown-item {
-            min-width: 80px;
-            padding: 15px;
-        }
-        
-        .sale-banner h2 {
-            font-size: 2em;
-        }
-        
-        .promotion-header h1 {
-            font-size: 2.2rem;
-        }
+    .custom-modal .close-modal {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 1.7rem;
+        color: #888;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 36px; height: 36px;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.2s, color 0.2s;
+    }
+    .custom-modal .close-modal:hover {
+        background: #f4f4f4;
+        color: var(--primary-color);
+    }
+    /* Nút Sửa/Xóa địa chỉ */
+    .edit-address-btn, .delete-address-btn {
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-left: 6px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .edit-address-btn {
+        background: var(--primary-color);
+        color: #fff;
+    }
+    .edit-address-btn:hover {
+        background: var(--secondary-color);
+        color: #fff;
+    }
+    .delete-address-btn {
+        background: #ff4444;
+        color: #fff;
+    }
+    .delete-address-btn:hover {
+        background: #d32f2f;
+        color: #fff;
+    }
+    @media (max-width: 600px) {
+        .custom-modal { padding: 1.2rem 0.5rem; min-width: 90vw; }
     }
 </style>
 
@@ -2442,9 +2855,10 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
-                <li><a href="promotion.html" class="active">Khuyến mãi</a></li>
+                <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
             </ul>
@@ -2452,253 +2866,150 @@
                 <input type="text" placeholder="Tìm kiếm..." class="search-input">
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart">
+                    <div class="btn-cart" onclick="window.location.href='products.html'">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </div>
-                    <div class="cart-dropdown">
-                        <div class="cart-header">
-                            <h3>
-                                <i class="fas fa-shopping-cart"></i>
-                                Giỏ hàng
-                                <span class="cart-count-badge">0 sản phẩm</span>
-                            </h3>
-                        </div>
-                        <div class="cart-items">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="cart-summary">
-                            <div class="cart-summary-row">
-                                <span>Tạm tính:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row">
-                                <span>Phí vận chuyển:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row total">
-                                <span>Tổng cộng:</span>
-                                <span>0₫</span>
-                            </div>
-                        </div>
-                        <div class="cart-buttons">
-                            <button class="btn-continue">Tiếp tục mua</button>
-                            <button class="btn-checkout">Thanh toán</button>
-                        </div>
-                        <div class="empty-cart" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <p>Giỏ hàng của bạn đang trống</p>
-                            <a href="#products" class="btn-shop">Thanh toán ngay</a>
-                        </div>
-                    </div>
+                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
+                    <div class="cart-dropdown" style="display:none !important;"></div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" alt="Promotion Hero" class="hero-image">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Khuyến Mãi Đặc Biệt</h1>
-            <p>Giảm giá lên đến 30% cho các sản phẩm thực phẩm bổ sung chất lượng cao</p>
-            <a href="#promotion-section" class="cta-button">Xem Ngay</a>
-        </div>
-    </section>
-
-    <!-- Promotion Section -->
-    <section class="promotion-section" id="promotion-section">
-        <div class="promotion-header">
-            <h1>Khuyến Mãi Đặc Biệt</h1>
-            <p>Khám phá ngay các chương trình khuyến mãi hấp dẫn dành riêng cho bạn</p>
-        </div>
-
-        <!-- Flash Sale Banner -->
-        <div class="sale-banner">
-            <div class="sale-content">
-                <h2>FLASH SALE - GIẢM SỐC 50%</h2>
-                <p>Chỉ trong 24 giờ - Số lượng có hạn</p>
-                <div class="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-number">24</span>
-                        <span class="countdown-label">Giờ</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number">00</span>
-                        <span class="countdown-label">Phút</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number">00</span>
-                        <span class="countdown-label">Giây</span>
-                    </div>
-                </div>
-                <a href="#" class="cta-button">Mua Ngay</a>
-            </div>
-        </div>
-
-        <!-- Featured Promotions -->
-        <div class="promotion-grid">
-            <div class="promotion-card">
-                <span class="promotion-badge">Giảm 30%</span>
-                <img src="https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain" alt="Whey Protein Gold Standard" class="promotion-image">
-                <div class="promotion-content">
-                    <h3 class="promotion-title">Whey Protein Gold Standard</h3>
-                    <p class="promotion-description">Whey protein chất lượng cao, hỗ trợ phát triển cơ bắp</p>
-                    <div class="promotion-price">
-                        <span class="original-price">1,500,000₫</span>
-                        <span class="discounted-price">1,050,000₫</span>
-                    </div>
-                    <div class="product-buttons">
-                        <button class="btn-add-cart" onclick="addToCart('whey-gold-promo', 'Whey Protein Gold Standard (SALE)', '1,050,000₫', 'https://th.bing.com/th/id/OIP.NIO33eJmW9-RJYHqrLeL1gHaHa?rs=1&pid=ImgDetMain')">
-                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                        </button>
-                        <button class="btn-buy-now">Mua Ngay</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="promotion-card">
-                <span class="promotion-badge">Giảm 25%</span>
-                <img src="https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0" alt="BCAA 2:1:1" class="promotion-image">
-                <div class="promotion-content">
-                    <h3 class="promotion-title">BCAA 2:1:1</h3>
-                    <p class="promotion-description">BCAA hỗ trợ phục hồi và tăng trưởng cơ bắp</p>
-                    <div class="promotion-price">
-                        <span class="original-price">800,000₫</span>
-                        <span class="discounted-price">560,000₫</span>
-                    </div>
-                    <div class="product-buttons">
-                        <button class="btn-add-cart" onclick="addToCart('bcaa-211-promo', 'BCAA 2:1:1 (SALE)', '560,000₫', 'https://th.bing.com/th/id/R.bb5867684706072bfea2255c6f531c0c?rik=M5BkswmbDX0HxA&pid=ImgRaw&r=0')">
-                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                        </button>
-                        <button class="btn-buy-now">Mua Ngay</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="promotion-card">
-                <span class="promotion-badge">Giảm 20%</span>
-                <img src="https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain" alt="Pre-workout Explosion" class="promotion-image">
-                <div class="promotion-content">
-                    <h3 class="promotion-title">Pre-workout Explosion</h3>
-                    <p class="promotion-description">Pre-workout tăng sức mạnh và sức bền</p>
-                    <div class="promotion-price">
-                        <span class="original-price">1,200,000₫</span>
-                        <span class="discounted-price">840,000₫</span>
-                    </div>
-                    <div class="product-buttons">
-                        <button class="btn-add-cart" onclick="addToCart('pre-explosion-promo', 'Pre-workout Explosion (SALE)', '840,000₫', 'https://th.bing.com/th/id/OIP.ZqguFk4COD1rZjr6yPZWQQHaHa?rs=1&pid=ImgDetMain')">
-                            <i class="fas fa-cart-plus"></i> Thêm vào giỏ
-                        </button>
-                        <button class="btn-buy-now">Mua Ngay</button>
-                    </div>
+    <!-- Member Header Start -->
+    <div class="member-header">
+        <div class="member-header-left">
+            <img id="headerAvatar" src="images/default-avatar.png" alt="Avatar" class="header-avatar">
+            <div class="header-info">
+                <div class="header-name" id="headerName">Tên khách hàng</div>
+                <div class="header-row">
+                    <span><i class="fas fa-envelope"></i> <span id="headerEmail">Email</span></span>
+                    <span><i class="fas fa-phone"></i> <span id="headerPhone">Số điện thoại</span></span>
                 </div>
             </div>
         </div>
-
-        <!-- Voucher Section -->
-        <div class="voucher-section">
-            <h2>Mã Giảm Giá Đặc Biệt</h2>
-            <div class="voucher-container">
-                <div class="voucher-card">
-                    <div class="voucher-left">
-                        <div class="discount">-20%</div>
-                        <div class="discount-text">Giảm giá</div>
-                    </div>
-                    <div class="voucher-right">
-                        <h3>Giảm 20% cho đơn hàng đầu tiên</h3>
-                        <p>Áp dụng cho tất cả sản phẩm</p>
-                        <div class="voucher-info">
-                            <span><i class="fas fa-clock"></i> Còn 2 ngày</span>
-                            <span><i class="fas fa-tag"></i> Tối thiểu 500.000đ</span>
-                        </div>
-                        <button class="copy-button">Sao Chép Mã</button>
-                    </div>
-                </div>
-
-                <div class="voucher-card">
-                    <div class="voucher-left">
-                        <div class="discount">-15%</div>
-                        <div class="discount-text">Giảm giá</div>
-                    </div>
-                    <div class="voucher-right">
-                        <h3>Giảm 15% cho đơn hàng từ 2 triệu</h3>
-                        <p>Áp dụng cho tất cả sản phẩm</p>
-                        <div class="voucher-info">
-                            <span><i class="fas fa-clock"></i> Còn 5 ngày</span>
-                            <span><i class="fas fa-tag"></i> Tối thiểu 2.000.000đ</span>
-                        </div>
-                        <button class="copy-button">Sao Chép Mã</button>
-                    </div>
-                </div>
-
-                <div class="voucher-card">
-                    <div class="voucher-left">
-                        <div class="discount">-10%</div>
-                        <div class="discount-text">Giảm giá</div>
-                    </div>
-                    <div class="voucher-right">
-                        <h3>Giảm 10% cho thành viên mới</h3>
-                        <p>Áp dụng cho tất cả sản phẩm</p>
-                        <div class="voucher-info">
-                            <span><i class="fas fa-clock"></i> Còn 7 ngày</span>
-                            <span><i class="fas fa-tag"></i> Không giới hạn</span>
-                        </div>
-                        <button class="copy-button">Sao Chép Mã</button>
-                    </div>
-                </div>
+        <div class="member-header-right">
+            <div class="header-balance">
+                <span class="balance-label">Tổng chi tiêu</span>
+                <span class="balance-value" id="headerTotal">0 VNĐ</span>
             </div>
         </div>
-
-        <!-- Brands Section -->
-        <div class="brands-section">
-            <h2>Thương Hiệu Nổi Bật</h2>
-            <div class="brands-container">
-                <div class="brand-row">
-                    <div class="brand-item">
-                        <div class="brand-logo">
-                            <img src="https://cdn.shopify.com/s/files/1/0266/5745/2376/files/optimum-nutrition-logo_1024x1024.png" alt="Optimum Nutrition">
+    </div>
+    <!-- Member Header End -->
+    <main class="member-main-2col member-main-whey">
+        <aside class="member-sidebar">
+            <ul class="sidebar-menu">
+                <li class="menu-item" data-section="dashboard"><i class="fas fa-home"></i> Tổng quan</li>
+                <li class="menu-item active" data-section="profile"><i class="fas fa-user"></i> Thông tin cá nhân</li>
+                <li class="menu-item" data-section="orders"><i class="fas fa-box"></i> Đơn hàng</li>
+                <li class="menu-item" data-section="address"><i class="fas fa-map-marker-alt"></i> Địa chỉ giao hàng</li>
+                <li class="menu-item" data-section="password"><i class="fas fa-key"></i> Đổi mật khẩu</li>
+                <li class="menu-item logout-item" data-section="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
+            </ul>
+        </aside>
+        <section class="member-content">
+            <div class="member-section" id="section-dashboard" style="display:none;">
+                <section class="member-dashboard card">
+                    <h2>Tổng quan tài khoản</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">Tổng số đơn hàng</div>
+                            <div class="stat-value" id="dashboardTotalOrders">0</div>
                         </div>
-                        <div class="brand-info">
-                            <h3>Optimum Nutrition</h3>
-                            <p>Thương hiệu Whey Protein số 1 thế giới</p>
-                        </div>
-                    </div>
-                    <div class="brand-item">
-                        <div class="brand-logo">
-                            <img src="https://cdn.shopify.com/s/files/1/0266/5745/2376/files/myprotein-logo_1024x1024.png" alt="MyProtein">
-                        </div>
-                        <div class="brand-info">
-                            <h3>MyProtein</h3>
-                            <p>Thực phẩm bổ sung chất lượng cao từ Anh Quốc</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="brand-row">
-                    <div class="brand-item">
-                        <div class="brand-logo">
-                            <img src="https://cdn.shopify.com/s/files/1/0266/5745/2376/files/dymatize-logo_1024x1024.png" alt="Dymatize">
-                        </div>
-                        <div class="brand-info">
-                            <h3>Dymatize</h3>
-                            <p>Whey Protein Isolate tinh khiết</p>
+                        <div class="stat-item">
+                            <div class="stat-label">Tổng chi tiêu</div>
+                            <div class="stat-value" id="dashboardTotalSpent">0 VNĐ</div>
                         </div>
                     </div>
-                    <div class="brand-item">
-                        <div class="brand-logo">
-                            <img src="https://cdn.shopify.com/s/files/1/0266/5745/2376/files/muscletech-logo_1024x1024.png" alt="MuscleTech">
-                        </div>
-                        <div class="brand-info">
-                            <h3>MuscleTech</h3>
-                            <p>Thương hiệu thực phẩm bổ sung hàng đầu</p>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </div>
-        </div>
-    </section>
+            <div class="member-section" id="section-profile">
+                <section class="member-profile card">
+                    <h2>Thông tin cá nhân</h2>
+                    <div class="profile-info">
+                        <img id="memberAvatar" src="images/default-avatar.png" alt="Avatar" class="profile-avatar">
+                        <div class="profile-details">
+                            <p><strong>Họ tên:</strong> <span id="memberName">---</span></p>
+                            <p><strong>Email:</strong> <span id="memberEmail">---</span></p>
+                            <p><strong>Số điện thoại:</strong> <span id="memberPhone">---</span></p>
+                            <!-- Thêm provider và lastLogin -->
+                            <p><strong>Nhà cung cấp:</strong> <span id="memberProvider">---</span></p>
+                            <p><strong>Lần đăng nhập gần nhất:</strong> <span id="memberLastLogin">---</span></p>
+                            <button class="edit-profile-btn">Chỉnh sửa</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="member-section" id="section-orders" style="display:none;">
+                <section class="member-orders card">
+                    <h2>Lịch sử đơn hàng</h2>
+                    <div class="orders-table-wrapper">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Trạng thái</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersList">
+                                <tr><td colspan="5" style="text-align:center;color:#888;">Chưa có đơn hàng</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <div class="member-section" id="section-address" style="display:none;">
+                <section class="member-address card">
+                    <h2>Địa chỉ giao hàng</h2>
+                    <ul id="addressList" class="address-list">
+                        <li class="address-item">Chưa có địa chỉ nào</li>
+                    </ul>
+                    <button class="add-address-btn">Thêm địa chỉ mới</button>
+                </section>
+            </div>
+            <div class="member-section" id="section-password" style="display:none;">
+                <section class="member-password card">
+                    <h2>Đổi mật khẩu</h2>
+                    <form id="changePasswordForm" class="change-password-form">
+                        <input type="password" id="oldPassword" placeholder="Mật khẩu cũ" required>
+                        <input type="password" id="newPassword" placeholder="Mật khẩu mới" required>
+                        <input type="password" id="confirmNewPassword" placeholder="Xác nhận mật khẩu mới" required>
+                        <button type="submit">Đổi mật khẩu</button>
+                    </form>
+                </section>
+            </div>
+        </section>
+    </main>
+    <script>
+    // Sidebar menu switching logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuItems = document.querySelectorAll('.sidebar-menu .menu-item');
+        const sections = document.querySelectorAll('.member-section');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                const section = this.getAttribute('data-section');
+                sections.forEach(sec => sec.style.display = 'none');
+                const showSection = document.getElementById('section-' + section);
+                if (showSection) showSection.style.display = '';
+                // Đăng xuất nhanh
+                if(section === 'logout') {
+                    if(window.auth && typeof window.auth.signOut === 'function') {
+                        window.auth.signOut();
+                    } else {
+                        location.reload();
+                    }
+                }
+            });
+        });
+    });
+    </script>
+    <!-- Member Main Content End -->
 
     <!-- Footer -->
     <footer>
@@ -3164,15 +3475,13 @@
                             
                             try {
                                 await userRef.update(userData);
-                                console.log('User data updated successfully');
                             } catch (dbError) {
-                                // Don't show error to user, just log it
                                 console.warn('Failed to update user data:', dbError);
-                                // Still proceed with the login flow
-                                hideModal(loginModal);
-                                showSuccessMessage('Đăng nhập thành công!');
-                                updateUIForLoggedInUser(result.user);
                             }
+                            
+                            hideModal(loginModal);
+                            showSuccessMessage('Đăng nhập thành công!');
+                            updateUIForLoggedInUser(result.user);
                         }
                     } catch (error) {
                         if (error.code === 'auth/popup-closed-by-user') {
@@ -3349,8 +3658,7 @@
 
             function updateCartSummary() {
                 const subtotal = cart.reduce((sum, item) => {
-                    const priceStr = typeof item.price === 'string' ? item.price : String(item.price);
-                    const price = parseInt(priceStr.replace(/[^\d]/g, ''));
+                    const price = parseInt(item.price.replace(/[^\d]/g, ''));
                     return sum + (price * item.quantity);
                 }, 0);
 
@@ -3402,6 +3710,321 @@
                 }
             });
         });
+
+        // Lấy thông tin khách hàng từ Firebase và hiển thị
+        if (window.firebase && window.firebase.auth) {
+            const auth = firebase.auth();
+            const database = firebase.database();
+            let currentUser = null;
+
+            // Helper: Hiển thị thông báo
+            function showSuccess(msg) {
+                Swal.fire({icon:'success',title:'Thành công',text:msg,confirmButtonColor:'#FF6B00'});
+            }
+            function showError(msg) {
+                Swal.fire({icon:'error',title:'Lỗi',text:msg,confirmButtonColor:'#FF6B00'});
+            }
+
+            // 1. Lấy & cập nhật thông tin cá nhân
+            auth.onAuthStateChanged(function(user) {
+                if (user) {
+                    currentUser = user;
+                    const userRef = database.ref('users/' + user.uid);
+                    userRef.on('value', function(snapshot) {
+                        const data = snapshot.val() || {};
+                        // Header
+                        document.getElementById('headerAvatar').src = data.photoURL || user.photoURL || 'images/default-avatar.png';
+                        document.getElementById('headerName').textContent = data.displayName || user.displayName || 'Khách hàng';
+                        document.getElementById('headerEmail').textContent = data.email || user.email || '';
+                        document.getElementById('headerPhone').textContent = data.phone || '';
+                        document.getElementById('headerTotal').textContent = (data.totalSpent ? data.totalSpent.toLocaleString('vi-VN') + ' VNĐ' : '0 VNĐ');
+                        // Thông tin cá nhân
+                        document.getElementById('memberAvatar').src = data.photoURL || user.photoURL || 'images/default-avatar.png';
+                        document.getElementById('memberName').textContent = data.displayName || user.displayName || '---';
+                        document.getElementById('memberEmail').textContent = data.email || user.email || '---';
+                        document.getElementById('memberPhone').textContent = data.phone || '---';
+                        // Form chỉnh sửa (nếu đang mở)
+                        if(document.getElementById('editProfileModal')) {
+                            document.getElementById('editName').value = data.displayName || user.displayName || '';
+                            document.getElementById('editEmail').value = data.email || user.email || '';
+                            document.getElementById('editPhone').value = data.phone || '';
+                        }
+                        // Trong JS, sau khi lấy data từ Firebase:
+                        document.getElementById('memberProvider').textContent = data.provider || '---';
+                        document.getElementById('memberLastLogin').textContent = data.lastLogin 
+                            ? new Date(data.lastLogin).toLocaleString('vi-VN') 
+                            : '---';
+                    });
+                    // Địa chỉ giao hàng
+                    loadAddresses();
+                    // Đơn hàng
+                    loadOrders();
+                }
+            });
+
+            // 1.1. Chỉnh sửa thông tin cá nhân
+            document.querySelector('.edit-profile-btn').addEventListener('click', async function() {
+                if (!currentUser) return;
+                // Lấy dữ liệu user mới nhất từ Firebase
+                const userSnap = await database.ref('users/' + currentUser.uid).once('value');
+                const data = userSnap.val() || {};
+                let modal = document.getElementById('editProfileModal');
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = 'editProfileModal';
+                    modal.className = 'custom-modal-bg';
+                    modal.innerHTML = `
+                    <div class="custom-modal">
+                        <span class="close-modal" id="closeEditProfile">&times;</span>
+                        <h2>Chỉnh sửa thông tin</h2>
+                        <form id="editProfileForm">
+                            <label>Họ tên:</label>
+                            <input id="editName" type="text" required>
+                            <label>Email:</label>
+                            <input id="editEmail" type="email" required>
+                            <label>Số điện thoại:</label>
+                            <input id="editPhone" type="tel">
+                            <button type="submit" class="modal-btn">Lưu</button>
+                        </form>
+                    </div>`;
+                    document.body.appendChild(modal);
+                    document.getElementById('closeEditProfile').onclick = function() {
+                        modal.remove();
+                    };
+                    document.getElementById('editProfileForm').onsubmit = async function(e) {
+                        e.preventDefault();
+                        const name = document.getElementById('editName').value.trim();
+                        const email = document.getElementById('editEmail').value.trim();
+                        const phone = document.getElementById('editPhone').value.trim();
+                        try {
+                            await currentUser.updateProfile({displayName: name});
+                            if(currentUser.email !== email) await currentUser.updateEmail(email);
+                            await database.ref('users/' + currentUser.uid).update({displayName: name, email: email, phone: phone});
+                            showSuccess('Cập nhật thông tin thành công!');
+                            modal.remove();
+                        } catch(err) {
+                            showError('Cập nhật thất bại: ' + err.message);
+                        }
+                    };
+                }
+                // Luôn gán dữ liệu mới nhất vào input
+                document.getElementById('editName').value = data.displayName || currentUser.displayName || '';
+                document.getElementById('editEmail').value = data.email || currentUser.email || '';
+                document.getElementById('editPhone').value = data.phone || '';
+            });
+
+            // 2. Địa chỉ giao hàng
+            function loadAddresses() {
+                if (!currentUser) return;
+                const list = document.getElementById('addressList');
+                database.ref('users/' + currentUser.uid + '/addresses').once('value').then(snap => {
+                    const data = snap.val() || {};
+                    list.innerHTML = '';
+                    const keys = Object.keys(data);
+                    if(keys.length === 0) {
+                        list.innerHTML = '<li class="address-item">Chưa có địa chỉ nào</li>';
+                    } else {
+                        keys.forEach(key => {
+                            const addr = data[key];
+                            const li = document.createElement('li');
+                            li.className = 'address-item';
+                            li.innerHTML = `<span>${addr.text || ''}</span>
+                            <span>
+                                <button class="edit-address-btn" data-id="${key}">Sửa</button>
+                                <button class="delete-address-btn" data-id="${key}">Xóa</button>
+                            </span>`;
+                            list.appendChild(li);
+                        });
+                    }
+                });
+            }
+            document.querySelector('.add-address-btn').onclick = function() {
+                if (!currentUser) return;
+                Swal.fire({
+                    title: 'Thêm địa chỉ mới',
+                    input: 'text',
+                    inputLabel: 'Địa chỉ',
+                    inputPlaceholder: 'Nhập địa chỉ giao hàng...',
+                    showCancelButton: true,
+                    confirmButtonText: 'Lưu',
+                    cancelButtonText: 'Hủy',
+                    inputValidator: value => !value && 'Vui lòng nhập địa chỉ!'
+                }).then(async result => {
+                    if(result.isConfirmed && result.value) {
+                        const newKey = database.ref().child('users/' + currentUser.uid + '/addresses').push().key;
+                        await database.ref('users/' + currentUser.uid + '/addresses/' + newKey).set({text: result.value});
+                        showSuccess('Đã thêm địa chỉ!');
+                        loadAddresses();
+                    }
+                });
+            };
+            document.getElementById('addressList').onclick = async function(e) {
+                if(e.target.classList.contains('edit-address-btn')) {
+                    const id = e.target.getAttribute('data-id');
+                    // Lấy lại địa chỉ từ Firebase
+                    const snap = await database.ref('users/' + currentUser.uid + '/addresses/' + id).once('value');
+                    const addr = snap.val() || {};
+                    Swal.fire({
+                        title: 'Sửa địa chỉ',
+                        input: 'text',
+                        inputValue: addr.text || '',
+                        showCancelButton: true,
+                        confirmButtonText: 'Lưu',
+                        cancelButtonText: 'Hủy',
+                        inputValidator: value => !value && 'Vui lòng nhập địa chỉ!'
+                    }).then(async result => {
+                        if(result.isConfirmed && result.value) {
+                            await database.ref('users/' + currentUser.uid + '/addresses/' + id).set({text: result.value});
+                            showSuccess('Đã cập nhật địa chỉ!');
+                            loadAddresses();
+                        }
+                    });
+                }
+                if(e.target.classList.contains('delete-address-btn')) {
+                    const id = e.target.getAttribute('data-id');
+                    Swal.fire({title:'Xác nhận xóa',text:'Bạn chắc chắn muốn xóa địa chỉ này?',icon:'warning',showCancelButton:true,confirmButtonColor:'#FF6B00',cancelButtonColor:'#d33',confirmButtonText:'Xóa',cancelButtonText:'Hủy'}).then(async result => {
+                        if(result.isConfirmed) {
+                            await database.ref('users/' + currentUser.uid + '/addresses/' + id).remove();
+                            showSuccess('Đã xóa địa chỉ!');
+                            loadAddresses();
+                        }
+                    });
+                }
+            };
+
+            // 3. Lịch sử đơn hàng
+            function loadOrders() {
+                if (!currentUser) return;
+                const tbody = document.getElementById('ordersList');
+                database.ref('invoices').once('value').then(snap => {
+                    const data = snap.val() || {};
+                    tbody.innerHTML = '';
+                    // Lấy email user hiện tại
+                    const userEmail = currentUser.email;
+                    // Lọc đơn hàng theo email
+                    const userOrders = Object.entries(data).filter(([key, order]) => {
+                        return order.customer && order.customer.email === userEmail;
+                    });
+                    if (userOrders.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#888;">Chưa có đơn hàng</td></tr>';
+                    } else {
+                        // Sắp xếp mới nhất lên đầu
+                        userOrders.sort((a, b) => new Date(b[1].createdAt) - new Date(a[1].createdAt));
+                        userOrders.forEach(([key, order]) => {
+                            const date = order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : '';
+                            const status = order.status || order.paymentStatus || '';
+                            const total = order.total ? order.total.toLocaleString('vi-VN') + ' VNĐ' : '';
+                            tbody.innerHTML += `<tr>
+                                <td>${key}</td>
+                                <td>${date}</td>
+                                <td>${status}</td>
+                                <td>${total}</td>
+                                <td><a href="#" class="order-detail-link" data-id="${key}">Xem</a></td>
+                            </tr>`;
+                        });
+                    }
+                    // Tổng quan
+                    document.getElementById('dashboardTotalOrders').textContent = userOrders.length;
+                    let totalSpent = 0;
+                    userOrders.forEach(([k, order]) => { if(order.total) totalSpent += order.total; });
+                    document.getElementById('dashboardTotalSpent').textContent = totalSpent.toLocaleString('vi-VN') + ' VNĐ';
+                    // Lưu tổng chi tiêu vào user
+                    database.ref('users/' + currentUser.uid + '/totalSpent').set(totalSpent);
+
+                    // Gắn lại sự kiện cho các nút "Xem" (phải nằm trong callback này)
+                    tbody.querySelectorAll('.order-detail-link').forEach(link => {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const orderId = this.getAttribute('data-id');
+                            // Lấy lại dữ liệu đơn từ invoices
+                            database.ref('invoices/' + orderId).once('value').then(snap => {
+                                const order = snap.val();
+                                if (!order) return Swal.fire('Không tìm thấy đơn hàng!');
+                                // Hiển thị chi tiết đơn hàng với giao diện đẹp
+                                const status = order.status || order.paymentStatus || '';
+                                const statusColor = status === 'paid' || status === 'success' ? '#4CAF50' : (status === 'pending' ? '#FF9800' : '#F44336');
+                                let html = `
+                                    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;">
+                                        <div style="flex:1;min-width:220px;">
+                                            <h3 style='margin:0 0 8px 0;font-size:1.1rem;color:#FF6B00;'>Thông tin đơn hàng</h3>
+                                            <div style='margin-bottom:8px;'><b>Mã đơn:</b> <span style='color:#333;'>${orderId}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Ngày đặt:</b> <span style='color:#333;'>${order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : ''}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Trạng thái:</b> <span style='color:${statusColor};font-weight:600;text-transform:uppercase;'>${status}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Mã giảm giá:</b> <span style='color:#333;'>${order.coupon || '-'}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Giảm giá:</b> <span style='color:#333;'>${order.discountAmount ? order.discountAmount.toLocaleString('vi-VN') + ' VNĐ' : '-'}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Tổng tiền:</b> <span style='color:#FF6B00;font-size:1.2rem;font-weight:700;'>${order.total ? order.total.toLocaleString('vi-VN') + ' VNĐ' : ''}</span></div>
+                                        </div>
+                                        <div style="flex:1;min-width:220px;">
+                                            <h3 style='margin:0 0 8px 0;font-size:1.1rem;color:#FF6B00;'>Khách hàng</h3>
+                                            <div style='margin-bottom:8px;'><b>Họ tên:</b> <span style='color:#333;'>${order.customer ? (order.customer.firstName + ' ' + order.customer.lastName) : ''}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Địa chỉ:</b> <span style='color:#333;'>${order.customer ? order.customer.address : ''}</span></div>
+                                            <div style='margin-bottom:8px;'><b>SĐT:</b> <span style='color:#333;'>${order.customer ? order.customer.phone : ''}</span></div>
+                                            <div style='margin-bottom:8px;'><b>Email:</b> <span style='color:#333;'>${order.customer ? order.customer.email : ''}</span></div>
+                                        </div>
+                                    </div>
+                                    <hr style='margin:18px 0 12px 0;border:0;border-top:1.5px solid #eee;'>
+                                    <h3 style='font-size:1.1rem;color:#FF6B00;margin-bottom:8px;'>Danh sách sản phẩm</h3>
+                                    <div style='overflow-x:auto;'>
+                                    <table style='width:100%;border-collapse:collapse;font-size:1rem;'>
+                                        <thead>
+                                            <tr style='background:#f8f8f8;'>
+                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;text-align:left;'>Ảnh</th>
+                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;text-align:left;'>Tên sản phẩm</th>
+                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>SL</th>
+                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>Đơn giá</th>
+                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>Thành tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${order.items.map(item => `
+                                                <tr>
+                                                    <td style='padding:6px 4px;'><img src="${item.image}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;box-shadow:0 2px 8px #eee;"></td>
+                                                    <td style='padding:6px 4px;color:#333;font-weight:500;'>${item.name}</td>
+                                                    <td style='padding:6px 4px;text-align:center;'>${item.quantity}</td>
+                                                    <td style='padding:6px 4px;text-align:right;'>${item.price.toLocaleString('vi-VN')} VNĐ</td>
+                                                    <td style='padding:6px 4px;text-align:right;font-weight:600;'>${(item.price*item.quantity).toLocaleString('vi-VN')} VNĐ</td>
+                                                </tr>
+                                            `).join('')}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                `;
+                                Swal.fire({
+                                    title: 'Chi tiết đơn hàng',
+                                    html: html,
+                                    width: 700,
+                                    confirmButtonColor: '#FF6B00',
+                                    showCloseButton: true
+                                });
+                            });
+                        });
+                    });
+                });
+
+            }
+
+            // 4. Đổi mật khẩu
+            document.getElementById('changePasswordForm').onsubmit = async function(e) {
+                e.preventDefault();
+                const oldPass = document.getElementById('oldPassword').value;
+                const newPass = document.getElementById('newPassword').value;
+                const confirmPass = document.getElementById('confirmNewPassword').value;
+                if(newPass !== confirmPass) return showError('Mật khẩu xác nhận không khớp!');
+                try {
+                    // Re-authenticate
+                    const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, oldPass);
+                    await currentUser.reauthenticateWithCredential(cred);
+                    await currentUser.updatePassword(newPass);
+                    showSuccess('Đổi mật khẩu thành công!');
+                    document.getElementById('changePasswordForm').reset();
+                } catch(err) {
+                    showError('Đổi mật khẩu thất bại: ' + err.message);
+                }
+            };
+        }
+    </script>
+    <script>
+        
     </script>
 </body>
 </html> 

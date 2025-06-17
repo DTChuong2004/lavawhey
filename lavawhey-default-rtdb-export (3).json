@@ -304,17 +304,228 @@
       ]
     }
   ],
+  "contacts": {
+    "-OSxzhhmJFGNPl6eOUZp": {
+      "createdAt": "2025-06-17T13:05:43.529Z",
+      "email": "dangthienchuong250604@gmail.com",
+      "message": "aaa",
+      "name": "dang thien chuong",
+      "phone": "2435454664"
+    },
+    "-OSy2h4H9Z0Pdu-8m7Xt": {
+      "createdAt": "2025-06-17T13:23:09.503Z",
+      "email": "dangthienchuong250604@gmail.com",
+      "message": "dấd",
+      "name": "dang thien chuong",
+      "phone": "01234567890"
+    }
+  },
+  "coupons": {
+    "SUMMER20": {
+      "code": "SUMMER20",
+      "description": "Giảm 20% cho đơn hàng hè",
+      "discount": 20,
+      "endDate": "2025-07-31",
+      "startDate": "2025-05-01",
+      "status": "active",
+      "type": "percent"
+    }
+  },
+  "invoices": {
+    "64275610": {
+      "coupon": "SUMMER20",
+      "createdAt": "2025-06-17T12:45:04.294Z",
+      "customer": {
+        "address": "Cần thơ",
+        "email": "dangthienchuong250604@gmail.com",
+        "firstName": "Chương",
+        "lastName": "Đặng",
+        "note": "",
+        "phone": "01234567890"
+      },
+      "discountAmount": 360000,
+      "items": [
+        {
+          "id": "whey-isolate",
+          "image": "https://n1.sdlcdn.com/imgs/i/2/o/SOS-Nutrition-Premium-Whey-Isolate-SDL946978167-3-3f56a.jpg",
+          "name": "Whey Protein Isolate",
+          "price": 1800000,
+          "quantity": 1
+        }
+      ],
+      "orderKey": "ORDER_1750164275610",
+      "total": 1440000,
+      "vnp_Amount": "144000000",
+      "vnp_BankCode": "NCB",
+      "vnp_OrderInfo": "Thanh+toan+don+hang+64275610",
+      "vnp_PayDate": "20250617194543",
+      "vnp_TransactionNo": "15022988",
+      "vnp_TxnRef": "64275610"
+    }
+  },
+  "orders": {
+    "ORDER_1750164275610": {
+      "coupon": "SUMMER20",
+      "createdAt": "2025-06-17T12:44:35.610Z",
+      "customer": {
+        "address": "Cần thơ",
+        "email": "dangthienchuong250604@gmail.com",
+        "firstName": "Chương",
+        "lastName": "Đặng",
+        "note": "",
+        "phone": "01234567890"
+      },
+      "discountAmount": 360000,
+      "id": "ORDER_1750164275610",
+      "items": [
+        {
+          "id": "whey-isolate",
+          "image": "https://n1.sdlcdn.com/imgs/i/2/o/SOS-Nutrition-Premium-Whey-Isolate-SDL946978167-3-3f56a.jpg",
+          "name": "Whey Protein Isolate",
+          "price": 1800000,
+          "quantity": 1
+        }
+      ],
+      "paymentStatus": "success",
+      "status": "paid",
+      "total": 1440000,
+      "userId": "KrrIsbVNW7cp2cbEkYEYU0wK2Ss1",
+      "vnp_BankCode": "NCB",
+      "vnp_PayDate": "20250617194543",
+      "vnp_TransactionNo": "15022988",
+      "vnp_TxnRef": "64275610"
+    }
+  },
   "users": {
     "KrrIsbVNW7cp2cbEkYEYU0wK2Ss1": {
+      "addresses": {
+        "-OSmvgU3bACsc7iVnKrD": {
+          "text": "Cần thơ"
+        }
+      },
       "displayName": "Chương Đặng",
       "email": "dangthienchuong250604@gmail.com",
       "googleData": {
         "created_at": "Tue, 10 Jun 2025 05:46:23 GMT",
         "email_verified": true
       },
-      "lastLogin": "2025-06-14T12:49:13.391Z",
+      "lastLogin": "2025-06-17T13:24:48.777Z",
+      "phone": "01234567890",
       "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLTsa2Ey6iTRBYB6jdE6sQQbz-ueo9FRW4FPvKAgeDuOUd1OQ=s96-c",
-      "provider": "google"
+      "provider": "google",
+      "totalSpent": 0
+    }
+  },
+  "vnpay_transactions": {
+    "61700515": {
+      "amount": 5100000,
+      "createdAt": "2025-06-17T12:01:41.146Z",
+      "orderKey": "ORDER_1750161700515",
+      "status": "pending"
+    },
+    "61706858": {
+      "amount": 0,
+      "createdAt": "2025-06-17T12:01:47.413Z",
+      "orderKey": "ORDER_1750161706858",
+      "status": "pending"
+    },
+    "61709707": {
+      "amount": 0,
+      "createdAt": "2025-06-17T12:01:50.961Z",
+      "orderKey": "ORDER_1750161709707",
+      "status": "pending"
+    },
+    "61715033": {
+      "amount": 0,
+      "createdAt": "2025-06-17T12:01:55.556Z",
+      "orderKey": "ORDER_1750161715033",
+      "status": "pending"
+    },
+    "61736250": {
+      "amount": 5300000,
+      "createdAt": "2025-06-17T12:02:16.791Z",
+      "orderKey": "ORDER_1750161736250",
+      "status": "pending"
+    },
+    "61749281": {
+      "amount": 0,
+      "createdAt": "2025-06-17T12:02:29.850Z",
+      "orderKey": "ORDER_1750161749281",
+      "status": "pending"
+    },
+    "61797848": {
+      "amount": 3300000,
+      "createdAt": "2025-06-17T12:03:18.387Z",
+      "orderKey": "ORDER_1750161797848",
+      "status": "pending"
+    },
+    "61879633": {
+      "amount": 1800000,
+      "createdAt": "2025-06-17T12:04:40.166Z",
+      "orderKey": "ORDER_1750161879633",
+      "status": "pending"
+    },
+    "62072616": {
+      "amount": 2000000,
+      "createdAt": "2025-06-17T12:07:53.178Z",
+      "orderKey": "ORDER_1750162072616",
+      "status": "pending"
+    },
+    "62282191": {
+      "amount": 5300000,
+      "createdAt": "2025-06-17T12:11:22.718Z",
+      "orderKey": "ORDER_1750162282191",
+      "status": "pending"
+    },
+    "63101992": {
+      "amount": 7100000,
+      "createdAt": "2025-06-17T12:25:02.651Z",
+      "orderKey": "ORDER_1750163101992",
+      "status": "pending"
+    },
+    "64097862": {
+      "amount": 3040000,
+      "createdAt": "2025-06-17T12:41:38.463Z",
+      "orderKey": "ORDER_1750164097862",
+      "status": "pending"
+    },
+    "64275610": {
+      "amount": 1440000,
+      "createdAt": "2025-06-17T12:44:36.146Z",
+      "orderKey": "ORDER_1750164275610",
+      "status": "pending"
+    }
+  },
+  "news": {
+    "1": {
+      "id": "1",
+      "title": "Whey Protein: Lợi ích và cách sử dụng hiệu quả",
+      "description": "Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.",
+      "image": "https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png",
+      "date": "2024-06-01",
+      "author": "LavaWhey",
+      "content": "Whey protein là nguồn protein chất lượng cao, giúp tăng cơ, phục hồi sau tập luyện và hỗ trợ giảm cân hiệu quả. Sử dụng whey đúng cách sẽ giúp bạn đạt được mục tiêu thể hình nhanh hơn.",
+      "tags": ["whey", "dinh dưỡng", "tập gym"]
+    },
+    "2": {
+      "id": "2",
+      "title": "BCAA là gì? Tác dụng của BCAA trong tập luyện",
+      "description": "Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.",
+      "image": "https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png",
+      "date": "2024-06-03",
+      "author": "LavaWhey",
+      "content": "BCAA là chuỗi axit amin thiết yếu giúp phục hồi cơ bắp, giảm đau nhức và tăng hiệu suất tập luyện. Bổ sung BCAA đúng thời điểm sẽ tối ưu hóa kết quả tập luyện.",
+      "tags": ["bcaa", "phục hồi", "tập luyện"]
+    },
+    "3": {
+      "id": "3",
+      "title": "Pre-workout: Bí quyết tăng năng lượng trước khi tập",
+      "description": "Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!",
+      "image": "https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png",
+      "date": "2024-06-05",
+      "author": "LavaWhey",
+      "content": "Pre-workout chứa các thành phần giúp tăng năng lượng, tập trung và sức bền. Sử dụng đúng liều lượng sẽ giúp bạn đạt hiệu quả tối đa mà không gây mệt mỏi.",
+      "tags": ["pre-workout", "năng lượng", "tập gym"]
     }
   }
 }

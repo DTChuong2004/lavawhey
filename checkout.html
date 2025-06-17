@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - LavaWhey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <style>
+    :root {
+        --primary-color: #FF6B00;
+        --secondary-color: #FF8533;
+        --dark-color: #333;
+        --light-color: #fff;
+        --gray-color: #f4f4f4;
+            --success-color: #4CAF50;
+            --error-color: #f44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+            background-color: var(--gray-color);
+        color: var(--dark-color);
+    }
+
+        .checkout-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .checkout-form {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .checkout-summary {
+            background: var(--light-color);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+        font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255,107,0,0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-method {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+            gap: 10px;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(255,107,0,0.05);
+        }
+
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(255,107,0,0.1);
+        }
+
+        .payment-method img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .order-summary-list {
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+        display: flex;
+        align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+        .order-item:last-child {
+        border-bottom: none;
+    }
+
+        .order-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+            border-radius: 8px;
+    }
+
+        .order-item-details {
+        flex: 1;
+    }
+
+        .order-item-name {
+        font-weight: 500;
+            margin-bottom: 5px;
+    }
+
+        .order-item-price {
+        color: var(--primary-color);
+        font-weight: 600;
+        }
+
+        .order-item-quantity {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .summary-row {
+        display: flex;
+        justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid #eee;
+            border-bottom: none;
+            margin-top: 15px;
+            padding-top: 15px;
+            font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+        .checkout-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+        border: none;
+        border-radius: 8px;
+            font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+            margin-top: 20px;
+    }
+
+        .checkout-button:hover {
+            background: var(--secondary-color);
+        transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,0,0.3);
+        }
+
+        .checkout-button:active {
+            transform: translateY(0);
+        }
+
+        .secure-checkout {
+        display: flex;
+        align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        color: #666;
+            font-size: 0.9rem;
+        }
+
+        .secure-checkout i {
+            color: var(--success-color);
+        }
+
+        .promo-code {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed #eee;
+        }
+
+        .promo-input {
+        display: flex;
+            gap: 10px;
+        }
+
+        .promo-input input {
+        flex: 1;
+            padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        }
+
+        .promo-input button {
+            padding: 10px 20px;
+            background: var(--dark-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .promo-input button:hover {
+            background: #555;
+        }
+
+        .shipping-options {
+            margin: 20px 0;
+        }
+
+        .shipping-option {
+        display: flex;
+            align-items: center;
+            gap: 10px;
+        padding: 15px;
+            border: 1px solid #ddd;
+        border-radius: 8px;
+            margin-bottom: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        }
+
+        .shipping-option:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(255,107,0,0.05);
+        }
+
+        .shipping-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(255,107,0,0.1);
+        }
+
+        .shipping-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .shipping-option-details {
+        flex: 1;
+        }
+
+        .shipping-option-price {
+        font-weight: 600;
+            color: var(--primary-color);
+    }
+
+        .estimated-delivery {
+            font-size: 0.9rem;
+        color: #666;
+            margin-top: 5px;
+    }
+
+    @media (max-width: 992px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Progress Bar */
+        .checkout-progress {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+        position: relative;
+            margin-bottom: 30px;
+    }
+
+        .progress-steps::before {
+        content: '';
+        position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #ddd;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .progress-step {
+        position: relative;
+            z-index: 2;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #666;
+        }
+
+        .progress-step.active {
+            border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+        .progress-step.completed {
+            border-color: var(--success-color);
+            background: var(--success-color);
+        color: white;
+        }
+
+        .progress-labels {
+        display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .progress-label {
+        text-align: center;
+        font-size: 0.9rem;
+            color: #666;
+            flex: 1;
+        }
+
+        .progress-label.active {
+        color: var(--primary-color);
+        font-weight: 500;
+    }
+
+        /* Order Success Animation */
+        @keyframes checkmark {
+            0% {
+                stroke-dashoffset: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .success-animation {
+        text-align: center;
+            padding: 40px;
+        }
+
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        .success-checkmark circle {
+            fill: none;
+            stroke: var(--success-color);
+            stroke-width: 2;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 1s ease-in-out forwards;
+        }
+
+        .success-checkmark path {
+            fill: none;
+            stroke: var(--success-color);
+            stroke-width: 2;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: checkmark 1s ease-in-out forwards;
+            animation-delay: 0.3s;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .success-details {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .success-button {
+            display: inline-block;
+            padding: 12px 25px;
+        background: var(--primary-color);
+        color: white;
+            text-decoration: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        .success-button:hover {
+            background: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    .modal {
+        display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.4); align-items: center; justify-content: center;
+    }
+    .modal.show { display: flex; }
+    .modal-content { background: #fff; border-radius: 10px; padding: 30px; position: relative; }
+</style>
+</head>
+<body>
+    <div class="checkout-container">
+        <!-- Progress Bar -->
+        <div class="checkout-progress" style="grid-column: 1 / -1;">
+            <div class="progress-steps">
+                <div class="progress-step completed">
+                    <i class="fas fa-check"></i>
+            </div>
+                <div class="progress-step active">2</div>
+                <div class="progress-step">3</div>
+                    </div>
+            <div class="progress-labels">
+                <div class="progress-label completed">Giỏ hàng</div>
+                <div class="progress-label active">Thanh toán</div>
+                <div class="progress-label">Hoàn tất</div>
+                        </div>
+                        </div>
+
+        <!-- Checkout Form -->
+        <div class="checkout-form">
+            <h2 class="section-title">Thông tin thanh toán</h2>
+            
+            <form id="checkoutForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">Họ</label>
+                        <input type="text" id="firstName" required>
+            </div>
+                    <div class="form-group">
+                        <label for="lastName">Tên</label>
+                        <input type="text" id="lastName" required>
+                </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+            </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" required>
+            </div>
+
+                <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" id="address" required>
+            </div>
+
+                <div class="form-group">
+                    <label for="note">Ghi chú</label>
+                    <textarea id="note" rows="4" placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."></textarea>
+    </div>
+
+                <h3>Phương thức thanh toán</h3>
+                <div class="payment-methods">
+                    <div class="payment-method selected">
+                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Icon-VNPAY-QR.png" alt="VNPay" style="width: 60px; height: 60px;">
+                        <div style="flex: 1;">
+                            <span style="font-weight: 600; display: block; margin-bottom: 5px;">Thanh toán qua VNPay</span>
+                            <span style="font-size: 0.9rem; color: #666;">Thanh toán an toàn qua cổng VNPay QR</span>
+                    </div>
+                        <i class="fas fa-check-circle" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+                    </div>
+                </div>
+                </form>
+                </div>
+
+        <!-- Order Summary -->
+        <div class="checkout-summary">
+            <h2 class="section-title">Đơn hàng của bạn</h2>
+            
+            <div class="order-summary-list">
+                <!-- Order items will be dynamically added here -->
+            </div>
+
+            <div class="promo-code">
+                <h3>Mã giảm giá</h3>
+                <div class="promo-input">
+                    <input type="text" placeholder="Nhập mã giảm giá">
+                    <button>Áp dụng</button>
+        </div>
+    </div>
+
+            <div class="summary-row">
+                <span>Tạm tính</span>
+                <span class="subtotal">0₫</span>
+            </div>
+            <div class="summary-row">
+                <span>Giảm giá</span>
+                <span class="discount">0₫</span>
+                </div>
+            <div class="summary-row total">
+                <span>Tổng cộng</span>
+                <span class="total-amount">0₫</span>
+            </div>
+
+            <button class="checkout-button" id="openConfirmOrderModal">
+                Đặt hàng
+            </button>
+
+            <div class="secure-checkout">
+                <i class="fas fa-lock"></i>
+                Thanh toán an toàn và bảo mật
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận thanh toán -->
+    <div class="modal" id="confirmOrderModal">
+        <div class="modal-content" style="max-width:600px;">
+            <span class="close-modal" style="float:right;cursor:pointer;font-size:24px;">&times;</span>
+            <h2>Xác nhận đơn hàng</h2>
+            <div id="userInfoConfirm"></div>
+            <div id="cartInfoConfirm" style="margin-top:20px;"></div>
+            <button id="confirmOrderBtn" class="checkout-button" style="margin-top:20px;">Xác nhận đặt hàng</button>
+        </div>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDPdSUkT56drPQGE9N4KvjM3ZoQaeamdao",
+            authDomain: "lavawhey.firebaseapp.com",
+            projectId: "lavawhey",
+            storageBucket: "lavawhey.firebasestorage.app",
+            messagingSenderId: "261576736130",
+            appId: "1:261576736130:web:9d8b878a50e01c9591a39b",
+            measurementId: "G-BR9VJHPJGL"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Đặt các hàm này ở phạm vi toàn cục, trước DOMContentLoaded
+        function getCartKey() {
+            const user = firebase.auth().currentUser;
+            return user ? `cart_${user.uid}` : 'cart_guest';
+        }
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem(getCartKey())) || [];
+            return cart;
+        }
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+        function displayCartItems() {
+            const cart = loadCart();
+            let subtotal = 0;
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                orderSummaryList.innerHTML = '<div style="text-align:center;color:#999;padding:20px 0;">Giỏ hàng của bạn đang trống</div>';
+                subtotalElement.textContent = formatPrice(0);
+                // Ẩn phí vận chuyển
+                if (shippingElement) shippingElement.parentElement.style.display = 'none';
+                discountElement.textContent = formatPrice(0);
+                totalElement.textContent = formatPrice(0);
+                return;
+            }
+
+            orderSummaryList.innerHTML = cart.map(item => {
+                const price = typeof item.price === 'string' 
+                    ? parseInt(item.price.replace(/[^\d]/g, ''))
+                    : item.price;
+                subtotal += price * item.quantity;
+                totalItems += item.quantity;
+                return `
+                    <div class="order-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="order-item-details">
+                            <div class="order-item-name">${item.name}</div>
+                            <div class="order-item-price">${formatPrice(price)} x ${item.quantity} = <b>${formatPrice(price * item.quantity)}</b></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Hiển thị tổng số sản phẩm
+            orderSummaryList.innerHTML = `<div style="font-weight:bold;margin-bottom:10px;">${totalItems} sản phẩm</div>` + orderSummaryList.innerHTML;
+
+            // Ẩn phí vận chuyển
+            if (shippingElement) shippingElement.parentElement.style.display = 'none';
+
+            // Update summary
+            const discount = 0;
+            const total = subtotal - discount;
+
+            subtotalElement.textContent = formatPrice(subtotal);
+            discountElement.textContent = formatPrice(discount);
+            totalElement.textContent = formatPrice(total);
+        }
+
+        // Khai báo các biến toàn cục để dùng cho displayCartItems
+        let orderSummaryList, subtotalElement, shippingElement, discountElement, totalElement;
+
+        // Thêm biến toàn cục cho coupon
+        let appliedCoupon = null;
+
+        function setupCouponInput() {
+            const couponInput = document.querySelector('.promo-input input');
+            const couponBtn = document.querySelector('.promo-input button');
+            if (!couponInput || !couponBtn) return;
+            couponBtn.addEventListener('click', async function(e) {
+                e.preventDefault();
+                const code = couponInput.value.trim().toUpperCase();
+                if (!code) return;
+                // Lấy mã giảm giá từ Firebase
+                const couponSnap = await firebase.database().ref('coupons/' + code).once('value');
+                const coupon = couponSnap.val();
+                if (!coupon || coupon.status !== 'active') {
+                    Swal.fire('Lỗi', 'Mã giảm giá không hợp lệ hoặc đã hết hạn.', 'error');
+                    appliedCoupon = null;
+                    localStorage.removeItem('appliedCoupon');
+                    updateDiscountDisplay(0, null);
+                    return;
+                }
+                // Kiểm tra ngày hiệu lực
+                const now = new Date();
+                const start = new Date(coupon.startDate);
+                const end = new Date(coupon.endDate);
+                if (now < start || now > end) {
+                    Swal.fire('Lỗi', 'Mã giảm giá chưa đến hạn hoặc đã hết hạn.', 'error');
+                    appliedCoupon = null;
+                    localStorage.removeItem('appliedCoupon');
+                    updateDiscountDisplay(0, null);
+                    return;
+                }
+                // Áp dụng giảm giá
+                const subtotal = parseInt(subtotalElement.textContent.replace(/[^\d]/g, ''));
+                let discount = 0;
+                if (coupon.type === 'percent') {
+                    discount = Math.round(subtotal * coupon.discount / 100);
+                } else if (coupon.type === 'amount') {
+                    discount = coupon.discount;
+                }
+                appliedCoupon = { code: coupon.code, discount, type: coupon.type };
+                localStorage.setItem('appliedCoupon', JSON.stringify(appliedCoupon));
+                updateDiscountDisplay(discount, coupon.code);
+                Swal.fire('Thành công', `Áp dụng mã ${coupon.code} thành công!`, 'success');
+            });
+        }
+
+        function updateDiscountDisplay(discount, code) {
+            discountElement.textContent = formatPrice(discount);
+            // Cập nhật lại tổng tiền
+            const subtotal = parseInt(subtotalElement.textContent.replace(/[^\d]/g, ''));
+            const total = subtotal - discount;
+            totalElement.textContent = formatPrice(total);
+            // Hiển thị mã giảm giá nếu muốn
+            // document.querySelector('.promo-code h3').textContent = code ? `Mã giảm giá (${code})` : 'Mã giảm giá';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            orderSummaryList = document.querySelector('.order-summary-list');
+            subtotalElement = document.querySelector('.subtotal');
+            shippingElement = document.querySelector('.shipping');
+            discountElement = document.querySelector('.discount');
+            totalElement = document.querySelector('.total-amount');
+            const checkoutButton = document.querySelector('.checkout-button');
+
+            // Load cart items from localStorage
+            function loadCart() {
+                const cart = JSON.parse(localStorage.getItem(getCartKey())) || [];
+                return cart;
+            }
+
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Shipping option selection
+            document.querySelectorAll('.shipping-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.shipping-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    this.querySelector('input[type="radio"]').checked = true;
+
+                    // Update shipping cost
+                    const shippingCost = this.querySelector('.shipping-option-price').textContent;
+                    shippingElement.textContent = shippingCost;
+
+                    // Recalculate total
+                    const subtotal = parseInt(subtotalElement.textContent.replace(/[^\d]/g, ''));
+                    const shipping = parseInt(shippingCost.replace(/[^\d]/g, ''));
+                    const discount = parseInt(discountElement.textContent.replace(/[^\d]/g, ''));
+                    const total = subtotal + shipping - discount;
+                    totalElement.textContent = formatPrice(total);
+                });
+            });
+
+            // Handle VNPay checkout
+            checkoutButton.addEventListener('click', async function(e) {
+                e.preventDefault();
+                const form = document.getElementById('checkoutForm');
+                if (!form.checkValidity()) {
+                    Swal.fire({ title: 'Lỗi!', text: 'Vui lòng điền đầy đủ thông tin.', icon: 'error' });
+                    return;
+                }
+                if (!currentUser) {
+                    Swal.fire({ title: 'Bạn chưa đăng nhập', text: 'Vui lòng đăng nhập để tiếp tục.', icon: 'warning' });
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'Đang xử lý...',
+                    text: 'Vui lòng chờ trong giây lát',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                const cart = JSON.parse(localStorage.getItem(getCartKey())) || [];
+                const total = parseInt(document.querySelector('.total-amount').textContent.replace(/[^\d]/g, ''));
+                const orderId = 'ORDER_' + Date.now();
+                const orderData = {
+                    id: orderId,
+                    items: cart,
+                    total: total,
+                    customer: {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        address: document.getElementById('address').value,
+                        note: document.getElementById('note').value
+                    },
+                    status: 'pending',
+                    createdAt: new Date().toISOString(),
+                    userId: currentUser ? currentUser.uid : null
+                };
+
+                // Khi đặt hàng, lưu mã giảm giá và số tiền giảm vào orderData
+                const couponData = JSON.parse(localStorage.getItem('appliedCoupon')) || null;
+                if (couponData) {
+                    orderData.coupon = couponData.code;
+                    orderData.discountAmount = couponData.discount;
+                }
+
+                firebase.database().ref('orders/' + orderId).set(orderData)
+                    .then(async () => {
+                        Swal.close();
+                        localStorage.removeItem(getCartKey());
+                        const paymentMethodDiv = document.querySelector('.payment-method.selected');
+                        let isVNPay = false;
+                        if (paymentMethodDiv && paymentMethodDiv.textContent.includes('VNPay')) {
+                            isVNPay = true;
+                        }
+                        if (isVNPay) {
+                            await processVNPayPayment(orderData, orderId);
+                            return;
+                        }
+                        Swal.fire({
+                            title: 'Đặt hàng thành công!',
+                            text: 'Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được xác nhận.',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF6B00'
+                        }).then(() => {
+                            window.location.href = 'index.html';
+                        });
+                    })
+                    .catch(error => {
+                        Swal.close();
+                        Swal.fire({
+                            title: 'Lỗi!',
+                            text: 'Có lỗi xảy ra khi xử lý đơn hàng. Vui lòng thử lại.',
+                            icon: 'error',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: '#FF6B00'
+                        });
+                    });
+            });
+
+            // Load cart items on page load
+            displayCartItems();
+            setupCouponInput(); // Đảm bảo gọi hàm này khi trang vừa load
+        });
+
+        let currentUser = null;
+        let userData = null;
+        // Lấy thông tin user từ Firebase khi đã đăng nhập
+        firebase.auth().onAuthStateChanged(async function(user) {
+            currentUser = user;
+            if (user) {
+                // Lấy thông tin user từ Realtime Database
+                const userRef = firebase.database().ref('users/' + user.uid);
+                const snapshot = await userRef.once('value');
+                userData = snapshot.val();
+                // Đổ thông tin vào form nếu có
+                if (userData) {
+                    document.getElementById('firstName').value = userData.displayName?.split(' ').slice(0, -1).join(' ') || '';
+                    document.getElementById('lastName').value = userData.displayName?.split(' ').slice(-1).join(' ') || '';
+                    document.getElementById('email').value = userData.email || '';
+                    document.getElementById('phone').value = userData.phone || '';
+                    // Địa chỉ: lấy địa chỉ đầu tiên nếu có
+                    if (userData.addresses) {
+                        const firstAddress = Object.values(userData.addresses)[0];
+                        document.getElementById('address').value = firstAddress.text || '';
+                    }
+                }
+            }
+            displayCartItems();
+        });
+
+        // === VNPay Integration ===
+        async function processVNPayPayment(order, orderId) {
+            const vnp_TmnCode = "AEDW20LM";
+            const vnp_HashSecret = "4ZD0IYFHDFXDYGBZJ4NMP5TXJAKFBW1H";
+            const vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+            const vnp_ReturnUrl = window.location.origin + "/vnpay_return.html";
+
+            // Lấy địa chỉ IP của người dùng
+            async function getClientIp() {
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    return data.ip || '127.0.0.1';
+                } catch (error) {
+                    console.error('Error fetching IP:', error);
+                    return '127.0.0.1';
+                }
+            }
+
+            // Tạo mã giao dịch từ orderId (sử dụng 8 ký tự cuối)
+            const txnRef = orderId.slice(-8).toUpperCase();
+            console.log('OrderId:', orderId);
+            console.log('TxnRef:', txnRef);
+
+            const vnp_Params = {
+                vnp_Version: '2.1.0',
+                vnp_Command: 'pay',
+                vnp_TmnCode: vnp_TmnCode,
+                vnp_Locale: 'vn',
+                vnp_CurrCode: 'VND',
+                vnp_TxnRef: txnRef,
+                vnp_OrderInfo: `Thanh toan don hang ${txnRef}`,
+                vnp_OrderType: 'other',
+                vnp_Amount: Math.round(order.total * 100),
+                vnp_ReturnUrl: vnp_ReturnUrl,
+                vnp_IpAddr: await getClientIp(),
+                vnp_CreateDate: moment().format('YYYYMMDDHHmmss')
+            };
+
+            // Lưu mapping giữa txnRef và orderId
+            localStorage.setItem('pendingOrderKey', orderId);
+            localStorage.setItem('vnpayTxnRef', txnRef);
+            
+            // Lưu thêm vào Firebase để backup
+            try {
+                await firebase.database().ref('vnpay_transactions/' + txnRef).set({
+                    orderKey: orderId,
+                    amount: order.total,
+                    createdAt: new Date().toISOString(),
+                    status: 'pending'
+                });
+                console.log('VNPAY transaction mapping saved to Firebase');
+            } catch (error) {
+                console.error('Error saving VNPAY mapping:', error);
+            }
+
+            // Sắp xếp tham số
+            const sortedParams = Object.keys(vnp_Params).sort().reduce((acc, key) => {
+                acc[key] = vnp_Params[key];
+                return acc;
+            }, {});
+
+            // Tạo chuỗi ký tự cần mã hóa
+            const signData = Object.keys(sortedParams)
+                .map(key => `${key}=${encodeURIComponent(sortedParams[key]).replace(/%20/g, '+')}`)
+                .join('&');
+
+            // Debug
+            console.log('vnp_Params:', vnp_Params);
+            console.log('signData:', signData);
+
+            // Tạo chữ ký
+            const hmac = CryptoJS.HmacSHA512(signData, vnp_HashSecret);
+            const vnp_SecureHash = hmac.toString(CryptoJS.enc.Hex);
+
+            console.log('vnp_SecureHash:', vnp_SecureHash);
+
+            // Thêm chữ ký vào tham số
+            sortedParams.vnp_SecureHash = vnp_SecureHash;
+
+            // Tạo URL thanh toán
+            const paymentUrl = vnp_Url + '?' + Object.keys(sortedParams)
+                .map(key => `${key}=${encodeURIComponent(sortedParams[key]).replace(/%20/g, '+')}`)
+                .join('&');
+
+            console.log('paymentUrl:', paymentUrl);
+
+            // Chuyển hướng
+            window.location.href = paymentUrl;
+        }
+    </script>
+</body>
+</html> 
