@@ -12,7 +12,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-
+ <script src="mobile.js"></script>
+    <link rel="stylesheet" href="mobile.css">
     <style>
     :root {
         --primary-color: #FF6B00;
@@ -868,6 +869,13 @@
             // Load cart items on page load
             displayCartItems();
             setupCouponInput(); // Đảm bảo gọi hàm này khi trang vừa load
+        });
+
+        // Listen for storage events to sync cart across tabs
+        window.addEventListener('storage', function(e) {
+            if (e.key === getCartKey()) {
+                displayCartItems();
+            }
         });
 
         let currentUser = null;

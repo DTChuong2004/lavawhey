@@ -19,6 +19,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="search_new.js"></script>
+    <script src="mobile.js"></script>
+    <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="search.css">
 <style>
         /* Reset CSS */
@@ -2150,7 +2152,7 @@
             </ul>
             <div class="search-container">
                 <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="search-input">
-                <div id="search-results" class="search-results"></div>
+                <div id="search-results"></div>
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
                     <div class="btn-cart">
@@ -2855,6 +2857,11 @@
                     }
                     hideModal(loginModal);
                     showSuccessMessage('Đăng nhập thành công!');
+                    // Nếu là admin thì chuyển hướng sang admin.html
+                    if (userCredential.user && userCredential.user.email === 'quantrilavawhey@gmail.com') {
+                        window.location.href = 'admin.html';
+                        return;
+                    }
                     updateUIForLoggedInUser(userCredential.user);
                 } catch (error) {
                     showErrorMessage('Đăng nhập thất bại: ' + error.message);
@@ -3004,6 +3011,14 @@
                     window.location.href = 'checkout.html';
                 }
             });
+            // Listen for storage events to sync cart across tabs/pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === getCartKey()) {
+                    cart = JSON.parse(e.newValue || '[]');
+                    updateCartDisplay();
+                }
+            });
+
             // Load cart on page load
             loadCart();
         });

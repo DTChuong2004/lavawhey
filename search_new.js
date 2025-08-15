@@ -23,7 +23,7 @@ async function layDuLieuCategories() {
     }
 }
 
-// Hàm tìm kiếm danh mục
+// Hàm tìm kiếm sản phẩm (cải thiện)
 function timKiemSanPham(categories, tuKhoa) {
     if (!categories || !Array.isArray(categories)) {
         return [];
@@ -32,11 +32,44 @@ function timKiemSanPham(categories, tuKhoa) {
     let ketQua = [];
     
     categories.forEach(danhMuc => {
-        if (danhMuc && danhMuc.name && danhMuc.name.toLowerCase().includes(tuKhoa)) {
-            // Trả về toàn bộ danh mục thay vì sản phẩm riêng lẻ
-            ketQua = [...ketQua, ...danhMuc.products];
+        if (danhMuc && danhMuc.products && Array.isArray(danhMuc.products)) {
+            // Tìm kiếm trong sản phẩm của danh mục
+            danhMuc.products.forEach(sanPham => {
+                if (sanPham && sanPham.name) {
+                    // Tìm theo tên sản phẩm
+                    if (sanPham.name.toLowerCase().includes(tuKhoa)) {
+                        ketQua.push({
+                            ...sanPham,
+                            categoryId: danhMuc.id,
+                            categoryName: danhMuc.name
+                        });
+                    }
+                    // Tìm theo mô tả sản phẩm
+                    else if (sanPham.description && sanPham.description.toLowerCase().includes(tuKhoa)) {
+                        ketQua.push({
+                            ...sanPham,
+                            categoryId: danhMuc.id,
+                            categoryName: danhMuc.name
+                        });
+                    }
+                }
+            });
+            
+            // Tìm theo tên danh mục
+            if (danhMuc.name && danhMuc.name.toLowerCase().includes(tuKhoa)) {
+                danhMuc.products.forEach(sanPham => {
+                    if (!ketQua.find(item => item.id === sanPham.id)) {
+                        ketQua.push({
+                            ...sanPham,
+                            categoryId: danhMuc.id,
+                            categoryName: danhMuc.name
+                        });
+                    }
+                });
+            }
         }
     });
+    
     return ketQua;
 }
 
@@ -76,31 +109,21 @@ function khoiTaoTimKiem() {
         
         // Hiển thị kết quả
         if (ketQua.length > 0) {
-            // Tìm danh mục chứa sản phẩm
-            searchResults.innerHTML = ketQua.map(sp => {
-                // Tìm danh mục chứa sản phẩm
-                const danhMucChua = categories.find(dm => 
-                    dm.products && dm.products.some(p => p.id === sp.id)
-                );
-                const danhMucId = danhMucChua ? danhMucChua.id : '';
-                
-                const danhMucName = danhMucChua ? danhMucChua.name : '';
-                return `
-                    <div class="search-item" data-category="${danhMucId}" data-product="${sp.id}">
-                        <div class="category-header">
-                            <h3>${danhMucName}</h3>
-                        </div>
-                        <div class="product-details">
-                            <img src="${sp.image.startsWith('./') ? sp.image.slice(2) : sp.image}" alt="${sp.name}">
-                            <div class="search-item-info">
-                                <h4>${sp.name}</h4>
-                                <p>${sp.description}</p>
-                                <span class="price">${sp.price.toLocaleString()}đ</span>
-                            </div>
+            searchResults.innerHTML = ketQua.map(sp => `
+                <div class="search-item" data-category="${sp.categoryId}" data-product="${sp.id}">
+                    <div class="category-header">
+                        <h3>${sp.categoryName}</h3>
+                    </div>
+                    <div class="product-details">
+                        <img src="${sp.image}" alt="${sp.name}" onerror="this.src='https://via.placeholder.com/80x80?text=No+Image'">
+                        <div class="search-item-info">
+                            <h4>${sp.name}</h4>
+                            <p>${sp.description || 'Không có mô tả'}</p>
+                            <span class="price">${sp.price.toLocaleString()}đ</span>
                         </div>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         } else {
             searchResults.innerHTML = '<div class="no-results">Không tìm thấy sản phẩm</div>';
         }
@@ -111,7 +134,6 @@ function khoiTaoTimKiem() {
             item.addEventListener('click', function() {
                 const categoryId = this.dataset.category;
                 const productId = this.dataset.product;
-                const url = `products.html?category=${categoryId}&search=${encodeURIComponent(tuKhoa)}&product=${productId}&scroll=true&single=true`;
                 
                 // Lưu thông tin chi tiết vào sessionStorage để sử dụng sau khi chuyển trang
                 const danhMucChua = categories.find(dm => dm.id === categoryId);

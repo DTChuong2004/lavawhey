@@ -3974,7 +3974,7 @@
 
         // --- CART GLOBAL LOGIC ---
         let cart = [];
-        // Cart DOM elements and event listeners must be set after DOMContentLoaded
+        // Cart DOM elements and event listeners must be set after DOMContentLoaded 
         document.addEventListener('DOMContentLoaded', function() {
             window.cartBtn = document.querySelector('.btn-cart');
             window.cartDropdown = document.querySelector('.cart-dropdown');
@@ -3984,6 +3984,14 @@
             window.emptyCart = document.querySelector('.empty-cart');
             window.cartSummary = document.querySelector('.cart-summary');
             window.cartButtons = document.querySelector('.cart-buttons');
+
+            // Listen for storage events to sync cart across tabs/pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === getCartKey()) {
+                    cart = JSON.parse(e.newValue || '[]');
+                    updateCartDisplay();
+                }
+            });
 
             // Toggle cart dropdown
             cartBtn.addEventListener('click', function(e) {

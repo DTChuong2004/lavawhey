@@ -17,6 +17,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="search_new.js"></script>
     <link rel="stylesheet" href="search.css">
+     <script src="mobile.js"></script>
+    <link rel="stylesheet" href="mobile.css">
 <style>
         /* Reset CSS */
     * {
@@ -3395,17 +3397,33 @@
                 }).format(price);
             }
 
+            function getCartKey() {
+                const user = firebase.auth().currentUser;
+                return user ? `cart_${user.uid}` : 'cart_guest';
+            }
+
             function saveCart() {
-                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem(getCartKey(), JSON.stringify(cart));
             }
 
             function loadCart() {
-                const savedCart = localStorage.getItem('cart');
+                const savedCart = localStorage.getItem(getCartKey());
                 if (savedCart) {
                     cart = JSON.parse(savedCart);
                     updateCartDisplay();
+                } else {
+                    cart = [];
+                    updateCartDisplay();
                 }
             }
+
+            // Listen for storage events to sync cart across tabs/pages
+            window.addEventListener('storage', function(e) {
+                if (e.key === getCartKey()) {
+                    cart = JSON.parse(e.newValue || '[]');
+                    updateCartDisplay();
+                }
+            });
 
             // Load cart on page load
             loadCart();
