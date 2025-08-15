@@ -15,6 +15,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="search_new.js"></script>
+    <script src="filter_products.js"></script>
+    <link rel="stylesheet" href="search.css">
 <style>
         /* Reset CSS */
     * {
@@ -31,10 +34,19 @@
         --gray-color: #f4f4f4;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         color: var(--dark-color);
+    }
+
+    /* Offset for fixed header */
+    section[id] {
+        scroll-margin-top: 120px;
     }
 
     /* Header & Navigation */
@@ -1113,17 +1125,16 @@
         position: relative;
     }
     .search-input {
-        padding: 0.8rem 1.2rem;
+        padding: 0.6rem 1rem;
         border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 25px;
-        font-size: 1.1rem;
-        width: 250px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        width: 180px;
         transition: width 0.3s ease;
         background-color: rgba(255,255,255,0.1);
         color: #ffffff;
     }
     .search-input:focus {
-        width: 300px;
         outline: none;
         border-color: var(--primary-color);
         background-color: rgba(255,255,255,0.15);
@@ -1136,15 +1147,15 @@
         color: var(--light-color);
         border: none;
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        margin-left: 0.8rem;
+        width: 38px;
+        height: 38px;
+        margin-left: 0.6rem;
         cursor: pointer;
         transition: background 0.2s;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
     .search-button:hover {
-        background: var(--secondary-color);
+        background: var(--primary-color);
     }
 
     .btn-cart, .btn-login {
@@ -2565,9 +2576,11 @@
                 <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="policy.html">Chính sách</a></li>
             </ul>
             <div class="search-container">
-                <input type="text" placeholder="Tìm kiếm..." class="search-input">
+                <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="search-input">
+                <div id="search-results"></div>
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
                     <div class="btn-cart">
@@ -2634,22 +2647,25 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Về LavaWhey</h3>
-                <p>Chuyên cung cấp các sản phẩm whey protein và thực phẩm bổ sung chất lượng cao.</p>
+                <h3>Giới thiệu chung</h3>
+                <p><a href="about.html" style="text-decoration:none; color:inherit; cursor:pointer;">Giới thiệu về LavaWhey</a></p>
+                <p><a href="about.html#featured-brands" style="text-decoration:none; color:inherit; cursor:pointer;">Thương hiệu nổi bật</a></p>
+                <p><a href="about.html#contact-complaints" style="text-decoration:none; color:inherit; cursor:pointer;">Liên hệ & khiếu nại</a></p>
+                <p><a href="about.html#transaction-terms" style="text-decoration:none; color:inherit; cursor:pointer;">Điều khoản giao dịch</a></p>
             </div>
             <div class="footer-section">
-                <h3>Theo dõi chúng tôi</h3>
-                <p>Facebook: LavaWhey</p>
-                <p>Instagram: @LavaWhey</p>
-                <p>Youtube: LavaWhey</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
+                <h3>Chính sách chung</h3>
+                <p><a href="policy.html#data-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách dữ liệu</a></p>
+                <p><a href="policy.html#privacy-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo mật</a></p>
+                <p><a href="policy.html#business-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách kinh doanh</a></p>
+                <p><a href="policy.html#shipping-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách vận chuyển</a></p>
+                <p><a href="policy.html#warranty-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo hành</a></p>
+                <p><a href="policy.html#return-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách đổi trả</a></p>
             </div>
             <div class="footer-section">
                 <h3>Hỗ trợ khách hàng</h3>
+                <p>Facebook: LavaWhey</p>
+                <p>Instagram: @LavaWhey</p>
                 <p><i class="fas fa-headset"></i> Hotline: 0847 788 360</p>
                 <p><i class="fas fa-envelope"></i> Email: LavaWhey@gmail.com</p>
                 <p><i class="fas fa-question-circle"></i> Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều, TP.Cần Thơ</p>
@@ -2812,6 +2828,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyDPdSUkT56drPQGE9N4KvjM3ZoQaeamdao",
             authDomain: "lavawhey.firebaseapp.com",
+            databaseURL: "https://lavawhey-default-rtdb.firebaseio.com",
             projectId: "lavawhey",
             storageBucket: "lavawhey.firebasestorage.app",
             messagingSenderId: "261576736130",
@@ -2820,11 +2837,18 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+            firebase.analytics();
+        }
 
         // Get database instance
-        const database = firebase.database();
+        window.database = firebase.database(); // Make database globally available
+
+        // Initialize database in filter_products.js
+        if (typeof initializeFirebaseDatabase === 'function') {
+            initializeFirebaseDatabase();
+        }
 
         // --- CART GLOBAL LOGIC ---
         let cart = [];
@@ -3201,6 +3225,25 @@
                 }
             });
         });
+
+        // Smooth scrolling for cross-page links
+        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.includes('#')) {
+                    const [page, targetId] = href.split('#');
+                    if (page === window.location.pathname.split('/').pop() || page === '') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector('#' + targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                }
+            });
+        });
         
         // Add to cart functionality
         document.querySelectorAll('.buy-button').forEach(button => {
@@ -3514,7 +3557,119 @@
                     updateUIForLoggedInUser(null); // Also load guest cart
                 }
             });
+
+            // Xử lý tham số URL và lọc sản phẩm
+            async function handleProductFiltering() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const searchQuery = urlParams.get('search')?.toLowerCase();
+                const categoryId = urlParams.get('category');
+
+                if (searchQuery) {
+                    // Lấy dữ liệu categories từ Firebase
+                    try {
+                        const response = await fetch('https://lavawhey-default-rtdb.firebaseio.com/categories.json');
+                        const categories = await response.json();
+
+                        // Ẩn tất cả các danh mục trước
+                        categories.forEach(category => {
+                            const categoryElement = document.getElementById(category.id);
+                            if (categoryElement) {
+                                categoryElement.style.display = 'none';
+                            }
+                        });
+
+                        let foundMatch = false;
+                        // Lọc và hiển thị chỉ những danh mục phù hợp
+                        categories.forEach(category => {
+                            const categoryElement = document.getElementById(category.id);
+                            if (categoryElement && category.products) {
+                                // Kiểm tra xem danh mục có match với search query không
+                                const isCategoryMatch = category.name.toLowerCase().includes(searchQuery);
+                                const hasMatchingProducts = category.products.some(product => 
+                                    product.name.toLowerCase().includes(searchQuery) ||
+                                    product.description.toLowerCase().includes(searchQuery)
+                                );
+
+                                if (isCategoryMatch || hasMatchingProducts) {
+                                    // Hiện danh mục phù hợp
+                                    categoryElement.style.display = 'block';
+                                    // Mở rộng danh mục
+                                    const categoryHeader = categoryElement.querySelector('h2');
+                                    if (categoryHeader && !categoryHeader.classList.contains('active')) {
+                                        categoryHeader.click();
+                                    }
+
+                                    // Cuộn đến danh mục đầu tiên có sản phẩm phù hợp
+                                    if (!foundMatch) {
+                                        foundMatch = true;
+                                        setTimeout(() => {
+                                            categoryElement.scrollIntoView({
+                                                behavior: 'smooth',
+                                                block: 'start'
+                                            });
+                                        }, 300);
+                                    }
+
+                                    // Highlight tất cả sản phẩm trong danh mục phù hợp
+                                    const productCards = categoryElement.querySelectorAll('.product-card');
+                                    productCards.forEach(card => {
+                                        card.style.display = 'block';
+                                    });
+                                }
+                            }
+                        });
+
+                        // Cập nhật danh mục bên trái
+                        const categoryList = document.querySelector('.category-list');
+                        if (categoryList) {
+                            const categoryLinks = categoryList.querySelectorAll('a');
+                            categoryLinks.forEach(link => {
+                                const categorySection = document.getElementById(link.getAttribute('href').slice(1));
+                                if (categorySection) {
+                                    link.parentElement.style.display = 
+                                        categorySection.style.display === 'none' ? 'none' : 'block';
+                                }
+                            });
+                        }
+
+                    } catch (error) {
+                        console.error('Lỗi khi lọc sản phẩm:', error);
+                    }
+                } else if (categoryId) {
+                    // Nếu chỉ có categoryId, cuộn đến danh mục đó
+                    const categoryElement = document.getElementById(categoryId);
+                    if (categoryElement) {
+                        // Hiện tất cả các danh mục
+                        const allCategories = document.querySelectorAll('.product-category');
+                        allCategories.forEach(cat => cat.style.display = 'block');
+
+                        // Hiện tất cả các liên kết danh mục
+                        const categoryLinks = document.querySelectorAll('.category-list a');
+                        categoryLinks.forEach(link => link.parentElement.style.display = 'block');
+
+                        const categoryHeader = categoryElement.querySelector('h2');
+                        if (categoryHeader && !categoryHeader.classList.contains('active')) {
+                            categoryHeader.click();
+                        }
+                        setTimeout(() => {
+                            categoryElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }, 300);
+                    }
+                } else {
+                    // Nếu không có tham số tìm kiếm, hiện tất cả
+                    const allCategories = document.querySelectorAll('.product-category');
+                    allCategories.forEach(cat => cat.style.display = 'block');
+                    const categoryLinks = document.querySelectorAll('.category-list a');
+                    categoryLinks.forEach(link => link.parentElement.style.display = 'block');
+                }
+            }
+
+            // Xử lý lọc sản phẩm khi trang đã tải xong
+            window.addEventListener('load', handleProductFiltering);
         });
     </script>
 </body>
-</html> 
+</html>

@@ -15,6 +15,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="search_new.js"></script>
+    <link rel="stylesheet" href="search.css">
 <style>
         /* Reset CSS */
     * {
@@ -31,10 +33,19 @@
         --gray-color: #f4f4f4;
     }
 
+    html {
+        scroll-behavior: smooth;
+    }
+
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.6;
         color: var(--dark-color);
+    }
+
+    /* Offset for fixed header */
+    section[id] {
+        scroll-margin-top: 120px;
     }
 
     /* Header & Navigation */
@@ -1108,17 +1119,16 @@
         position: relative;
     }
     .search-input {
-        padding: 0.8rem 1.2rem;
+        padding: 0.6rem 1rem;
         border: 1px solid rgba(255,255,255,0.2);
-        border-radius: 25px;
-        font-size: 1.1rem;
-        width: 250px;
+        border-radius: 20px;
+        font-size: 0.95rem;
+        width: 180px;
         transition: width 0.3s ease;
         background-color: rgba(255,255,255,0.1);
         color: #ffffff;
     }
     .search-input:focus {
-        width: 300px;
         outline: none;
         border-color: var(--primary-color);
         background-color: rgba(255,255,255,0.15);
@@ -1131,15 +1141,15 @@
         color: var(--light-color);
         border: none;
         border-radius: 50%;
-        width: 45px;
-        height: 45px;
-        margin-left: 0.8rem;
+        width: 38px;
+        height: 38px;
+        margin-left: 0.6rem;
         cursor: pointer;
         transition: background 0.2s;
-        font-size: 1.1rem;
+        font-size: 0.95rem;
     }
     .search-button:hover {
-        background: var(--secondary-color);
+        background: var(--primary-color);
     }
 
     .btn-cart, .btn-login {
@@ -2204,22 +2214,58 @@
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="index.html" >Trang chủ</a></li>
                 <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
                 <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
-                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="contact.html" class="active">Liên hệ</a></li>
+                <li><a href="policy.html">Chính sách</a></li>
             </ul>
             <div class="search-container">
-                <input type="text" placeholder="Tìm kiếm..." class="search-input">
+                <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="search-input">
+                <div id="search-results"></div>
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart" onclick="window.location.href='products.html'">
+                    <div class="btn-cart">
                         <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
                     </div>
-                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
-                    <div class="cart-dropdown" style="display:none !important;"></div>
+                    <div class="cart-dropdown">
+                        <div class="cart-header">
+                            <h3>
+                                <i class="fas fa-shopping-cart"></i>
+                                Giỏ hàng
+                                <span class="cart-count-badge">0 sản phẩm</span>
+                            </h3>
+                        </div>
+                        <div class="cart-items">
+                            <!-- Cart items will be dynamically added here -->
+                        </div>
+                        <div class="cart-summary">
+                            <div class="cart-summary-row">
+                                <span>Tạm tính:</span>
+                                <span>0₫</span>
+                            </div>
+                            <div class="cart-summary-row">
+                                <span>Phí vận chuyển:</span>
+                                <span>0₫</span>
+                            </div>
+                            <div class="cart-summary-row total">
+                                <span>Tổng cộng:</span>
+                                <span>0₫</span>
+                            </div>
+                        </div>
+                        <div class="cart-buttons">
+                            <button class="btn-continue">Tiếp tục mua</button>
+                            <button class="btn-checkout">Thanh toán</button>
+                        </div>
+                        <div class="empty-cart" style="display: none;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p>Giỏ hàng của bạn đang trống</p>
+                            <a href="products.html" class="btn-shop">Mua sắm ngay</a>
+                        </div>
+                    </div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
@@ -2323,22 +2369,25 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Về LavaWhey</h3>
-                <p>Chuyên cung cấp các sản phẩm whey protein và thực phẩm bổ sung chất lượng cao.</p>
+                <h3>Giới thiệu chung</h3>
+                <p><a href="about.html" style="text-decoration:none; color:inherit; cursor:pointer;">Giới thiệu về LavaWhey</a></p>
+                <p><a href="about.html#featured-brands" style="text-decoration:none; color:inherit; cursor:pointer;">Thương hiệu nổi bật</a></p>
+                <p><a href="about.html#contact-complaints" style="text-decoration:none; color:inherit; cursor:pointer;">Liên hệ & khiếu nại</a></p>
+                <p><a href="about.html#transaction-terms" style="text-decoration:none; color:inherit; cursor:pointer;">Điều khoản giao dịch</a></p>
             </div>
             <div class="footer-section">
-                <h3>Theo dõi chúng tôi</h3>
-                <p>Facebook: LavaWhey</p>
-                <p>Instagram: @LavaWhey</p>
-                <p>Youtube: LavaWhey</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
+                <h3>Chính sách chung</h3>
+                <p><a href="policy.html#data-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách dữ liệu</a></p>
+                <p><a href="policy.html#privacy-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo mật</a></p>
+                <p><a href="policy.html#business-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách kinh doanh</a></p>
+                <p><a href="policy.html#shipping-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách vận chuyển</a></p>
+                <p><a href="policy.html#warranty-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo hành</a></p>
+                <p><a href="policy.html#return-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách đổi trả</a></p>
             </div>
             <div class="footer-section">
                 <h3>Hỗ trợ khách hàng</h3>
+                <p>Facebook: LavaWhey</p>
+                <p>Instagram: @LavaWhey</p>
                 <p><i class="fas fa-headset"></i> Hotline: 0847 788 360</p>
                 <p><i class="fas fa-envelope"></i> Email: LavaWhey@gmail.com</p>
                 <p><i class="fas fa-question-circle"></i> Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều, TP.Cần Thơ</p>
@@ -2495,6 +2544,25 @@
                     targetElement.scrollIntoView({
                         behavior: 'smooth'
                     });
+                }
+            });
+        });
+
+        // Smooth scrolling for cross-page links
+        document.querySelectorAll('a[href*="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.includes('#')) {
+                    const [page, targetId] = href.split('#');
+                    if (page === window.location.pathname.split('/').pop() || page === '') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector('#' + targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
                 }
             });
         });
@@ -2807,6 +2875,18 @@
                     updateUIForLoggedInUser(user);
                 }
             });
+
+            // Handle direct access to anchor links
+            if (window.location.hash) {
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                }
+            }
         });
 
         // Cart functionality

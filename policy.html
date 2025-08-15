@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
     <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp">
-    <title>LavaWhey - Thực phẩm bổ sung chất lượng cao</title>
+    <title>LavaWhey - Chính sách & Điều khoản</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
@@ -482,25 +482,16 @@
     /* Hero Section */
     .hero {
         position: relative;
-        height: 100vh;
-        min-height: 700px;
+        height: 60vh;
+        min-height: 400px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         color: white;
         margin-top: 120px;
+        background: linear-gradient(135deg, #FF6B00 0%, #FF8533 100%);
         overflow: hidden;
-    }
-
-    .hero-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
     }
 
     .hero-overlay {
@@ -809,6 +800,82 @@
         }
     }
 
+    /* Policy Content Section */
+    .policy-content {
+        padding: 4rem 5%;
+        background-color: var(--light-color);
+    }
+
+    .policy-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .policy-section {
+        margin-bottom: 4rem;
+        background: white;
+        border-radius: 15px;
+        padding: 2.5rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        border-left: 5px solid var(--primary-color);
+    }
+
+    .policy-section h2 {
+        color: var(--primary-color);
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 1rem;
+    }
+
+    .policy-section h3 {
+        color: var(--dark-color);
+        font-size: 1.5rem;
+        margin: 2rem 0 1rem 0;
+        font-weight: 600;
+    }
+
+    .policy-section p {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .policy-section ul {
+        margin: 1rem 0;
+        padding-left: 2rem;
+    }
+
+    .policy-section li {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .policy-section .highlight {
+        background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 4px solid var(--primary-color);
+        margin: 1.5rem 0;
+    }
+
+    .policy-section .contact-info {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+    }
+
+    .policy-section .contact-info h4 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
     /* Benefits Section */
     .benefits {
         padding: 5rem 5%;
@@ -894,15 +961,34 @@
         }
         
         .hero {
-            height: 100vh;
+            height: 50vh;
+            min-height: 300px;
         }
         
         .hero h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
         }
         
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1rem;
+        }
+        
+        .policy-section {
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .policy-section h2 {
+            font-size: 1.8rem;
+        }
+        
+        .policy-section h3 {
+            font-size: 1.3rem;
+        }
+        
+        .policy-section p,
+        .policy-section li {
+            font-size: 1rem;
         }
         
         .cta-button {
@@ -943,28 +1029,43 @@
             grid-template-columns: 1fr;
         }
     }
+    .news-grid.news-slider {
+        min-height: 420px;
+        /* Đảm bảo chiều cao tối thiểu cho grid slider, có thể điều chỉnh nếu cần */
+    }
     .news-card {
+        height: 100%;
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         background: var(--gray-color);
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         overflow: hidden;
         transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .news-card a {
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
     .news-card img {
         width: 100%;
         height: 180px;
         object-fit: cover;
+        flex-shrink: 0;
     }
     .news-card h3 {
         font-size: 1.3rem;
         margin: 1rem 1.2rem 0.5rem 1.2rem;
         color: var(--dark-color);
+        min-height: 48px;
     }
     .news-card p {
         margin: 0 1.2rem 1rem 1.2rem;
         color: #555;
+        min-height: 48px;
         flex: 1;
     }
     .read-more {
@@ -974,6 +1075,8 @@
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s;
+        align-self: flex-start;
+        margin-top: auto;
     }
     .read-more:hover {
         color: var(--secondary-color);
@@ -2117,740 +2220,31 @@
         transform: translateY(-2px);
     }
 
-    .member-main {
-        max-width: 1100px;
-        margin: 140px auto 40px auto;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-    }
-    .card {
+    .news-pagination .news-page-btn {
         background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-        padding: 3rem 3.5rem;
-        margin-bottom: 1.5rem;
-        width: 100%;
-        max-width: none;
-        min-height: 320px;
-        font-size: 1.15rem;
-        box-sizing: border-box;
-    }
-    .member-content {
-        width: 100%;
-        padding-right: 0;
-    }
-    .member-profile.card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .profile-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        width: 100%;
-    }
-    .profile-avatar {
-        width: 110px;
-        height: 110px;
+        border: 2px solid #FF6B00;
+        color: #FF6B00;
         border-radius: 50%;
-        object-fit: cover;
-        border: 4px solid var(--primary-color);
-        background: #f4f4f4;
-        font-size: 2.5rem;
-    }
-    .profile-details {
-        text-align: center;
-        width: 100%;
-    }
-    .profile-details p {
-        margin-bottom: 1.2rem;
-        font-size: 1.18rem;
-    }
-    .edit-profile-btn {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 32px;
-        font-weight: 500;
+        width: 36px;
+        height: 36px;
         font-size: 1.1rem;
-        cursor: pointer;
-        margin-top: 8px;
-        transition: background 0.2s;
-    }
-    .edit-profile-btn:hover {
-        background: var(--secondary-color);
-    }
-    .orders-table-wrapper {
-        overflow-x: auto;
-    }
-    .orders-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-    .orders-table th, .orders-table td {
-        padding: 10px 12px;
-        border-bottom: 1px solid #eee;
-        text-align: center;
-    }
-    .orders-table th {
-        background: #f4f4f4;
-        color: var(--primary-color);
-    }
-    .orders-table tr:last-child td {
-        border-bottom: none;
-    }
-    .address-list, .voucher-list {
-        list-style: none;
-        padding-left: 0;
-        margin-top: 1rem;
-    }
-    .address-item, .voucher-item {
-        background: #f4f4f4;
-        border-radius: 8px;
-        padding: 10px 16px;
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .add-address-btn {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 8px 18px;
-        font-weight: 500;
-        cursor: pointer;
-        margin-top: 8px;
-    }
-    .add-address-btn:hover {
-        background: var(--secondary-color);
-    }
-    .points-info {
-        margin-top: 1rem;
-    }
-    .rank-progress {
-        background: #eee;
-        border-radius: 8px;
-        height: 16px;
-        margin: 10px 0 8px 0;
-        width: 100%;
-        overflow: hidden;
-    }
-    .rank-bar {
-        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        height: 100%;
-        border-radius: 8px;
-        transition: width 0.5s;
-    }
-    .rank-benefit {
-        color: #888;
-        font-size: 0.95rem;
-    }
-    .change-password-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 1rem;
-    }
-    .change-password-form input {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-    }
-    .change-password-form button {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 0;
-        font-weight: 500;
-        cursor: pointer;
-        margin-top: 8px;
-    }
-    .change-password-form button:hover {
-        background: var(--secondary-color);
-    }
-    .member-logout {
-        text-align: center;
-        margin: 2rem 0 0 0;
-    }
-    .logout-btn {
-        background: #ff4444;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 32px;
         font-weight: 600;
-        font-size: 1.1rem;
         cursor: pointer;
-        box-shadow: 0 2px 8px rgba(255,68,68,0.08);
-        transition: background 0.2s;
-    }
-    .logout-btn:hover {
-        background: #d32f2f;
-    }
-    @media (max-width: 900px) {
-        .member-main {
-            flex-direction: column;
-            align-items: center;
-        }
-        .card {
-            max-width: 98vw;
-            padding: 2rem 1rem;
-        }
-    }
-    @media (max-width: 600px) {
-        .card {
-            padding: 1.2rem 0.5rem;
-        }
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            font-size: 1.5rem;
-        }
-    }
-
-    .member-main-2col {
-        max-width: 1200px;
-        margin: 140px auto 40px auto;
-        display: flex;
-        gap: 2.5rem;
-        align-items: flex-start;
-    }
-    .member-sidebar {
-        width: 260px;
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        padding: 2.5rem 1.5rem 2rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: sticky;
-        top: 120px;
-        min-height: 400px;
-    }
-    .sidebar-profile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-    .sidebar-profile img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--primary-color);
-        margin-bottom: 10px;
-    }
-    .sidebar-name {
-        font-weight: 600;
-        font-size: 1.1rem;
-        color: var(--primary-color);
-    }
-    .sidebar-menu ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-    .sidebar-menu .menu-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 18px;
-        border-radius: 8px;
-        color: #333;
-        font-size: 1.05rem;
-        font-weight: 500;
-        cursor: pointer;
-        margin-bottom: 6px;
         transition: background 0.2s, color 0.2s;
     }
-    .sidebar-menu .menu-item i {
-        width: 22px;
-        text-align: center;
-        color: var(--primary-color);
-    }
-    .sidebar-menu .menu-item.active, .sidebar-menu .menu-item:hover {
-        background: linear-gradient(90deg, #FF6B00 0%, #FF8533 100%);
-        color: #fff;
-    }
-    .sidebar-menu .menu-item.logout-item {
-        color: #ff4444;
-    }
-    .sidebar-menu .menu-item.logout-item.active, .sidebar-menu .menu-item.logout-item:hover {
-        background: #ff4444;
-        color: #fff;
-    }
-    .member-content {
-        flex: 1;
-        min-width: 0;
-    }
-    .member-section {
-        width: 100%;
-    }
-    /* Card, profile, orders, address, voucher, points, password giữ nguyên như cũ */
-    @media (max-width: 900px) {
-        .member-main-2col {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .member-sidebar {
-            width: 100%;
-            flex-direction: row;
-            align-items: flex-start;
-            padding: 1.2rem 0.5rem;
-            margin-bottom: 1.5rem;
-            position: static;
-            min-height: unset;
-        }
-        .sidebar-profile {
-            flex-direction: row;
-            align-items: center;
-            margin-bottom: 0;
-            margin-right: 1.5rem;
-        }
-        .sidebar-profile img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 0;
-            margin-right: 10px;
-        }
-        .sidebar-menu ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .sidebar-menu .menu-item {
-            padding: 8px 10px;
-            font-size: 0.98rem;
-            margin-bottom: 0;
-        }
-    }
-    @media (max-width: 600px) {
-        .member-main-2col {
-            margin: 120px 0 20px 0;
-        }
-        .member-sidebar {
-            flex-direction: column;
-            align-items: center;
-            padding: 1rem 0.2rem;
-        }
-        .sidebar-menu ul {
-            flex-direction: column;
-            gap: 0;
-        }
-        .sidebar-menu .menu-item {
-            width: 100%;
-            text-align: left;
-        }
-    }
-    .member-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        padding: 2.2rem 2.5rem 1.5rem 2.5rem;
-        margin: 140px auto 30px auto;
-        max-width: 1200px;
-        position: relative;
-        z-index: 2;
-    }
-    .member-header-left {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    }
-    .header-avatar {
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--primary-color);
-        background: #f4f4f4;
-    }
-    .header-info {
-        display: flex;
-        flex-direction: column;
-        gap: 0.7rem;
-    }
-    .header-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--primary-color);
-    }
-    .header-row {
-        display: flex;
-        gap: 2.5rem;
-        color: #444;
-        font-size: 1.08rem;
-    }
-    .header-row i {
-        color: var(--primary-color);
-        margin-right: 5px;
-    }
-    .member-header-right {
-        display: flex;
-        align-items: center;
-        gap: 2.2rem;
-    }
-    .header-balance {
-        text-align: right;
-    }
-    .balance-label {
-        color: #888;
-        font-size: 0.98rem;
-    }
-    .balance-value {
-        color: #FF6B00;
-        font-size: 1.4rem;
-        font-weight: 700;
-        display: block;
-    }
-    .header-actions {
-        display: flex;
-        gap: 0.7rem;
-    }
-    .header-btn {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 22px;
-        font-weight: 600;
-        font-size: 1.05rem;
-        cursor: pointer;
-        transition: background 0.2s;
-    }
-    .header-btn:hover {
-        background: var(--secondary-color);
-    }
-    .pay-btn {
-        background: #FF6B00;
-    }
-    .history-btn {
-        background: #FF8533;
-    }
-    .member-main-fpt {
-        margin-top: 0;
-    }
-    .sidebar-section {
-        margin-bottom: 2.2rem;
-    }
-    .sidebar-title {
-        font-size: 1.08rem;
-        font-weight: 700;
-        color: #888;
-        margin-bottom: 0.7rem;
-        margin-left: 8px;
-    }
-    .sidebar-menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .sidebar-menu .menu-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 18px;
-        border-radius: 8px;
-        color: #333;
-        font-size: 1.05rem;
-        font-weight: 500;
-        cursor: pointer;
-        margin-bottom: 6px;
-        transition: background 0.2s, color 0.2s;
-    }
-    .sidebar-menu .menu-item i {
-        width: 22px;
-        text-align: center;
-        color: var(--primary-color);
-    }
-    .sidebar-menu .menu-item.active, .sidebar-menu .menu-item:hover {
-        background: linear-gradient(90deg, #FF6B00 0%, #FF8533 100%);
-        color: #fff;
-    }
-    .sidebar-menu .menu-item.logout-item {
-        color: #ff4444;
-    }
-    .sidebar-menu .menu-item.logout-item.active, .sidebar-menu .menu-item.logout-item:hover {
-        background: #ff4444;
-        color: #fff;
-    }
-    .service-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #FF6B00;
-        margin-bottom: 1.2rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    .service-title i {
-        color: #FF6B00;
-    }
-    .contract-count {
-        background: #eee;
-        color: #FF6B00;
-        border-radius: 16px;
-        padding: 2px 12px;
-        font-size: 0.98rem;
-        margin-left: 10px;
-    }
-    .service-contract {
-        background: #fff;
-        border-radius: 14px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
-    }
-    .contract-row {
-        display: flex;
-        gap: 2.5rem;
-        margin-bottom: 1.2rem;
-        font-size: 1.08rem;
-    }
-    .service-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.2rem;
-    }
-    .service-card {
-        background: #f8f8f8;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        padding: 1.2rem 1.5rem;
-        min-width: 220px;
-        flex: 1 1 220px;
-        display: flex;
-        flex-direction: column;
-        gap: 0.7rem;
-        position: relative;
-    }
-    .card-title {
-        font-weight: 600;
-        color: #FF6B00;
-        font-size: 1.08rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .card-content {
-        color: #333;
-        font-size: 1.05rem;
-    }
-    .card-link {
-        color: #FF6B00;
-        font-size: 0.98rem;
-        text-decoration: none;
-        font-weight: 500;
-        margin-top: 4px;
-        display: inline-block;
-    }
-    .card-link i {
-        margin-left: 4px;
-    }
-    .pay-type-btn {
+    .news-pagination .news-page-btn.active {
         background: #FF6B00;
         color: #fff;
-        border: none;
-        border-radius: 6px;
-        padding: 6px 18px;
-        font-weight: 500;
-        margin-right: 8px;
-        cursor: pointer;
-        font-size: 1rem;
     }
-    .pay-type-btn.active {
-        background: #FF6B00;
-    }
-    .pay-type-btn[disabled] {
-        background: #eee;
-        color: #aaa;
-        cursor: not-allowed;
-    }
-    .card-note {
-        color: #888;
-        font-size: 0.95rem;
-    }
-    .renew-btn {
-        background: #aaa;
-        color: #fff;
-        border: none;
-        border-radius: 6px;
-        padding: 6px 18px;
-        font-weight: 500;
-        margin-bottom: 4px;
-        cursor: not-allowed;
-        font-size: 1rem;
+    .news-next-btn:hover {
+        background: #FF8533 !important;
     }
     @media (max-width: 900px) {
-        .member-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.2rem;
-            padding: 1.2rem 1rem 1rem 1rem;
-        }
-        .member-main-2col {
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .service-cards {
-            flex-direction: column;
-        }
+        .news-next-btn { right: -20px !important; }
     }
     @media (max-width: 600px) {
-        .member-header {
-            margin: 110px 0 18px 0;
-            padding: 1rem 0.5rem;
-        }
-        .service-contract {
-            padding: 1rem 0.5rem;
-        }
-    }
-    .member-main-whey { margin-top: 0; }
-    .dashboard-stats {
-        display: flex;
-        gap: 2rem;
-        margin-top: 1.5rem;
-    }
-    .stat-item {
-        background: #f8f8f8;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        padding: 1.2rem 1.5rem;
-        min-width: 160px;
-        flex: 1 1 160px;
-        text-align: center;
-    }
-    .stat-label { color: #888; font-size: 1.05rem; margin-bottom: 6px; }
-    .stat-value { color: #FF6B00; font-size: 1.3rem; font-weight: 700; }
-
-    /* Modal đẹp hiện đại */
-    .custom-modal-bg {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.25);
-        z-index: 9998;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: fadeIn 0.2s;
-    }
-    .custom-modal {
-        background: #fff;
-        border-radius: 18px;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-        padding: 2.5rem 2.5rem 2rem 2.5rem;
-        min-width: 340px;
-        max-width: 95vw;
-        position: relative;
-        animation: popIn 0.2s;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes popIn { from { transform: scale(0.95); opacity: 0.5; } to { transform: scale(1); opacity: 1; } }
-    .custom-modal h2 {
-        margin-bottom: 1.2rem;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--primary-color);
-        text-align: center;
-    }
-    .custom-modal label {
-        font-weight: 500;
-        color: #333;
-    }
-    .custom-modal input {
-        width: 100%;
-        padding: 10px;
-        border: 1.5px solid #eee;
-        border-radius: 8px;
-        margin-top: 4px;
-        margin-bottom: 1rem;
-        font-size: 1.08rem;
-        background: #fafafa;
-        transition: border 0.2s;
-    }
-    .custom-modal input:focus {
-        border: 1.5px solid var(--primary-color);
-        outline: none;
-    }
-    .custom-modal .modal-btn {
-        background: var(--primary-color);
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 32px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        cursor: pointer;
-        margin-top: 8px;
-        transition: background 0.2s;
-        display: block;
-        width: 100%;
-    }
-    .custom-modal .modal-btn:hover {
-        background: var(--secondary-color);
-    }
-    .custom-modal .close-modal {
-        position: absolute;
-        top: 12px;
-        right: 18px;
-        font-size: 1.7rem;
-        color: #888;
-        cursor: pointer;
-        border-radius: 50%;
-        width: 36px; height: 36px;
-        display: flex; align-items: center; justify-content: center;
-        transition: background 0.2s, color 0.2s;
-    }
-    .custom-modal .close-modal:hover {
-        background: #f4f4f4;
-        color: var(--primary-color);
-    }
-    /* Nút Sửa/Xóa địa chỉ */
-    .edit-address-btn, .delete-address-btn {
-        border: none;
-        border-radius: 8px;
-        padding: 8px 18px;
-        font-size: 1rem;
-        font-weight: 500;
-        margin-left: 6px;
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .edit-address-btn {
-        background: var(--primary-color);
-        color: #fff;
-    }
-    .edit-address-btn:hover {
-        background: var(--secondary-color);
-        color: #fff;
-    }
-    .delete-address-btn {
-        background: #ff4444;
-        color: #fff;
-    }
-    .delete-address-btn:hover {
-        background: #d32f2f;
-        color: #fff;
-    }
-    @media (max-width: 600px) {
-        .custom-modal { padding: 1.2rem 0.5rem; min-width: 90vw; }
+        .news-next-btn { right: 0 !important; top: 100%; transform: translateY(0); margin-top: 10px; }
+        .news-pagination { margin-bottom: 20px; }
     }
 </style>
 
@@ -2860,202 +2254,361 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <a href="index.html">
+                <a href="policy.html">
                     <img src="images/logo.png.png" alt="LavaWhey Logo">
                 </a>
             </div>
             <ul class="nav-links">
-                <li><a href="index.html" >Trang chủ</a></li>
-                <li><a href="member.html" class="active">Thành viên</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="member.html">Thành viên</a></li>
                 <li><a href="products.html">Sản phẩm</a></li>
                 <li><a href="news.html">Tin tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
-                <li><a href="policy.html">Chính sách</a></li>
+                <li><a href="policy.html" class="active">Chính sách</a></li>
             </ul>
-             <div class="search-container">
+            <div class="search-container">
                 <input type="text" id="search-input" placeholder="Tìm kiếm sản phẩm..." class="search-input">
                 <div id="search-results"></div>
                 <button class="search-button"><i class="fas fa-search"></i></button>
                 <div class="cart-container">
-                    <div class="btn-cart">
+                    <div class="btn-cart" onclick="window.location.href='products.html'">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </div>
-                    <div class="cart-dropdown">
-                        <div class="cart-header">
-                            <h3>
-                                <i class="fas fa-shopping-cart"></i>
-                                Giỏ hàng
-                                <span class="cart-count-badge">0 sản phẩm</span>
-                            </h3>
-                        </div>
-                        <div class="cart-items">
-                            <!-- Cart items will be dynamically added here -->
-                        </div>
-                        <div class="cart-summary">
-                            <div class="cart-summary-row">
-                                <span>Tạm tính:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row">
-                                <span>Phí vận chuyển:</span>
-                                <span>0₫</span>
-                            </div>
-                            <div class="cart-summary-row total">
-                                <span>Tổng cộng:</span>
-                                <span>0₫</span>
-                            </div>
-                        </div>
-                        <div class="cart-buttons">
-                            <button class="btn-continue">Tiếp tục mua</button>
-                            <button class="btn-checkout">Thanh toán</button>
-                        </div>
-                        <div class="empty-cart" style="display: none;">
-                            <i class="fas fa-shopping-cart"></i>
-                            <p>Giỏ hàng của bạn đang trống</p>
-                            <a href="products.html" class="btn-shop">Mua sắm ngay</a>
-                        </div>
-                    </div>
+                    <!-- Ẩn hoàn toàn dropdown giỏ hàng -->
+                    <div class="cart-dropdown" style="display:none !important;"></div>
                 </div>
                 <a href="#" class="btn-login">Đăng nhập</a>
             </div>
         </nav>
     </header>
+    
+    
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Policy Content -->
+    <section class="policy-content">
+        <div class="policy-container">
+            
+            <!-- Chính sách dữ liệu -->
+            <div class="policy-section" id="data-policy">
+                <h2>Chính sách dữ liệu</h2>
+                
+                <h3>1. Thông tin chúng tôi thu thập</h3>
+                <p>LavaWhey cam kết bảo vệ quyền riêng tư của khách hàng. Chúng tôi thu thập các thông tin sau:</p>
+                <ul>
+                    <li><strong>Thông tin cá nhân:</strong> Tên, địa chỉ email, số điện thoại, địa chỉ giao hàng</li>
+                    <li><strong>Thông tin giao dịch:</strong> Lịch sử mua hàng, sản phẩm đã xem, giỏ hàng</li>
+                    <li><strong>Thông tin kỹ thuật:</strong> IP address, trình duyệt, thiết bị truy cập</li>
+                    <li><strong>Cookies:</strong> Để cải thiện trải nghiệm người dùng và phân tích website</li>
+                </ul>
 
-    <!-- Member Header Start -->
-    <div class="member-header">
-        <div class="member-header-left">
-            <img id="headerAvatar" src="images/default-avatar.png" alt="Avatar" class="header-avatar">
-            <div class="header-info">
-                <div class="header-name" id="headerName">Tên khách hàng</div>
-                <div class="header-row">
-                    <span><i class="fas fa-envelope"></i> <span id="headerEmail">Email</span></span>
-                    <span><i class="fas fa-phone"></i> <span id="headerPhone">Số điện thoại</span></span>
+                <h3>2. Mục đích sử dụng thông tin</h3>
+                <p>Thông tin thu thập được sử dụng cho các mục đích:</p>
+                <ul>
+                    <li>Xử lý đơn hàng và giao hàng</li>
+                    <li>Cung cấp dịch vụ khách hàng</li>
+                    <li>Gửi thông tin khuyến mãi và cập nhật sản phẩm</li>
+                    <li>Cải thiện website và trải nghiệm người dùng</li>
+                    <li>Phân tích xu hướng mua hàng</li>
+                </ul>
+
+                <div class="highlight">
+                    <h4>Cam kết bảo mật</h4>
+                    <p>Chúng tôi cam kết không bán, trao đổi hoặc chuyển giao thông tin cá nhân của bạn cho bên thứ ba mà không có sự đồng ý của bạn, trừ khi được yêu cầu bởi pháp luật.</p>
+                </div>
+
+                <h3>3. Quyền của khách hàng</h3>
+                <p>Bạn có quyền:</p>
+                <ul>
+                    <li>Truy cập và cập nhật thông tin cá nhân</li>
+                    <li>Yêu cầu xóa thông tin cá nhân</li>
+                    <li>Từ chối nhận email marketing</li>
+                    <li>Khiếu nại về việc xử lý dữ liệu</li>
+                </ul>
+
+                <div class="contact-info">
+                    <h4>Liên hệ về chính sách dữ liệu</h4>
+                    <p><strong>Email:</strong> privacy@lavawhey.com</p>
+                    <p><strong>Điện thoại:</strong> 0847 788 360</p>
+                    <p><strong>Địa chỉ:</strong> Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều, TP.Cần Thơ</p>
                 </div>
             </div>
-        </div>
-        <div class="member-header-right">
-            <div class="header-balance">
-                <span class="balance-label">Tổng chi tiêu</span>
-                <span class="balance-value" id="headerTotal">0 VNĐ</span>
+
+            <!-- Chính sách bảo mật -->
+            <div class="policy-section" id="privacy-policy">
+                <h2>Chính sách bảo mật</h2>
+                
+                <h3>1. Bảo mật thông tin</h3>
+                <p>LavaWhey áp dụng các biện pháp bảo mật tiên tiến để bảo vệ thông tin của khách hàng:</p>
+                <ul>
+                    <li><strong>Mã hóa SSL:</strong> Tất cả dữ liệu được mã hóa khi truyền tải</li>
+                    <li><strong>Bảo mật thanh toán:</strong> Sử dụng cổng thanh toán an toàn</li>
+                    <li><strong>Kiểm soát truy cập:</strong> Hạn chế quyền truy cập vào dữ liệu</li>
+                    <li><strong>Giám sát liên tục:</strong> Theo dõi và phát hiện hoạt động bất thường</li>
+                </ul>
+
+                <h3>2. Bảo vệ mật khẩu</h3>
+                <p>Chúng tôi khuyến nghị khách hàng:</p>
+                <ul>
+                    <li>Sử dụng mật khẩu mạnh (ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số)</li>
+                    <li>Không chia sẻ mật khẩu với người khác</li>
+                    <li>Thay đổi mật khẩu định kỳ</li>
+                    <li>Đăng xuất sau khi sử dụng xong</li>
+                </ul>
+
+                <h3>3. Bảo mật giao dịch</h3>
+                <p>Mọi giao dịch thanh toán đều được bảo vệ:</p>
+                <ul>
+                    <li>Xác thực 3D Secure cho thẻ tín dụng</li>
+                    <li>Mã hóa thông tin thẻ</li>
+                    <li>Xác minh địa chỉ giao hàng</li>
+                    <li>Ghi nhận đầy đủ lịch sử giao dịch</li>
+                </ul>
+
+                <div class="highlight">
+                    <h4>Thông báo bảo mật</h4>
+                    <p>Nếu bạn phát hiện hoạt động bất thường hoặc nghi ngờ vi phạm bảo mật, vui lòng liên hệ ngay với chúng tôi qua hotline 0847 788 360 hoặc email security@lavawhey.com</p>
+                </div>
             </div>
-        </div>
-    </div>
-    <!-- Member Header End -->
-    <main class="member-main-2col member-main-whey">
-        <aside class="member-sidebar">
-            <ul class="sidebar-menu">
-                <li class="menu-item" data-section="dashboard"><i class="fas fa-home"></i> Tổng quan</li>
-                <li class="menu-item active" data-section="profile"><i class="fas fa-user"></i> Thông tin cá nhân</li>
-                <li class="menu-item" data-section="orders"><i class="fas fa-box"></i> Đơn hàng</li>
-                <li class="menu-item" data-section="address"><i class="fas fa-map-marker-alt"></i> Địa chỉ giao hàng</li>
-                <li class="menu-item" data-section="password"><i class="fas fa-key"></i> Đổi mật khẩu</li>
-                <li class="menu-item logout-item" data-section="logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</li>
-            </ul>
-        </aside>
-        <section class="member-content">
-            <div class="member-section" id="section-dashboard" style="display:none;">
-                <section class="member-dashboard card">
-                    <h2>Tổng quan tài khoản</h2>
-                    <div class="dashboard-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">Tổng số đơn hàng</div>
-                            <div class="stat-value" id="dashboardTotalOrders">0</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-label">Tổng chi tiêu</div>
-                            <div class="stat-value" id="dashboardTotalSpent">0 VNĐ</div>
-                        </div>
-                    </div>
-                </section>
+
+            <!-- Chính sách kinh doanh -->
+            <div class="policy-section" id="business-policy">
+                <h2>Chính sách kinh doanh</h2>
+                
+                <h3>1. Nguyên tắc kinh doanh</h3>
+                <p>LavaWhey hoạt động dựa trên các nguyên tắc:</p>
+                <ul>
+                    <li><strong>Chất lượng hàng đầu:</strong> Chỉ cung cấp sản phẩm chính hãng, có nguồn gốc rõ ràng</li>
+                    <li><strong>Minh bạch:</strong> Công khai thông tin sản phẩm, giá cả và chính sách</li>
+                    <li><strong>Trách nhiệm:</strong> Đảm bảo sức khỏe và an toàn cho khách hàng</li>
+                    <li><strong>Phát triển bền vững:</strong> Tôn trọng môi trường và cộng đồng</li>
+                </ul>
+
+                <h3>2. Tiêu chuẩn sản phẩm</h3>
+                <p>Tất cả sản phẩm của chúng tôi đáp ứng:</p>
+                <ul>
+                    <li>Chứng nhận FDA, GMP, ISO 22000</li>
+                    <li>Nguồn gốc xuất xứ rõ ràng</li>
+                    <li>Hạn sử dụng còn ít nhất 6 tháng</li>
+                    <li>Bao bì nguyên vẹn, không bị rách móp</li>
+                    <li>Thông tin nhãn mác đầy đủ, rõ ràng</li>
+                </ul>
+
+                <h3>3. Chính sách giá cả</h3>
+                <p>Chúng tôi cam kết:</p>
+                <ul>
+                    <li>Công khai giá cả, không có phí ẩn</li>
+                    <li>Giá cạnh tranh trên thị trường</li>
+                    <li>Áp dụng chính sách giảm giá minh bạch</li>
+                    <li>Không tăng giá đột ngột</li>
+                </ul>
+
+                <h3>4. Đối tác và nhà cung cấp</h3>
+                <p>Chúng tôi chỉ hợp tác với:</p>
+                <ul>
+                    <li>Nhà phân phối chính thức của các thương hiệu</li>
+                    <li>Đối tác có chứng nhận chất lượng</li>
+                    <li>Nhà cung cấp có uy tín lâu năm</li>
+                    <li>Đối tác tuân thủ quy định pháp luật</li>
+                </ul>
+
+                <div class="highlight">
+                    <h4>Cam kết chất lượng</h4>
+                    <p>LavaWhey cam kết 100% sản phẩm chính hãng. Nếu phát hiện hàng giả, hàng nhái, chúng tôi sẽ bồi thường gấp 10 lần giá trị sản phẩm.</p>
+                </div>
             </div>
-            <div class="member-section" id="section-profile">
-                <section class="member-profile card">
-                    <h2>Thông tin cá nhân</h2>
-                    <div class="profile-info">
-                        <img id="memberAvatar" src="images/default-avatar.png" alt="Avatar" class="profile-avatar">
-                        <div class="profile-details">
-                            <p><strong>Họ tên:</strong> <span id="memberName">---</span></p>
-                            <p><strong>Email:</strong> <span id="memberEmail">---</span></p>
-                            <p><strong>Số điện thoại:</strong> <span id="memberPhone">---</span></p>
-                            <!-- Thêm provider và lastLogin -->
-                            <p><strong>Nhà cung cấp:</strong> <span id="memberProvider">---</span></p>
-                            <p><strong>Lần đăng nhập gần nhất:</strong> <span id="memberLastLogin">---</span></p>
-                            <button class="edit-profile-btn">Chỉnh sửa</button>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="member-section" id="section-orders" style="display:none;">
-                <section class="member-orders card">
-                    <h2>Lịch sử đơn hàng</h2>
-                    <div class="orders-table-wrapper">
-                        <table class="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>Mã đơn</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Trạng thái</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Chi tiết</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ordersList">
-                                <tr><td colspan="5" style="text-align:center;color:#888;">Chưa có đơn hàng</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
-            <div class="member-section" id="section-address" style="display:none;">
-                <section class="member-address card">
-                    <h2>Địa chỉ giao hàng</h2>
-                    <ul id="addressList" class="address-list">
-                        <li class="address-item">Chưa có địa chỉ nào</li>
+
+            <!-- Chính sách vận chuyển -->
+            <div class="policy-section" id="shipping-policy">
+                <h2>Chính sách vận chuyển</h2>
+                
+                <h3>1. Phạm vi giao hàng</h3>
+                <p>Chúng tôi giao hàng toàn quốc với các khu vực:</p>
+                <ul>
+                    <li><strong>TP. Cần Thơ:</strong> Giao hàng trong ngày (đơn hàng trước 14h)</li>
+                    <li><strong>Đồng bằng sông Cửu Long:</strong> 1-2 ngày làm việc</li>
+                    <li><strong>TP. Hồ Chí Minh:</strong> 1-2 ngày làm việc</li>
+                    <li><strong>Các tỉnh miền Nam:</strong> 2-3 ngày làm việc</li>
+                    <li><strong>Các tỉnh miền Trung:</strong> 3-4 ngày làm việc</li>
+                    <li><strong>Các tỉnh miền Bắc:</strong> 4-5 ngày làm việc</li>
+                </ul>
+
+                <h3>2. Phí vận chuyển</h3>
+                <div class="highlight">
+                    <h4>Miễn phí vận chuyển</h4>
+                    <ul>
+                        <li>Đơn hàng từ 500.000đ trở lên</li>
+                        <li>Khách hàng VIP (mua từ 5 lần trở lên)</li>
+                        <li>Đơn hàng trong phạm vi 5km từ cửa hàng</li>
                     </ul>
-                    <button class="add-address-btn">Thêm địa chỉ mới</button>
-                </section>
+                </div>
+                <p><strong>Phí vận chuyển tiêu chuẩn:</strong></p>
+                <ul>
+                    <li>TP. Cần Thơ: 15.000đ - 30.000đ</li>
+                    <li>Đồng bằng sông Cửu Long: 30.000đ - 50.000đ</li>
+                    <li>TP. Hồ Chí Minh: 40.000đ - 60.000đ</li>
+                    <li>Các tỉnh khác: 50.000đ - 100.000đ</li>
+                </ul>
+
+                <h3>3. Quy trình giao hàng</h3>
+                <ol>
+                    <li><strong>Xác nhận đơn hàng:</strong> Trong vòng 2 giờ sau khi đặt hàng</li>
+                    <li><strong>Chuẩn bị hàng:</strong> Kiểm tra chất lượng và đóng gói</li>
+                    <li><strong>Giao hàng:</strong> Theo thời gian đã hẹn</li>
+                    <li><strong>Xác nhận:</strong> Khách hàng ký nhận và thanh toán</li>
+                </ol>
+
+                <h3>4. Dịch vụ giao hàng</h3>
+                <p>Chúng tôi cung cấp các dịch vụ:</p>
+                <ul>
+                    <li><strong>Giao hàng tiêu chuẩn:</strong> Trong giờ hành chính</li>
+                    <li><strong>Giao hàng nhanh:</strong> Trong vòng 2-4 giờ (phụ phí 20.000đ)</li>
+                    <li><strong>Giao hàng theo giờ:</strong> Khách hàng chọn thời gian</li>
+                    <li><strong>Giao hàng cuối tuần:</strong> Thứ 7, Chủ nhật</li>
+                </ul>
+
+                <div class="contact-info">
+                    <h4>Thông tin vận chuyển</h4>
+                    <p><strong>Hotline:</strong> 0847 788 360</p>
+                    <p><strong>Email:</strong> shipping@lavawhey.com</p>
+                    <p><strong>Giờ làm việc:</strong> 7:00 - 22:00 (Thứ 2 - Chủ nhật)</p>
+                </div>
             </div>
-            <div class="member-section" id="section-password" style="display:none;">
-                <section class="member-password card">
-                    <h2>Đổi mật khẩu</h2>
-                    <form id="changePasswordForm" class="change-password-form">
-                        <input type="password" id="oldPassword" placeholder="Mật khẩu cũ" required>
-                        <input type="password" id="newPassword" placeholder="Mật khẩu mới" required>
-                        <input type="password" id="confirmNewPassword" placeholder="Xác nhận mật khẩu mới" required>
-                        <button type="submit">Đổi mật khẩu</button>
-                    </form>
-                </section>
+
+            <!-- Chính sách bảo hành -->
+            <div class="policy-section" id="warranty-policy">
+                <h2>Chính sách bảo hành</h2>
+                
+                <h3>1. Điều kiện bảo hành</h3>
+                <p>Sản phẩm được bảo hành khi:</p>
+                <ul>
+                    <li>Còn trong thời hạn bảo hành</li>
+                    <li>Có tem bảo hành nguyên vẹn</li>
+                    <li>Không bị hư hỏng do sử dụng sai cách</li>
+                    <li>Không bị ẩm mốc, biến chất</li>
+                    <li>Có hóa đơn mua hàng hợp lệ</li>
+                </ul>
+
+                <h3>2. Thời hạn bảo hành</h3>
+                <p>Tùy theo loại sản phẩm:</p>
+                <ul>
+                    <li><strong>Whey Protein:</strong> 12 tháng từ ngày sản xuất</li>
+                    <li><strong>BCAA, Pre-workout:</strong> 18 tháng từ ngày sản xuất</li>
+                    <li><strong>Vitamin, Omega-3:</strong> 24 tháng từ ngày sản xuất</li>
+                    <li><strong>Thực phẩm chức năng khác:</strong> Theo hạn sử dụng</li>
+                </ul>
+
+                <h3>3. Quy trình bảo hành</h3>
+                <ol>
+                    <li><strong>Tiếp nhận:</strong> Khách hàng mang sản phẩm đến cửa hàng</li>
+                    <li><strong>Kiểm tra:</strong> Nhân viên kiểm tra điều kiện bảo hành</li>
+                    <li><strong>Xác nhận:</strong> Thông báo kết quả trong 24h</li>
+                    <li><strong>Xử lý:</strong> Đổi mới hoặc sửa chữa theo chính sách</li>
+                </ol>
+
+                <h3>4. Hình thức bảo hành</h3>
+                <ul>
+                    <li><strong>Đổi mới:</strong> Sản phẩm cùng loại, cùng giá trị</li>
+                    <li><strong>Hoàn tiền:</strong> 100% giá trị sản phẩm</li>
+                    <li><strong>Giảm giá:</strong> Cho sản phẩm thay thế khác</li>
+                    <li><strong>Sửa chữa:</strong> Đối với lỗi kỹ thuật nhỏ</li>
+                </ul>
+
+                <div class="highlight">
+                    <h4>Cam kết bảo hành</h4>
+                    <p>LavaWhey cam kết xử lý bảo hành nhanh chóng, minh bạch. Mọi trường hợp bảo hành đều được giải quyết trong vòng 7 ngày làm việc.</p>
+                </div>
+
+                <div class="contact-info">
+                    <h4>Bộ phận bảo hành</h4>
+                    <p><strong>Địa chỉ:</strong> Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều, TP.Cần Thơ</p>
+                    <p><strong>Điện thoại:</strong> 0847 788 360</p>
+                    <p><strong>Email:</strong> warranty@lavawhey.com</p>
+                    <p><strong>Giờ làm việc:</strong> 8:00 - 18:00 (Thứ 2 - Thứ 7)</p>
+                </div>
             </div>
-        </section>
-    </main>
-    <script>
-    // Sidebar menu switching logic
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuItems = document.querySelectorAll('.sidebar-menu .menu-item');
-        const sections = document.querySelectorAll('.member-section');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                menuItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-                const section = this.getAttribute('data-section');
-                sections.forEach(sec => sec.style.display = 'none');
-                const showSection = document.getElementById('section-' + section);
-                if (showSection) showSection.style.display = '';
-                // Đăng xuất nhanh
-                if(section === 'logout') {
-                    if(window.auth && typeof window.auth.signOut === 'function') {
-                        window.auth.signOut();
-                    } else {
-                        location.reload();
-                    }
-                }
-            });
-        });
-    });
-    </script>
-    <!-- Member Main Content End -->
+
+            <!-- Chính sách đổi trả -->
+            <div class="policy-section" id="return-policy">
+                <h2>Chính sách đổi trả</h2>
+                
+                <h3>1. Điều kiện đổi trả</h3>
+                <p>Khách hàng có thể đổi trả sản phẩm trong các trường hợp:</p>
+                <ul>
+                    <li>Sản phẩm bị lỗi từ nhà sản xuất</li>
+                    <li>Sản phẩm không đúng với đơn hàng</li>
+                    <li>Sản phẩm bị hư hỏng trong quá trình vận chuyển</li>
+                    <li>Sản phẩm hết hạn sử dụng</li>
+                    <li>Khách hàng không hài lòng về chất lượng</li>
+                </ul>
+
+                <h3>2. Thời gian đổi trả</h3>
+                <div class="highlight">
+                    <h4>Chính sách 30 ngày đổi trả</h4>
+                    <p>Khách hàng có thể đổi trả sản phẩm trong vòng 30 ngày kể từ ngày nhận hàng, với điều kiện sản phẩm còn nguyên vẹn, chưa sử dụng và còn hạn sử dụng.</p>
+                </div>
+
+                <h3>3. Sản phẩm không được đổi trả</h3>
+                <ul>
+                    <li>Sản phẩm đã được sử dụng</li>
+                    <li>Sản phẩm bị hư hỏng do sử dụng sai cách</li>
+                    <li>Sản phẩm đã hết hạn sử dụng</li>
+                    <li>Sản phẩm không còn tem, nhãn mác</li>
+                    <li>Sản phẩm khuyến mãi, giảm giá đặc biệt</li>
+                </ul>
+
+                <h3>4. Quy trình đổi trả</h3>
+                <ol>
+                    <li><strong>Liên hệ:</strong> Gọi hotline hoặc gửi email yêu cầu đổi trả</li>
+                    <li><strong>Xác nhận:</strong> Nhân viên xác nhận điều kiện đổi trả</li>
+                    <li><strong>Gửi hàng:</strong> Khách hàng gửi sản phẩm về cửa hàng</li>
+                    <li><strong>Kiểm tra:</strong> Nhân viên kiểm tra tình trạng sản phẩm</li>
+                    <li><strong>Xử lý:</strong> Đổi trả hoặc hoàn tiền trong 3-5 ngày</li>
+                </ol>
+
+                <h3>5. Hình thức đổi trả</h3>
+                <ul>
+                    <li><strong>Đổi sản phẩm:</strong> Sản phẩm cùng loại hoặc khác loại</li>
+                    <li><strong>Hoàn tiền:</strong> 100% giá trị sản phẩm</li>
+                    <li><strong>Chuyển khoản:</strong> Hoàn tiền qua tài khoản ngân hàng</li>
+                    <li><strong>Trừ vào đơn hàng tiếp theo:</strong> Áp dụng cho khách hàng thân thiết</li>
+                </ul>
+
+                <h3>6. Chi phí đổi trả</h3>
+                <p><strong>Miễn phí đổi trả:</strong></p>
+                <ul>
+                    <li>Sản phẩm bị lỗi từ nhà sản xuất</li>
+                    <li>Sản phẩm không đúng đơn hàng</li>
+                    <li>Sản phẩm bị hư hỏng do vận chuyển</li>
+                </ul>
+                <p><strong>Khách hàng chịu phí:</strong></p>
+                <ul>
+                    <li>Phí vận chuyển về cửa hàng (nếu đổi trả do không hài lòng)</li>
+                    <li>Phí kiểm tra chất lượng (nếu cần)</li>
+                </ul>
+
+                <div class="contact-info">
+                    <h4>Bộ phận đổi trả</h4>
+                    <p><strong>Hotline:</strong> 0847 788 360</p>
+                    <p><strong>Email:</strong> returns@lavawhey.com</p>
+                    <p><strong>Địa chỉ:</strong> Hẻm 112/12, Đường 3/2, Hưng Lợi, Ninh Kiều, TP.Cần Thơ</p>
+                    <p><strong>Thời gian xử lý:</strong> 3-5 ngày làm việc</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    
+
+  
+
+    
 
     <!-- Footer -->
     <footer>
@@ -3069,12 +2622,12 @@
             </div>
             <div class="footer-section">
                 <h3>Chính sách chung</h3>
-                <p><a href="policy.html#data-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách dữ liệu</a></p>
-                <p><a href="policy.html#privacy-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo mật</a></p>
-                <p><a href="policy.html#business-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách kinh doanh</a></p>
-                <p><a href="policy.html#shipping-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách vận chuyển</a></p>
-                <p><a href="policy.html#warranty-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách bảo hành</a></p>
-                <p><a href="policy.html#return-policy" style="text-decoration:none; color:inherit; cursor:pointer;">Chính sách đổi trả</a></p>
+                <p>Chính sách dữ liệu</p>
+                <p>Chính sách bảo mật</p>
+                <p>Chính sách kinh doanh</p>
+                <p>Chính sách vận chuyển</p>
+                <p>Chính sách bảo hành</p>
+                <p>Chính sách đổi trả</p>
             </div>
             <div class="footer-section">
                 <h3>Hỗ trợ khách hàng</h3>
@@ -3200,68 +2753,74 @@
         </div>
     </div>
 
-    <div class="modal" id="registerModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-header">
-                <h2>Đăng ký tài khoản</h2>
-            </div>
-            <div class="modal-body">
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="registerName">Họ và tên</label>
-                        <input type="text" id="registerName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPhone">Số điện thoại</label>
-                        <input type="tel" id="registerPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="registerPassword">Mật khẩu</label>
-                        <input type="password" id="registerPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Xác nhận mật khẩu</label>
-                        <input type="password" id="confirmPassword" required>
-                    </div>
-                    <div class="form-options">
-                        <label>
-                            <input type="checkbox" required> Tôi đồng ý với <a href="#">điều khoản sử dụng</a>
-                        </label>
-                    </div>
-                    <button type="submit" class="submit-button">Đăng ký</button>
-                </form>
-                <div class="modal-footer">
-                    <p>Đã có tài khoản? <a href="#" class="switch-modal" data-target="loginModal">Đăng nhập</a></p>
-                </div>
-            </div>
+    <!-- Modal Thương hiệu nổi bật -->
+    <div class="modal" id="featuredBrandsModal">
+      <div class="modal-content" style="max-width:600px">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2>Thương hiệu nổi bật</h2>
         </div>
-    </div>
-
-    <div class="modal" id="forgotPasswordModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="modal-header">
-                <h2>Quên mật khẩu</h2>
-            </div>
-            <div class="modal-body">
-                <form id="forgotPasswordForm">
-                    <div class="form-group">
-                        <label for="forgotEmail">Email</label>
-                        <input type="email" id="forgotEmail" required>
-                    </div>
-                    <button type="submit" class="submit-button">Gửi link đặt lại mật khẩu</button>
-                </form>
-                <div class="modal-footer">
-                    <p>Đã nhớ mật khẩu? <a href="#" class="switch-modal" data-target="loginModal">Đăng nhập</a></p>
-                </div>
-            </div>
+        <div class="modal-body" style="max-height:70vh;overflow-y:auto;text-align:left;">
+          <div style="margin-bottom:2em">
+            <h3 style="color:#FF6B00">Optimum Nutrition (ON)</h3>
+            <ul>
+              <li>Là thương hiệu thực phẩm bổ sung hàng đầu thế giới, nổi tiếng với sản phẩm Whey Gold Standard.</li>
+              <li>Thành lập năm 1986 tại Mỹ, thuộc tập đoàn Glanbia.</li>
+              <li>Sản phẩm được kiểm định nghiêm ngặt, đạt nhiều chứng nhận quốc tế (Informed-Choice, GMP).</li>
+              <li>Whey Gold Standard được đánh giá cao về độ tinh khiết, khả năng hòa tan và hiệu quả phục hồi cơ bắp.</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:2em">
+            <h3 style="color:#FF6B00">Dymatize</h3>
+            <ul>
+              <li>Thành lập năm 1994 tại Mỹ, nổi bật với dòng ISO100 (Whey Isolate siêu tinh khiết).</li>
+              <li>Sản phẩm được sản xuất tại nhà máy đạt chuẩn NSF GMP, kiểm nghiệm chất lượng nghiêm ngặt.</li>
+              <li>ISO100 thường được các vận động viên chuyên nghiệp lựa chọn nhờ tốc độ hấp thu nhanh, không chứa lactose, ít tạp chất.</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:2em">
+            <h3 style="color:#FF6B00">MyProtein</h3>
+            <ul>
+              <li>Thương hiệu thực phẩm bổ sung lớn nhất châu Âu, thành lập tại Anh năm 2004.</li>
+              <li>Nổi tiếng với Impact Whey Protein, đa dạng hương vị, giá thành hợp lý.</li>
+              <li>Sản phẩm đạt chuẩn chất lượng của châu Âu, được kiểm nghiệm bởi Labdoor, Informed-Sport.</li>
+              <li>Được cộng đồng fitness quốc tế đánh giá cao về sự minh bạch thành phần và giá trị dinh dưỡng.</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:2em">
+            <h3 style="color:#FF6B00">Rule 1 Proteins</h3>
+            <ul>
+              <li>Thương hiệu Mỹ, sáng lập bởi các cựu lãnh đạo của Optimum Nutrition.</li>
+              <li>Nổi bật với sản phẩm Rule 1 R1 Whey Blend và R1 Protein Isolate.</li>
+              <li>Cam kết không sử dụng amino spiking, thành phần rõ ràng, chất lượng cao.</li>
+              <li>Được sản xuất tại nhà máy đạt chuẩn GMP, kiểm soát chất lượng nghiêm ngặt.</li>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var featuredBrandsBtn = document.getElementById('footer-featured-brands');
+      var featuredBrandsModal = document.getElementById('featuredBrandsModal');
+      if (featuredBrandsBtn && featuredBrandsModal) {
+        featuredBrandsBtn.addEventListener('click', function() {
+          featuredBrandsModal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        });
+        featuredBrandsModal.querySelector('.close-modal').addEventListener('click', function() {
+          featuredBrandsModal.classList.remove('show');
+          document.body.style.overflow = '';
+        });
+        window.addEventListener('click', function(e) {
+          if (e.target === featuredBrandsModal) {
+            featuredBrandsModal.classList.remove('show');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+    });
+    </script>
 
     <script>
         // Firebase Configuration
@@ -3644,530 +3203,467 @@
             }
         });
 
-        // Cart functionality
+        // --- CART GLOBAL LOGIC ---
+        let cart = [];
+        // Cart DOM elements and event listeners must be set after DOMContentLoaded
         document.addEventListener('DOMContentLoaded', function() {
-            const cartBtn = document.querySelector('.btn-cart');
-            const cartDropdown = document.querySelector('.cart-dropdown');
-            const cartItems = document.querySelector('.cart-items');
-            const cartCount = document.querySelector('.cart-count');
-            const cartCountBadge = document.querySelector('.cart-count-badge');
-            const emptyCart = document.querySelector('.empty-cart');
-            const cartSummary = document.querySelector('.cart-summary');
-            const cartButtons = document.querySelector('.cart-buttons');
-            
-            let cart = [];
-            
+            window.cartBtn = document.querySelector('.btn-cart');
+            window.cartDropdown = document.querySelector('.cart-dropdown');
+            window.cartItems = document.querySelector('.cart-items');
+            window.cartCount = document.querySelector('.cart-count');
+            window.cartCountBadge = document.querySelector('.cart-count-badge');
+            window.emptyCart = document.querySelector('.empty-cart');
+            window.cartSummary = document.querySelector('.cart-summary');
+            window.cartButtons = document.querySelector('.cart-buttons');
+
             // Toggle cart dropdown
             cartBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 cartDropdown.classList.toggle('show');
                 updateCartDisplay();
             });
-
+            // Prevent dropdown from closing when clicking inside
+            cartDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
             // Close cart when clicking outside
             document.addEventListener('click', function(e) {
                 if (!cartDropdown.contains(e.target) && !cartBtn.contains(e.target)) {
                     cartDropdown.classList.remove('show');
                 }
             });
-
-            // Add to cart functionality
-            document.querySelectorAll('.buy-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    const product = this.closest('.product-card');
-                    const productId = product.dataset.id;
-                    const productName = product.querySelector('h3').textContent;
-                    const productPrice = product.querySelector('.price').textContent;
-                    const productImage = product.querySelector('img').src;
-
-                    addToCart({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        image: productImage,
-                        quantity: 1
-                    });
-
-                    // Show success notification
-                    Swal.fire({
-                        title: 'Thêm vào giỏ hàng thành công!',
-                        text: productName,
-                        icon: 'success',
-                        timer: 1500,
-                        showConfirmButton: false,
-                        position: 'top-end',
-                        toast: true
-                    });
-                });
-            });
-
-            function addToCart(product) {
-                const existingItem = cart.find(item => item.id === product.id);
-                
-                if (existingItem) {
-                    existingItem.quantity++;
-                } else {
-                    cart.push(product);
-                }
-                
-                updateCartDisplay();
-                saveCart();
-            }
-
-            function updateCartDisplay() {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                cartCount.textContent = totalItems;
-                cartCountBadge.textContent = `${totalItems} sản phẩm`;
-
-                if (totalItems === 0) {
-                    emptyCart.style.display = 'block';
-                    cartSummary.style.display = 'none';
-                    cartButtons.style.display = 'none';
-                    cartItems.innerHTML = '';
-                } else {
-                    emptyCart.style.display = 'none';
-                    cartSummary.style.display = 'block';
-                    cartButtons.style.display = 'flex';
-                    renderCartItems();
-                }
-
-                updateCartSummary();
-            }
-
-            function renderCartItems() {
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item" data-id="${item.id}">
-                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <h4 class="cart-item-name">${item.name}</h4>
-                            <div class="cart-item-price">${item.price}</div>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn minus" ${item.quantity === 1 ? 'disabled' : ''}>-</button>
-                                <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99">
-                                <button class="quantity-btn plus">+</button>
-                            </div>
-                        </div>
-                        <i class="fas fa-times cart-item-remove"></i>
-                    </div>
-                `).join('');
-
-                // Add event listeners for quantity buttons
-                cartItems.querySelectorAll('.quantity-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        const cartItem = cart.find(i => i.id === id);
-                        
-                        if (this.classList.contains('plus')) {
-                            cartItem.quantity++;
-                        } else if (this.classList.contains('minus') && cartItem.quantity > 1) {
-                            cartItem.quantity--;
-                        }
-                        
-                        updateCartDisplay();
-                        saveCart();
-                    });
-                });
-
-                // Add event listeners for quantity input
-                cartItems.querySelectorAll('.quantity-input').forEach(input => {
-                    input.addEventListener('change', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        const cartItem = cart.find(i => i.id === id);
-                        const newQuantity = parseInt(this.value);
-                        
-                        if (newQuantity > 0 && newQuantity < 100) {
-                            cartItem.quantity = newQuantity;
-                            updateCartDisplay();
-                            saveCart();
-                        } else {
-                            this.value = cartItem.quantity;
-                        }
-                    });
-                });
-
-                // Add event listeners for remove buttons
-                cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const item = this.closest('.cart-item');
-                        const id = item.dataset.id;
-                        cart = cart.filter(i => i.id !== id);
-                        updateCartDisplay();
-                        saveCart();
-                    });
-                });
-            }
-
-            function updateCartSummary() {
-                const subtotal = cart.reduce((sum, item) => {
-                    const price = parseInt(item.price.replace(/[^\d]/g, ''));
-                    return sum + (price * item.quantity);
-                }, 0);
-
-                const shipping = subtotal > 0 ? 30000 : 0; // Phí ship 30k cho đơn hàng có sản phẩm
-                const total = subtotal + shipping;
-
-                const summaryRows = cartDropdown.querySelectorAll('.cart-summary-row');
-                summaryRows[0].querySelector('span:last-child').textContent = formatPrice(subtotal);
-                summaryRows[1].querySelector('span:last-child').textContent = formatPrice(shipping);
-                summaryRows[2].querySelector('span:last-child').textContent = formatPrice(total);
-            }
-
-            function formatPrice(price) {
-                return new Intl.NumberFormat('vi-VN', {
-                    style: 'currency',
-                    currency: 'VND'
-                }).format(price);
-            }
-
-            function saveCart() {
-                localStorage.setItem('cart', JSON.stringify(cart));
-            }
-
-            function loadCart() {
-                const savedCart = localStorage.getItem('cart');
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    updateCartDisplay();
-                }
-            }
-
-            // Load cart on page load
-            loadCart();
-
             // Handle continue shopping button
             document.querySelector('.btn-continue').addEventListener('click', function() {
                 cartDropdown.classList.remove('show');
             });
-
             // Handle checkout button
             document.querySelector('.btn-checkout').addEventListener('click', function() {
                 if (cart.length > 0) {
-                    // Implement checkout logic here
-                    Swal.fire({
-                        title: 'Tiến hành thanh toán',
-                        text: 'Chức năng đang được phát triển',
-                        icon: 'info'
-                    });
+                    window.location.href = 'checkout.html';
                 }
+            });
+            // Load cart on page load
+            loadCart();
+        });
+        // --- END CART GLOBAL LOGIC ---
+
+        function getCartKey() {
+            const user = firebase.auth().currentUser;
+            return user ? `cart_${user.uid}` : 'cart_guest';
+        }
+        function saveCart() {
+            localStorage.setItem(getCartKey(), JSON.stringify(cart));
+        }
+        function loadCart() {
+            const savedCart = localStorage.getItem(getCartKey());
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartDisplay();
+            } else {
+                cart = [];
+                updateCartDisplay();
+            }
+        }
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            // Đảm bảo price là số trước khi thêm vào giỏ hàng
+            const price = typeof product.price === 'string'
+                ? parseInt(product.price.replace(/[^\d]/g, ''))
+                : product.price;
+            if (existingItem) {
+                existingItem.quantity += product.quantity || 1;
+            } else {
+                cart.push({
+                    ...product,
+                    price: price // Lưu price dưới dạng số
+                });
+            }
+            updateCartDisplay();
+            saveCart();
+        }
+        function updateCartDisplay() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCountBadge.textContent = `${totalItems} sản phẩm`;
+            if (totalItems === 0) {
+                emptyCart.style.display = 'block';
+                cartSummary.style.display = 'none';
+                cartButtons.style.display = 'none';
+                cartItems.innerHTML = '';
+            } else {
+                emptyCart.style.display = 'none';
+                cartSummary.style.display = 'block';
+                cartButtons.style.display = 'flex';
+                renderCartItems();
+            }
+            updateCartSummary();
+        }
+        function renderCartItems() {
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-name">${item.name}</h4>
+                        <div class="cart-item-price">${formatPrice(item.price)}</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" ${item.quantity === 1 ? 'disabled' : ''}>-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="99">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                    </div>
+                    <i class="fas fa-times cart-item-remove"></i>
+                </div>
+            `).join('');
+            // Add event listeners for quantity buttons
+            cartItems.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    const cartItem = cart.find(i => i.id === id);
+                    if (this.classList.contains('plus')) {
+                        cartItem.quantity++;
+                    } else if (this.classList.contains('minus') && cartItem.quantity > 1) {
+                        cartItem.quantity--;
+                    }
+                    updateCartDisplay();
+                    saveCart();
+                });
+            });
+            // Add event listeners for quantity input
+            cartItems.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    const cartItem = cart.find(i => i.id === id);
+                    const newQuantity = parseInt(this.value);
+                    if (newQuantity > 0 && newQuantity < 100) {
+                        cartItem.quantity = newQuantity;
+                        updateCartDisplay();
+                        saveCart();
+                    } else {
+                        this.value = cartItem.quantity;
+                    }
+                });
+            });
+            // Add event listeners for remove buttons
+            cartItems.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const item = this.closest('.cart-item');
+                    const id = item.dataset.id;
+                    cart = cart.filter(i => i.id !== id);
+                    updateCartDisplay();
+                    saveCart();
+                });
+            });
+        }
+        function updateCartSummary() {
+            const subtotal = cart.reduce((sum, item) => {
+                const price = typeof item.price === 'string' 
+                    ? parseInt(item.price.replace(/[^\d]/g, ''))
+                    : item.price;
+                return sum + (price * item.quantity);
+            }, 0);
+            const shipping = subtotal > 0 ? 30000 : 0;
+            const total = subtotal + shipping;
+            const summaryRows = cartDropdown.querySelectorAll('.cart-summary-row');
+            summaryRows[0].querySelector('span:last-child').textContent = formatPrice(subtotal);
+            summaryRows[1].querySelector('span:last-child').textContent = formatPrice(shipping);
+            summaryRows[2].querySelector('span:last-child').textContent = formatPrice(total);
+        }
+        // --- END CART GLOBAL LOGIC ---
+
+        // Function to format price
+        function formatPrice(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
+
+        // News slider logic
+        const newsData = [
+            // 9 tin mẫu, bạn có thể thêm nhiều hơn nếu muốn
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: Lợi ích và cách sử dụng hiệu quả',
+                desc: 'Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA là gì? Tác dụng của BCAA trong tập luyện',
+                desc: 'Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Bí quyết tăng năng lượng trước khi tập',
+                desc: 'Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!'
+            },
+            // Tin 4-9 mẫu
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: Có nên dùng hàng ngày?',
+                desc: 'Chuyên gia dinh dưỡng nói gì về việc dùng whey protein mỗi ngày?'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA và phục hồi cơ bắp',
+                desc: 'BCAA giúp phục hồi cơ bắp nhanh hơn sau tập luyện.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Thành phần và lưu ý',
+                desc: 'Những thành phần chính trong pre-workout và lưu ý khi sử dụng.'
+            },
+            {
+                link: 'news1.html',
+                img: 'https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png',
+                title: 'Whey Protein: So sánh các loại phổ biến',
+                desc: 'So sánh Whey Concentrate, Isolate và Hydrolyzed.'
+            },
+            {
+                link: 'news2.html',
+                img: 'https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png',
+                title: 'BCAA: Khi nào nên dùng?',
+                desc: 'Thời điểm tốt nhất để bổ sung BCAA cho người tập gym.'
+            },
+            {
+                link: 'news3.html',
+                img: 'https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png',
+                title: 'Pre-workout: Có nên dùng cho người mới?',
+                desc: 'Lời khuyên cho người mới bắt đầu sử dụng pre-workout.'
+            }
+        ];
+
+        const newsPerPage = 3;
+        let newsPage = 0;
+
+        function renderNewsSlider(page) {
+            const grid = document.querySelector('.news-slider');
+            grid.innerHTML = '';
+            const start = page * newsPerPage;
+            const end = start + newsPerPage;
+            const items = newsData.slice(start, end);
+            items.forEach(news => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <a href="${news.link}" style="text-decoration:none; color:inherit; display:block;">
+                        <img src="${news.img}" alt="${news.title}">
+                        <h3>${news.title}</h3>
+                        <p>${news.desc}</p>
+                        <span class="read-more" style="color:#FF6B00; font-weight:500; display:inline-block; margin-top:8px;">Đọc thêm</span>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function setActiveNewsPage(page) {
+            document.querySelectorAll('.news-page-btn').forEach((btn, idx) => {
+                btn.classList.toggle('active', idx === page);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderNewsSlider(newsPage);
+            setActiveNewsPage(newsPage);
+            // Nút số
+            document.querySelectorAll('.news-page-btn').forEach((btn, idx) => {
+                btn.addEventListener('click', function() {
+                    newsPage = idx;
+                    renderNewsSlider(newsPage);
+                    setActiveNewsPage(newsPage);
+                });
+            });
+            // Nút trượt phải
+            document.querySelector('.news-next-btn').addEventListener('click', function() {
+                newsPage = (newsPage + 1) % Math.ceil(newsData.length / newsPerPage);
+                renderNewsSlider(newsPage);
+                setActiveNewsPage(newsPage);
             });
         });
-
-        // Lấy thông tin khách hàng từ Firebase và hiển thị
-        if (window.firebase && window.firebase.auth) {
-            const auth = firebase.auth();
-            const database = firebase.database();
-            let currentUser = null;
-
-            // Helper: Hiển thị thông báo
-            function showSuccess(msg) {
-                Swal.fire({icon:'success',title:'Thành công',text:msg,confirmButtonColor:'#FF6B00'});
-            }
-            function showError(msg) {
-                Swal.fire({icon:'error',title:'Lỗi',text:msg,confirmButtonColor:'#FF6B00'});
-            }
-
-            // 1. Lấy & cập nhật thông tin cá nhân
-            auth.onAuthStateChanged(function(user) {
-                if (user) {
-                    currentUser = user;
-                    const userRef = database.ref('users/' + user.uid);
-                    userRef.on('value', function(snapshot) {
-                        const data = snapshot.val() || {};
-                        // Header
-                        document.getElementById('headerAvatar').src = data.photoURL || user.photoURL || 'images/default-avatar.png';
-                        document.getElementById('headerName').textContent = data.displayName || user.displayName || 'Khách hàng';
-                        document.getElementById('headerEmail').textContent = data.email || user.email || '';
-                        document.getElementById('headerPhone').textContent = data.phone || '';
-                        document.getElementById('headerTotal').textContent = (data.totalSpent ? data.totalSpent.toLocaleString('vi-VN') + ' VNĐ' : '0 VNĐ');
-                        // Thông tin cá nhân
-                        document.getElementById('memberAvatar').src = data.photoURL || user.photoURL || 'images/default-avatar.png';
-                        document.getElementById('memberName').textContent = data.displayName || user.displayName || '---';
-                        document.getElementById('memberEmail').textContent = data.email || user.email || '---';
-                        document.getElementById('memberPhone').textContent = data.phone || '---';
-                        // Form chỉnh sửa (nếu đang mở)
-                        if(document.getElementById('editProfileModal')) {
-                            document.getElementById('editName').value = data.displayName || user.displayName || '';
-                            document.getElementById('editEmail').value = data.email || user.email || '';
-                            document.getElementById('editPhone').value = data.phone || '';
-                        }
-                        // Trong JS, sau khi lấy data từ Firebase:
-                        document.getElementById('memberProvider').textContent = data.provider || '---';
-                        document.getElementById('memberLastLogin').textContent = data.lastLogin 
-                            ? new Date(data.lastLogin).toLocaleString('vi-VN') 
-                            : '---';
-                    });
-                    // Địa chỉ giao hàng
-                    loadAddresses();
-                    // Đơn hàng
-                    loadOrders();
-                }
-            });
-
-            // 1.1. Chỉnh sửa thông tin cá nhân
-            document.querySelector('.edit-profile-btn').addEventListener('click', async function() {
-                if (!currentUser) return;
-                // Lấy dữ liệu user mới nhất từ Firebase
-                const userSnap = await database.ref('users/' + currentUser.uid).once('value');
-                const data = userSnap.val() || {};
-                let modal = document.getElementById('editProfileModal');
-                if (!modal) {
-                    modal = document.createElement('div');
-                    modal.id = 'editProfileModal';
-                    modal.className = 'custom-modal-bg';
-                    modal.innerHTML = `
-                    <div class="custom-modal">
-                        <span class="close-modal" id="closeEditProfile">&times;</span>
-                        <h2>Chỉnh sửa thông tin</h2>
-                        <form id="editProfileForm">
-                            <label>Họ tên:</label>
-                            <input id="editName" type="text" required>
-                            <label>Email:</label>
-                            <input id="editEmail" type="email" required>
-                            <label>Số điện thoại:</label>
-                            <input id="editPhone" type="tel">
-                            <button type="submit" class="modal-btn">Lưu</button>
-                        </form>
-                    </div>`;
-                    document.body.appendChild(modal);
-                    document.getElementById('closeEditProfile').onclick = function() {
-                        modal.remove();
-                    };
-                    document.getElementById('editProfileForm').onsubmit = async function(e) {
-                        e.preventDefault();
-                        const name = document.getElementById('editName').value.trim();
-                        const email = document.getElementById('editEmail').value.trim();
-                        const phone = document.getElementById('editPhone').value.trim();
-                        try {
-                            await currentUser.updateProfile({displayName: name});
-                            if(currentUser.email !== email) await currentUser.updateEmail(email);
-                            await database.ref('users/' + currentUser.uid).update({displayName: name, email: email, phone: phone});
-                            showSuccess('Cập nhật thông tin thành công!');
-                            modal.remove();
-                        } catch(err) {
-                            showError('Cập nhật thất bại: ' + err.message);
-                        }
-                    };
-                }
-                // Luôn gán dữ liệu mới nhất vào input
-                document.getElementById('editName').value = data.displayName || currentUser.displayName || '';
-                document.getElementById('editEmail').value = data.email || currentUser.email || '';
-                document.getElementById('editPhone').value = data.phone || '';
-            });
-
-            // 2. Địa chỉ giao hàng
-            function loadAddresses() {
-                if (!currentUser) return;
-                const list = document.getElementById('addressList');
-                database.ref('users/' + currentUser.uid + '/addresses').once('value').then(snap => {
-                    const data = snap.val() || {};
-                    list.innerHTML = '';
-                    const keys = Object.keys(data);
-                    if(keys.length === 0) {
-                        list.innerHTML = '<li class="address-item">Chưa có địa chỉ nào</li>';
-                    } else {
-                        keys.forEach(key => {
-                            const addr = data[key];
-                            const li = document.createElement('li');
-                            li.className = 'address-item';
-                            li.innerHTML = `<span>${addr.text || ''}</span>
-                            <span>
-                                <button class="edit-address-btn" data-id="${key}">Sửa</button>
-                                <button class="delete-address-btn" data-id="${key}">Xóa</button>
-                            </span>`;
-                            list.appendChild(li);
-                        });
-                    }
-                });
-            }
-            document.querySelector('.add-address-btn').onclick = function() {
-                if (!currentUser) return;
-                Swal.fire({
-                    title: 'Thêm địa chỉ mới',
-                    input: 'text',
-                    inputLabel: 'Địa chỉ',
-                    inputPlaceholder: 'Nhập địa chỉ giao hàng...',
-                    showCancelButton: true,
-                    confirmButtonText: 'Lưu',
-                    cancelButtonText: 'Hủy',
-                    inputValidator: value => !value && 'Vui lòng nhập địa chỉ!'
-                }).then(async result => {
-                    if(result.isConfirmed && result.value) {
-                        const newKey = database.ref().child('users/' + currentUser.uid + '/addresses').push().key;
-                        await database.ref('users/' + currentUser.uid + '/addresses/' + newKey).set({text: result.value});
-                        showSuccess('Đã thêm địa chỉ!');
-                        loadAddresses();
-                    }
-                });
-            };
-            document.getElementById('addressList').onclick = async function(e) {
-                if(e.target.classList.contains('edit-address-btn')) {
-                    const id = e.target.getAttribute('data-id');
-                    // Lấy lại địa chỉ từ Firebase
-                    const snap = await database.ref('users/' + currentUser.uid + '/addresses/' + id).once('value');
-                    const addr = snap.val() || {};
-                    Swal.fire({
-                        title: 'Sửa địa chỉ',
-                        input: 'text',
-                        inputValue: addr.text || '',
-                        showCancelButton: true,
-                        confirmButtonText: 'Lưu',
-                        cancelButtonText: 'Hủy',
-                        inputValidator: value => !value && 'Vui lòng nhập địa chỉ!'
-                    }).then(async result => {
-                        if(result.isConfirmed && result.value) {
-                            await database.ref('users/' + currentUser.uid + '/addresses/' + id).set({text: result.value});
-                            showSuccess('Đã cập nhật địa chỉ!');
-                            loadAddresses();
-                        }
-                    });
-                }
-                if(e.target.classList.contains('delete-address-btn')) {
-                    const id = e.target.getAttribute('data-id');
-                    Swal.fire({title:'Xác nhận xóa',text:'Bạn chắc chắn muốn xóa địa chỉ này?',icon:'warning',showCancelButton:true,confirmButtonColor:'#FF6B00',cancelButtonColor:'#d33',confirmButtonText:'Xóa',cancelButtonText:'Hủy'}).then(async result => {
-                        if(result.isConfirmed) {
-                            await database.ref('users/' + currentUser.uid + '/addresses/' + id).remove();
-                            showSuccess('Đã xóa địa chỉ!');
-                            loadAddresses();
-                        }
-                    });
-                }
-            };
-
-            // 3. Lịch sử đơn hàng
-            function loadOrders() {
-                if (!currentUser) return;
-                const tbody = document.getElementById('ordersList');
-                database.ref('invoices').once('value').then(snap => {
-                    const data = snap.val() || {};
-                    tbody.innerHTML = '';
-                    // Lấy email user hiện tại
-                    const userEmail = currentUser.email;
-                    // Lọc đơn hàng theo email
-                    const userOrders = Object.entries(data).filter(([key, order]) => {
-                        return order.customer && order.customer.email === userEmail;
-                    });
-                    if (userOrders.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#888;">Chưa có đơn hàng</td></tr>';
-                    } else {
-                        // Sắp xếp mới nhất lên đầu
-                        userOrders.sort((a, b) => new Date(b[1].createdAt) - new Date(a[1].createdAt));
-                        userOrders.forEach(([key, order]) => {
-                            const date = order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : '';
-                            const status = order.status || order.paymentStatus || '';
-                            const total = order.total ? order.total.toLocaleString('vi-VN') + ' VNĐ' : '';
-                            tbody.innerHTML += `<tr>
-                                <td>${key}</td>
-                                <td>${date}</td>
-                                <td>${status}</td>
-                                <td>${total}</td>
-                                <td><a href="#" class="order-detail-link" data-id="${key}">Xem</a></td>
-                            </tr>`;
-                        });
-                    }
-                    // Tổng quan
-                    document.getElementById('dashboardTotalOrders').textContent = userOrders.length;
-                    let totalSpent = 0;
-                    userOrders.forEach(([k, order]) => { if(order.total) totalSpent += order.total; });
-                    document.getElementById('dashboardTotalSpent').textContent = totalSpent.toLocaleString('vi-VN') + ' VNĐ';
-                    // Lưu tổng chi tiêu vào user
-                    database.ref('users/' + currentUser.uid + '/totalSpent').set(totalSpent);
-
-                    // Gắn lại sự kiện cho các nút "Xem" (phải nằm trong callback này)
-                    tbody.querySelectorAll('.order-detail-link').forEach(link => {
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            const orderId = this.getAttribute('data-id');
-                            // Lấy lại dữ liệu đơn từ invoices
-                            database.ref('invoices/' + orderId).once('value').then(snap => {
-                                const order = snap.val();
-                                if (!order) return Swal.fire('Không tìm thấy đơn hàng!');
-                                // Hiển thị chi tiết đơn hàng với giao diện đẹp
-                                const status = order.status || order.paymentStatus || '';
-                                const statusColor = status === 'paid' || status === 'success' ? '#4CAF50' : (status === 'pending' ? '#FF9800' : '#F44336');
-                                let html = `
-                                    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;">
-                                        <div style="flex:1;min-width:220px;">
-                                            <h3 style='margin:0 0 8px 0;font-size:1.1rem;color:#FF6B00;'>Thông tin đơn hàng</h3>
-                                            <div style='margin-bottom:8px;'><b>Mã đơn:</b> <span style='color:#333;'>${orderId}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Ngày đặt:</b> <span style='color:#333;'>${order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : ''}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Trạng thái:</b> <span style='color:${statusColor};font-weight:600;text-transform:uppercase;'>${status}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Mã giảm giá:</b> <span style='color:#333;'>${order.coupon || '-'}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Giảm giá:</b> <span style='color:#333;'>${order.discountAmount ? order.discountAmount.toLocaleString('vi-VN') + ' VNĐ' : '-'}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Tổng tiền:</b> <span style='color:#FF6B00;font-size:1.2rem;font-weight:700;'>${order.total ? order.total.toLocaleString('vi-VN') + ' VNĐ' : ''}</span></div>
-                                        </div>
-                                        <div style="flex:1;min-width:220px;">
-                                            <h3 style='margin:0 0 8px 0;font-size:1.1rem;color:#FF6B00;'>Khách hàng</h3>
-                                            <div style='margin-bottom:8px;'><b>Họ tên:</b> <span style='color:#333;'>${order.customer ? (order.customer.firstName + ' ' + order.customer.lastName) : ''}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Địa chỉ:</b> <span style='color:#333;'>${order.customer ? order.customer.address : ''}</span></div>
-                                            <div style='margin-bottom:8px;'><b>SĐT:</b> <span style='color:#333;'>${order.customer ? order.customer.phone : ''}</span></div>
-                                            <div style='margin-bottom:8px;'><b>Email:</b> <span style='color:#333;'>${order.customer ? order.customer.email : ''}</span></div>
-                                        </div>
-                                    </div>
-                                    <hr style='margin:18px 0 12px 0;border:0;border-top:1.5px solid #eee;'>
-                                    <h3 style='font-size:1.1rem;color:#FF6B00;margin-bottom:8px;'>Danh sách sản phẩm</h3>
-                                    <div style='overflow-x:auto;'>
-                                    <table style='width:100%;border-collapse:collapse;font-size:1rem;'>
-                                        <thead>
-                                            <tr style='background:#f8f8f8;'>
-                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;text-align:left;'>Ảnh</th>
-                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;text-align:left;'>Tên sản phẩm</th>
-                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>SL</th>
-                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>Đơn giá</th>
-                                                <th style='padding:8px 6px;border-bottom:2px solid #FF6B00;'>Thành tiền</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            ${order.items.map(item => `
-                                                <tr>
-                                                    <td style='padding:6px 4px;'><img src="${item.image}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;box-shadow:0 2px 8px #eee;"></td>
-                                                    <td style='padding:6px 4px;color:#333;font-weight:500;'>${item.name}</td>
-                                                    <td style='padding:6px 4px;text-align:center;'>${item.quantity}</td>
-                                                    <td style='padding:6px 4px;text-align:right;'>${item.price.toLocaleString('vi-VN')} VNĐ</td>
-                                                    <td style='padding:6px 4px;text-align:right;font-weight:600;'>${(item.price*item.quantity).toLocaleString('vi-VN')} VNĐ</td>
-                                                </tr>
-                                            `).join('')}
-                                        </tbody>
-                                    </table>
-                                    </div>
-                                `;
-                                Swal.fire({
-                                    title: 'Chi tiết đơn hàng',
-                                    html: html,
-                                    width: 700,
-                                    confirmButtonColor: '#FF6B00',
-                                    showCloseButton: true
-                                });
-                            });
-                        });
-                    });
-                });
-
-            }
-
-            // 4. Đổi mật khẩu
-            document.getElementById('changePasswordForm').onsubmit = async function(e) {
-                e.preventDefault();
-                const oldPass = document.getElementById('oldPassword').value;
-                const newPass = document.getElementById('newPassword').value;
-                const confirmPass = document.getElementById('confirmNewPassword').value;
-                if(newPass !== confirmPass) return showError('Mật khẩu xác nhận không khớp!');
-                try {
-                    // Re-authenticate
-                    const cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, oldPass);
-                    await currentUser.reauthenticateWithCredential(cred);
-                    await currentUser.updatePassword(newPass);
-                    showSuccess('Đổi mật khẩu thành công!');
-                    document.getElementById('changePasswordForm').reset();
-                } catch(err) {
-                    showError('Đổi mật khẩu thất bại: ' + err.message);
-                }
-            };
-        }
     </script>
+
     <script>
-        
+    // ... existing code ...
+    // Hiển thị mã khuyến mãi động thay cho banner Siêu Sale Tháng 3
+    document.addEventListener('DOMContentLoaded', async function() {
+        const saleBanner = document.querySelector('.sale-banner .sale-content');
+        if (saleBanner) {
+            // Xóa nội dung cũ
+            saleBanner.innerHTML = '<h2>Đang tải khuyến mãi...</h2>';
+            try {
+                const db = firebase.database();
+                const snapshot = await db.ref('coupons').once('value');
+                const coupons = snapshot.val();
+                let found = false;
+                if (coupons) {
+                    const now = new Date();
+                    for (const key in coupons) {
+                        const coupon = coupons[key];
+                        // Kiểm tra trạng thái và thời gian
+                        const start = new Date(coupon.startDate);
+                        const end = new Date(coupon.endDate);
+                        if (coupon.status === 'active' && now >= start && now <= end) {
+                            found = true;
+                            saleBanner.innerHTML = `
+                                <h2>Mã khuyến mãi: <span style="color:#FF6B00">${coupon.code}</span></h2>
+                                <p style="font-size:1.3em;font-weight:600;">${coupon.description || ''}</p>
+                                <div style="font-size:1.1em;margin:18px 0;">
+                                    <b>Giảm giá:</b> ${coupon.discount}${coupon.type === 'percent' ? '%' : '₫'}<br>
+                                    <b>Thời gian áp dụng:</b> ${coupon.startDate} - ${coupon.endDate}<br>
+                                    <b>Trạng thái:</b> <span style="color:${coupon.status==='active'?'#4CAF50':'#d33'}">${coupon.status==='active'?'Đang diễn ra':'Không hoạt động'}</span>
+                                </div>
+                                <button class="cta-button" onclick="navigator.clipboard.writeText('${coupon.code}');Swal.fire({title:'Đã sao chép mã!',text:'${coupon.code}',icon:'success',timer:1200,showConfirmButton:false})">Sao chép mã</button>
+                            `;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    saleBanner.innerHTML = '<h2>Hiện chưa có khuyến mãi nào đang diễn ra</h2>';
+                }
+            } catch (err) {
+                saleBanner.innerHTML = '<h2>Lỗi tải khuyến mãi</h2>';
+            }
+        }
+    });
+    // ... existing code ...
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Gửi form liên hệ trên trang chủ lên Firebase
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.querySelector('form.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                if (!name || !phone || !email || !message) {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Vui lòng điền đầy đủ thông tin!',
+                        icon: 'error',
+                        confirmButtonColor: '#FF6B00'
+                    });
+                    return;
+                }
+
+                try {
+                    const database = firebase.database();
+                    const newContactRef = database.ref('contacts').push();
+                    await newContactRef.set({
+                        name,
+                        phone,
+                        email,
+                        message,
+                        createdAt: new Date().toISOString()
+                    });
+                    Swal.fire({
+                        title: 'Thành công!',
+                        text: 'Tin nhắn của bạn đã được gửi. Chúng tôi sẽ liên hệ lại sớm nhất!',
+                        icon: 'success',
+                        confirmButtonColor: '#FF6B00',
+                        timer: 2500
+                    });
+                    contactForm.reset();
+                } catch (error) {
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Gửi tin nhắn thất bại: ' + error.message,
+                        icon: 'error',
+                        confirmButtonColor: '#FF6B00'
+                    });
+                }
+            });
+        }
+    });
+    // ... existing code ...
+    </script>
+
+    <script>
+    // ... existing code ...
+    // Lấy 3 tin mới nhất từ Firebase và render ra slider
+    async function fetchAndRenderNews() {
+        const grid = document.querySelector('.news-slider');
+        grid.innerHTML = '<div style="text-align:center;width:100%">Đang tải tin tức...</div>';
+        try {
+            const db = firebase.database();
+            // Lấy tất cả tin, sắp xếp theo date giảm dần, lấy 3 tin mới nhất
+            const snapshot = await db.ref('news').once('value');
+            const newsObj = snapshot.val();
+            if (!newsObj) {
+                grid.innerHTML = '<div style="text-align:center;width:100%">Chưa có tin tức</div>';
+                return;
+            }
+            // Chuyển object thành array và sort theo date giảm dần
+            const newsArr = Object.values(newsObj)
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 3);
+
+            grid.innerHTML = '';
+            newsArr.forEach(news => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <a href="news.html?id=${news.id}" style="text-decoration:none; color:inherit; display:block;">
+                        <img src="${news.image}" alt="${news.title}">
+                        <h3>${news.title}</h3>
+                        <p>${news.description}</p>
+                        <span class="read-more" style="color:#FF6B00; font-weight:500; display:inline-block; margin-top:8px;">Đọc thêm</span>
+                    </a>
+                `;
+                grid.appendChild(card);
+            });
+        } catch (err) {
+            grid.innerHTML = '<div style="text-align:center;width:100%">Lỗi tải tin tức</div>';
+        }
+    }
+
+    // Gọi hàm khi DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function() {
+        fetchAndRenderNews();
+    });
+    // ... existing code ...
+    </script>
+
+
+
+    <script>
+    // ... existing code ...
+    // Sự kiện click cho Thương hiệu nổi bật ở footer
+    var featuredBrandsBtn = document.getElementById('footer-featured-brands');
+    var featuredBrandsModal = document.getElementById('featuredBrandsModal');
+    if (featuredBrandsBtn && featuredBrandsModal) {
+      featuredBrandsBtn.addEventListener('click', function() {
+        featuredBrandsModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+      // Đóng modal khi click nút đóng
+      featuredBrandsModal.querySelector('.close-modal').addEventListener('click', function() {
+        featuredBrandsModal.classList.remove('show');
+        document.body.style.overflow = '';
+      });
+      // Đóng modal khi click ra ngoài
+      window.addEventListener('click', function(e) {
+        if (e.target === featuredBrandsModal) {
+          featuredBrandsModal.classList.remove('show');
+          document.body.style.overflow = '';
+        }
+      });
+    }
+    // ... existing code ...
     </script>
 </body>
 </html> 

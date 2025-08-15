@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - LavaWhey</title>
+    <!-- Google Fonts & Material Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css">
+    <style>
+        :root {
+            --primary-black: #0a0a0a;
+            --secondary-black: #1a1a1a;
+            --dark-gray: #2d2d2d;
+            --medium-gray: #404040;
+            --light-gray: #666666;
+            --primary-orange: #FF6B00;
+            --secondary-orange: #FF8533;
+            --accent-orange: #FFA366;
+            --text-white: #ffffff;
+            --text-light: #e0e0e0;
+            --text-muted: #b0b0b0;
+            --border-color: #333333;
+            --shadow-dark: rgba(0, 0, 0, 0.3);
+            --shadow-orange: rgba(255, 107, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--primary-black);
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background: var(--secondary-black);
+            color: var(--text-white);
+            width: 280px;
+            position: fixed;
+            top: 0; 
+            left: 0;
+            z-index: 100;
+            box-shadow: 4px 0 20px var(--shadow-dark);
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar .sidebar-header {
+            padding: 2.5rem 2rem 2rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, var(--secondary-black) 0%, var(--dark-gray) 100%);
+        }
+
+        .sidebar .sidebar-header .material-icons {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+
+        .sidebar .nav-link {
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 1.2rem 2.5rem 1.2rem 2rem;
+            border-radius: 0;
+            margin: 0.1rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .sidebar .nav-link .material-icons {
+            font-size: 1.7rem;
+            color: var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            background: linear-gradient(90deg, var(--dark-gray) 0%, var(--medium-gray) 100%);
+            color: var(--text-white);
+            border-left: 3px solid var(--primary-orange);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link:hover .material-icons {
+            color: var(--primary-orange);
+            transform: scale(1.1);
+        }
+
+        .sidebar .nav-link.active {
+            background: linear-gradient(90deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+            color: var(--text-white);
+            border-left: 3px solid var(--accent-orange);
+            box-shadow: 0 4px 20px var(--shadow-orange);
+        }
+
+        .sidebar .nav-link.active .material-icons {
+            color: var(--text-white);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            padding: 0 3rem 3rem 3rem;
+            min-height: 100vh;
+            background: var(--primary-black);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-top: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+            text-shadow: 0 2px 10px var(--shadow-dark);
+        }
+
+        .admin-header .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .admin-header .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-orange);
+            box-shadow: 0 0 20px var(--shadow-orange);
+        }
+
+        .admin-header .btn-logout {
+            background: transparent;
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-header .btn-logout::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .admin-header .btn-logout:hover::before {
+            left: 100%;
+        }
+
+        .admin-header .btn-logout:hover {
+            background: var(--primary-orange);
+            color: var(--text-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-orange);
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-card {
+            background: linear-gradient(135deg, var(--secondary-black) 0%, var(--dark-gray) 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--shadow-dark);
+            padding: 2.5rem 3rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px var(--shadow-dark), 0 0 30px var(--shadow-orange);
+            border-color: var(--primary-orange);
+        }
+
+        .dashboard-card .material-icons {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+
+        .dashboard-card .card-info {
+            flex: 1;
+        }
+
+        .dashboard-card .card-info .card-title {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-card .card-info .card-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+            text-shadow: 0 2px 10px var(--shadow-dark);
+        }
+
+        .dashboard-charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-chart-card {
+            background: linear-gradient(135deg, var(--secondary-black) 0%, var(--dark-gray) 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--shadow-dark);
+            padding: 2.5rem;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .dashboard-chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-orange), var(--secondary-orange));
+        }
+
+        .dashboard-chart-card h5 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .spinner-border {
+            color: var(--primary-orange);
+        }
+
+        .table-responsive {
+            background: linear-gradient(135deg, var(--secondary-black) 0%, var(--dark-gray) 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px var(--shadow-dark);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .table-responsive h2 {
+            color: var(--text-white);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .table {
+            color: var(--text-white);
+            background: transparent;
+        }
+
+        .table thead {
+            background: linear-gradient(90deg, var(--primary-orange) 0%, var(--secondary-orange) 100%);
+            color: var(--text-white);
+        }
+
+        .table thead th {
+            border: none;
+            padding: 1.2rem 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+            border: none;
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .table tbody tr:hover {
+            background: var(--medium-gray);
+            transform: scale(1.01);
+            box-shadow: 0 4px 20px var(--shadow-dark);
+        }
+
+        .badge-status {
+            font-size: 0.9em;
+            padding: 0.5em 1.2em;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-paid { 
+            background: linear-gradient(45deg, #4CAF50, #45a049); 
+            color: var(--text-white); 
+        }
+        .badge-pending { 
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange)); 
+            color: var(--text-white); 
+        }
+        .badge-cancel { 
+            background: linear-gradient(45deg, #d33, #b71c1c); 
+            color: var(--text-white); 
+        }
+
+        .btn-action {
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 3px;
+            background: var(--medium-gray);
+            color: var(--primary-orange);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-action:hover {
+            background: var(--primary-orange);
+            color: var(--text-white);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px var(--shadow-orange);
+        }
+
+        .btn-primary, .btn-success, .btn-warning, .btn-danger {
+            border-radius: 12px !important;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
+            color: var(--text-white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-orange);
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: var(--text-white);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #FF9800, #F57C00);
+            color: var(--text-white);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #d33, #b71c1c);
+            color: var(--text-white);
+        }
+
+        .modal-content {
+            background: var(--secondary-black);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px var(--shadow-dark);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            background: var(--dark-gray);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            color: var(--primary-orange);
+            font-size: 1.3rem;
+        }
+
+        .modal-body {
+            background: var(--secondary-black);
+            padding: 2rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 0.8rem;
+        }
+
+        .form-control {
+            background: var(--dark-gray);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            padding: 1rem 1.5rem;
+            transition: all 0.3s ease;
+            color: var(--text-white);
+        }
+
+        .form-control:focus {
+            background: var(--medium-gray);
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 0 0 4px var(--shadow-orange);
+            color: var(--text-white);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Coupon form specific styles */
+        .modal-lg .form-control {
+            font-size: 1rem;
+        }
+
+        .modal-lg .form-label {
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .modal-lg .row {
+            margin: 0 -0.5rem;
+        }
+
+        .modal-lg .col-md-6 {
+            padding: 0 0.5rem;
+        }
+
+        /* News form specific styles */
+        #newsContent {
+            resize: vertical;
+            min-height: 200px;
+        }
+        .modal-lg .col-md-8 {
+            padding: 0 0.5rem;
+        }
+        .modal-lg .col-md-4 {
+            padding: 0 0.5rem;
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            background: var(--dark-gray);
+            border-radius: 0 0 20px 20px;
+        }
+
+        .swal2-popup {
+            background: var(--secondary-black) !important;
+            color: var(--text-white) !important;
+            border-radius: 20px !important;
+            border: 1px solid var(--border-color) !important;
+        }
+
+        .swal2-title {
+            color: var(--text-white) !important;
+        }
+
+        .swal2-content {
+            color: var(--text-light) !important;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-orange);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-orange);
+        }
+
+        /* DataTables customization */
+        .dataTables_wrapper .dataTables_length select,
+        .dataTables_wrapper .dataTables_filter input {
+            background: var(--dark-gray);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_paginate {
+            color: var(--text-light);
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background: var(--medium-gray);
+            color: var(--text-white) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 0 2px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: var(--primary-orange) !important;
+            color: var(--text-white) !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--primary-orange) !important;
+            color: var(--text-white) !important;
+        }
+
+        /* Login Section Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--primary-black);
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--secondary-black);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow-dark);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header .material-icons {
+            font-size: 4rem;
+            color: var(--primary-orange);
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+        }
+
+        .login-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-white);
+            margin-top: 10px;
+        }
+
+        .login-header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-form label {
+            display: block;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .login-form .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--dark-gray);
+            color: var(--text-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-form .form-control:focus {
+            background: var(--medium-gray);
+            border: 1px solid var(--primary-orange);
+            box-shadow: 0 0 0 4px var(--shadow-orange);
+            color: var(--text-white);
+        }
+
+        .login-form .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
+            color: var(--text-white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-orange);
+        }
+
+        .login-divider {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .login-divider span {
+            padding: 0 10px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .btn-google {
+            width: 100%;
+            padding: 12px;
+            background: #4285F4;
+            color: var(--text-white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-google:hover {
+            background: #357ABD;
+            box-shadow: 0 4px 15px var(--shadow-dark);
+        }
+
+        .login-footer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 20px;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-cards, .dashboard-charts { 
+                grid-template-columns: 1fr; 
+            }
+            .main-content { 
+                padding: 0 2rem; 
+            }
+        }
+
+        @media (max-width: 900px) {
+            .main-content { 
+                margin-left: 0; 
+                padding: 0 1rem; 
+            }
+            .sidebar { 
+                position: static; 
+                width: 100%; 
+                min-height: auto; 
+                flex-direction: row; 
+            }
+            .sidebar .sidebar-header { 
+                display: none; 
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-card, .dashboard-chart-card { 
+                min-width: 90vw; 
+                padding: 1.5rem; 
+            }
+            .table-responsive { 
+                padding: 1rem; 
+            }
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar d-flex flex-column">
+        <div class="sidebar-header">
+            <span class="material-icons">fitness_center</span> LavaWhey Admin
+        </div>
+        <nav class="nav flex-column mt-3">
+            <a class="nav-link active" href="#dashboard" data-section="dashboard"><span class="material-icons">dashboard</span> Tổng quan</a>
+            <a class="nav-link" href="#categories" data-section="categories"><span class="material-icons">category</span> Danh mục & Sản phẩm</a>
+            <a class="nav-link" href="#orders" data-section="orders"><span class="material-icons">receipt_long</span> Đơn hàng</a>
+            <a class="nav-link" href="#users" data-section="users"><span class="material-icons">people</span> Người dùng</a>
+            <a class="nav-link" href="#contacts" data-section="contacts"><span class="material-icons">mail</span> Liên hệ</a>
+            <a class="nav-link" href="#coupons" data-section="coupons"><span class="material-icons">local_offer</span> Mã giảm giá</a>
+            <a class="nav-link" href="#news" data-section="news"><span class="material-icons">article</span> Tin tức</a>
+        </nav>
+    </div>
+
+    <!-- Login Section -->
+    <div id="login-section" class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <span class="material-icons">fitness_center</span>
+                <h1>LavaWhey Admin</h1>
+                <p>Đăng nhập để truy cập bảng điều khiển</p>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mật khẩu</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-login">
+                    <span class="material-icons">login</span>
+                    Đăng nhập
+                </button>
+                <div class="login-divider">
+                    <span>hoặc</span>
+                </div>
+                <button type="button" class="btn btn-google" id="btnGoogleLogin">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">
+                    Đăng nhập với Google
+                </button>
+            </form>
+            <div class="login-footer">
+                <p>Chỉ dành cho quản trị viên</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Content (hidden until login) -->
+    <div id="admin-content" style="display:none">
+        <div class="main-content">
+            <div class="admin-header">
+                <h1 id="section-title">Tổng quan</h1>
+                <div class="admin-actions">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=FF6B00&color=fff" class="avatar" alt="Admin">
+                    <button class="btn btn-logout" id="btn-logout"><span class="material-icons">logout</span> Đăng xuất</button>
+                </div>
+            </div>
+            <!-- Dashboard Section -->
+            <div id="dashboard-section">
+                <div class="dashboard-cards mb-4">
+                    <div class="dashboard-card">
+                        <span class="material-icons">category</span>
+                        <div class="card-info">
+                            <div class="card-title">Danh mục</div>
+                            <div class="card-value" id="count-categories">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">inventory_2</span>
+                        <div class="card-info">
+                            <div class="card-title">Sản phẩm</div>
+                            <div class="card-value" id="count-products">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">receipt_long</span>
+                        <div class="card-info">
+                            <div class="card-title">Đơn hàng</div>
+                            <div class="card-value" id="count-orders">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">people</span>
+                        <div class="card-info">
+                            <div class="card-title">Người dùng</div>
+                            <div class="card-value" id="count-users">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">mail</span>
+                        <div class="card-info">
+                            <div class="card-title">Liên hệ</div>
+                            <div class="card-value" id="count-contacts">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">local_offer</span>
+                        <div class="card-info">
+                            <div class="card-title">Mã giảm giá</div>
+                            <div class="card-value" id="count-coupons">0</div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <span class="material-icons">article</span>
+                        <div class="card-info">
+                            <div class="card-title">Tin tức</div>
+                            <div class="card-value" id="count-news">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-charts">
+                    <div class="dashboard-chart-card">
+                        <h5>Doanh thu theo tháng</h5>
+                        <canvas id="revenueChart" height="180"></canvas>
+                        <div id="revenueChartLoading" class="text-center mt-3"><div class="spinner-border"></div></div>
+                    </div>
+                    <div class="dashboard-chart-card">
+                        <h5>Đơn hàng theo trạng thái</h5>
+                        <canvas id="orderStatusChart" height="180"></canvas>
+                        <div id="orderStatusChartLoading" class="text-center mt-3"><div class="spinner-border"></div></div>
+                    </div>
+                    <div class="dashboard-chart-card">
+                        <h5>Sản phẩm theo danh mục</h5>
+                        <canvas id="productCategoryChart" height="180"></canvas>
+                        <div id="productCategoryChartLoading" class="text-center mt-3"><div class="spinner-border"></div></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Section: Categories & Products -->
+            <div id="categories-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Danh mục & Sản phẩm</h2>
+                        <button class="btn btn-primary" id="btn-add-category"><span class="material-icons">add</span> Thêm danh mục</button>
+                    </div>
+                    <table class="table table-bordered" id="table-categories">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên danh mục</th>
+                                <th>Số sản phẩm</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section: Orders -->
+            <div id="orders-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Đơn hàng</h2>
+                    </div>
+                    <table class="table table-bordered" id="table-orders">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Khách hàng</th>
+                                <th>Số điện thoại</th>
+                                <th>Tổng tiền</th>
+                                <th>Trạng thái</th>
+                                <th>Ngày tạo</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section: Users -->
+            <div id="users-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Người dùng</h2>
+                    </div>
+                    <table class="table table-bordered" id="table-users">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Provider</th>
+                                <th>Ngày đăng ký</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section: Contacts -->
+            <div id="contacts-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Liên hệ</h2>
+                    </div>
+                    <table class="table table-bordered" id="table-contacts">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Số điện thoại</th>
+                                <th>Nội dung</th>
+                                <th>Ngày gửi</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section: Coupons -->
+            <div id="coupons-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Mã giảm giá</h2>
+                        <button class="btn btn-primary" id="btn-add-coupon"><span class="material-icons">add</span> Thêm mã</button>
+                    </div>
+                    <table class="table table-bordered" id="table-coupons">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Mã</th>
+                                <th>Mô tả</th>
+                                <th>Giảm giá</th>
+                                <th>Loại</th>
+                                <th>Ngày bắt đầu</th>
+                                <th>Ngày kết thúc</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Section: News -->
+            <div id="news-section" style="display:none">
+                <div class="table-responsive">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2>Tin tức</h2>
+                        <button class="btn btn-primary" id="btn-add-news"><span class="material-icons">add</span> Thêm tin</button>
+                    </div>
+                    <table class="table table-bordered" id="table-news">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tiêu đề</th>
+                                <th>Mô tả</th>
+                                <th>Ngày đăng</th>
+                                <th>Tác giả</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Modal: Thêm/Sửa Danh mục -->
+        <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form id="categoryForm">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="categoryModalLabel">Thêm danh mục</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="categoryName" class="form-label">Tên danh mục</label>
+                    <input type="text" class="form-control" id="categoryName" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+                <input type="hidden" id="categoryIndex">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Thêm/Sửa Mã giảm giá -->
+        <div class="modal fade" id="couponModal" tabindex="-1" aria-labelledby="couponModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <form id="couponForm">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="couponModalLabel">Thêm mã giảm giá</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="couponCode" class="form-label">Mã giảm giá *</label>
+                        <input type="text" class="form-control" id="couponCode" required placeholder="VD: WELCOME2024">
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponDescription" class="form-label">Mô tả</label>
+                        <textarea class="form-control" id="couponDescription" rows="3" placeholder="Mô tả về mã giảm giá"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponDiscount" class="form-label">Giá trị giảm *</label>
+                        <input type="number" class="form-control" id="couponDiscount" required min="0" step="0.01">
+                        <small class="form-text text-muted" id="discountHelp">Nhập số tiền hoặc phần trăm</small>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label for="couponType" class="form-label">Loại giảm giá *</label>
+                        <select class="form-control" id="couponType" required>
+                          <option value="">Chọn loại</option>
+                          <option value="percent">Phần trăm (%)</option>
+                          <option value="fixed">Số tiền cố định (VNĐ)</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponStartDate" class="form-label">Ngày bắt đầu *</label>
+                        <input type="datetime-local" class="form-control" id="couponStartDate" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponEndDate" class="form-label">Ngày kết thúc *</label>
+                        <input type="datetime-local" class="form-control" id="couponEndDate" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="couponStatus" class="form-label">Trạng thái</label>
+                        <select class="form-control" id="couponStatus">
+                          <option value="active">Kích hoạt</option>
+                          <option value="inactive">Không kích hoạt</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+                <input type="hidden" id="couponIndex">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal: Thêm/Sửa Tin tức -->
+        <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <form id="newsForm">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="newsModalLabel">Thêm tin tức</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="mb-3">
+                        <label for="newsTitle" class="form-label">Tiêu đề *</label>
+                        <input type="text" class="form-control" id="newsTitle" required placeholder="Nhập tiêu đề tin tức">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newsDescription" class="form-label">Mô tả ngắn *</label>
+                        <textarea class="form-control" id="newsDescription" rows="3" required placeholder="Mô tả ngắn gọn về tin tức"></textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label for="newsContent" class="form-label">Nội dung *</label>
+                        <textarea class="form-control" id="newsContent" rows="8" required placeholder="Nội dung chi tiết của tin tức"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="mb-3">
+                        <label for="newsAuthor" class="form-label">Tác giả *</label>
+                        <input type="text" class="form-control" id="newsAuthor" required placeholder="Tên tác giả">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newsDate" class="form-label">Ngày đăng *</label>
+                        <input type="datetime-local" class="form-control" id="newsDate" required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="newsStatus" class="form-label">Trạng thái</label>
+                        <select class="form-control" id="newsStatus">
+                          <option value="published">Đã đăng</option>
+                          <option value="draft">Bản nháp</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label for="newsImage" class="form-label">Ảnh đại diện</label>
+                        <input type="url" class="form-control" id="newsImage" placeholder="URL ảnh (tùy chọn)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                  <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+                <input type="hidden" id="newsIndex">
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <!-- jQuery & DataTables -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <!-- Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Firebase config (dùng lại config từ index.html)
+    const firebaseConfig = {
+        apiKey: "AIzaSyDPdSUkT56drPQGE9N4KvjM3ZoQaeamdao",
+        authDomain: "lavawhey.firebaseapp.com",
+        projectId: "lavawhey",
+        storageBucket: "lavawhey.firebasestorage.app",
+        messagingSenderId: "261576736130",
+        appId: "1:261576736130:web:9d8b878a50e01c9591a39b",
+        measurementId: "G-BR9VJHPJGL"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const loginSection = document.getElementById('login-section');
+    const adminContent = document.getElementById('admin-content');
+    const loginForm = document.getElementById('loginForm');
+    const btnGoogleLogin = document.getElementById('btnGoogleLogin');
+    const btnLogout = document.getElementById('btn-logout');
+
+    // Authentication state observer
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in
+            console.log('User signed in:', user.email);
+            showAdminContent(user);
+        } else {
+            // User is signed out
+            console.log('User signed out');
+            showLoginForm();
+        }
+    });
+
+    // Show login form
+    function showLoginForm() {
+        loginSection.style.display = 'flex';
+        adminContent.style.display = 'none';
+        // Clear any existing user data
+        if (window.currentUser) {
+            window.currentUser = null;
+        }
+    }
+
+    // Show admin content
+    function showAdminContent(user) {
+        loginSection.style.display = 'none';
+        adminContent.style.display = 'block';
+        window.currentUser = user;
+        
+        // Update admin header with user info
+        const avatar = document.querySelector('.admin-header .avatar');
+        const userName = user.displayName || user.email || 'Admin';
+        avatar.src = user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=FF6B00&color=fff`;
+        
+        // Load dashboard data
+        loadDashboard();
+        loadCategories();
+        loadOrders();
+        loadUsers();
+        loadContacts();
+        loadCoupons();
+        loadNews();
+    }
+
+    // Handle email/password login
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        
+        if (!email || !password) {
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Vui lòng nhập đầy đủ email và mật khẩu',
+                icon: 'error',
+                confirmButtonColor: '#FF6B00'
+            });
+            return;
+        }
+
+        try {
+            // Show loading
+            const submitBtn = loginForm.querySelector('.btn-login');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div>Đang đăng nhập...';
+            submitBtn.disabled = true;
+
+            // Attempt to sign in
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
+            
+            // Check if user is admin (you can customize this logic)
+            if (userCredential.user) {
+                // For demo purposes, allow any authenticated user
+                // In production, you should check against a list of admin emails or roles
+                Swal.fire({
+                    title: 'Đăng nhập thành công!',
+                    text: `Chào mừng ${userCredential.user.email}`,
+                    icon: 'success',
+                    confirmButtonColor: '#FF6B00'
+                });
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            let errorMessage = 'Đăng nhập thất bại';
+            
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    errorMessage = 'Email không tồn tại';
+                    break;
+                case 'auth/wrong-password':
+                    errorMessage = 'Mật khẩu không đúng';
+                    break;
+                case 'auth/invalid-email':
+                    errorMessage = 'Email không hợp lệ';
+                    break;
+                case 'auth/too-many-requests':
+                    errorMessage = 'Quá nhiều lần thử đăng nhập. Vui lòng thử lại sau';
+                    break;
+                case 'auth/user-disabled':
+                    errorMessage = 'Tài khoản đã bị vô hiệu hóa';
+                    break;
+                default:
+                    errorMessage = error.message;
+            }
+            
+            Swal.fire({
+                title: 'Lỗi đăng nhập!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonColor: '#FF6B00'
+            });
+        } finally {
+            // Reset button
+            const submitBtn = loginForm.querySelector('.btn-login');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Handle Google sign-in
+    btnGoogleLogin.addEventListener('click', async function() {
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            provider.addScope('email');
+            provider.addScope('profile');
+            
+            // Show loading
+            const originalText = btnGoogleLogin.innerHTML;
+            btnGoogleLogin.innerHTML = '<div class="spinner-border spinner-border-sm me-2"></div>Đang đăng nhập...';
+            btnGoogleLogin.disabled = true;
+            
+            const result = await auth.signInWithPopup(provider);
+            
+            if (result.user) {
+                Swal.fire({
+                    title: 'Đăng nhập thành công!',
+                    text: `Chào mừng ${result.user.displayName || result.user.email}`,
+                    icon: 'success',
+                    confirmButtonColor: '#FF6B00'
+                });
+            }
+        } catch (error) {
+            console.error('Google sign-in error:', error);
+            let errorMessage = 'Đăng nhập với Google thất bại';
+            
+            if (error.code === 'auth/popup-closed-by-user') {
+                errorMessage = 'Cửa sổ đăng nhập đã bị đóng';
+            } else if (error.code === 'auth/popup-blocked') {
+                errorMessage = 'Cửa sổ đăng nhập bị chặn. Vui lòng cho phép popup';
+            }
+            
+            Swal.fire({
+                title: 'Lỗi đăng nhập Google!',
+                text: errorMessage,
+                icon: 'error',
+                confirmButtonColor: '#FF6B00'
+            });
+        } finally {
+            // Reset button
+            const originalText = btnGoogleLogin.innerHTML;
+            btnGoogleLogin.innerHTML = '<img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google">Đăng nhập với Google';
+            btnGoogleLogin.disabled = false;
+        }
+    });
+
+    // Handle logout
+    btnLogout.addEventListener('click', function() {
+        Swal.fire({
+            title: 'Đăng xuất?',
+            text: 'Bạn có chắc muốn đăng xuất?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy',
+            confirmButtonColor: '#FF6B00',
+            cancelButtonColor: '#6c757d'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await auth.signOut();
+                    Swal.fire({
+                        title: 'Đã đăng xuất!',
+                        text: 'Bạn đã đăng xuất thành công',
+                        icon: 'success',
+                        confirmButtonColor: '#FF6B00'
+                    });
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    Swal.fire({
+                        title: 'Lỗi!',
+                        text: 'Không thể đăng xuất. Vui lòng thử lại',
+                        icon: 'error',
+                        confirmButtonColor: '#FF6B00'
+                    });
+                }
+            }
+        });
+    });
+
+    // Sidebar navigation
+    document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.sidebar .nav-link').forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            const section = this.getAttribute('data-section');
+            document.getElementById('section-title').textContent = this.textContent.trim();
+            const allSections = [
+                'dashboard-section', 'categories-section', 'orders-section', 'users-section', 'contacts-section', 'coupons-section', 'news-section'
+            ];
+            allSections.forEach(secId => {
+                const el = document.getElementById(secId);
+                if (el) el.style.display = (secId === section+'-section') ? '' : 'none';
+            });
+        });
+    });
+
+    // Chart.js instances
+    let revenueChartInstance = null;
+    let orderStatusChartInstance = null;
+    let productCategoryChartInstance = null;
+
+    // Load dashboard stats + charts
+    async function loadDashboard() {
+        try {
+            // Danh mục & sản phẩm
+            const catSnap = await db.ref('categories').once('value');
+            const categories = catSnap.val() || [];
+            let productCount = 0;
+            let productCategoryLabels = [], productCategoryCounts = [];
+            categories.forEach(cat => {
+                if (cat.products) productCount += cat.products.length;
+                productCategoryLabels.push(cat.name);
+                productCategoryCounts.push(cat.products ? cat.products.length : 0);
+            });
+            document.getElementById('count-categories').textContent = categories.length;
+            document.getElementById('count-products').textContent = productCount;
+            
+            // Đơn hàng
+            const orderSnap = await db.ref('orders').once('value');
+            const orders = orderSnap.val() || {};
+            document.getElementById('count-orders').textContent = Object.keys(orders).length;
+            
+            // Người dùng
+            const userSnap = await db.ref('users').once('value');
+            const users = userSnap.val() || {};
+            document.getElementById('count-users').textContent = Object.keys(users).length;
+            
+            // Liên hệ
+            const contactSnap = await db.ref('contacts').once('value');
+            const contacts = contactSnap.val() || {};
+            document.getElementById('count-contacts').textContent = Object.keys(contacts).length;
+            
+            // Mã giảm giá
+            const couponSnap = await db.ref('coupons').once('value');
+            const coupons = couponSnap.val() || [];
+            document.getElementById('count-coupons').textContent = Array.isArray(coupons) ? coupons.length : 0;
+            
+            // Tin tức
+            const newsSnap = await db.ref('news').once('value');
+            const news = newsSnap.val() || [];
+            document.getElementById('count-news').textContent = Array.isArray(news) ? news.length : (news && typeof news === 'object' ? Object.keys(news).length : 0);
+
+            // --- Dashboard Charts ---
+            // 1. Doanh thu theo tháng
+            document.getElementById('revenueChartLoading').style.display = '';
+            if (revenueChartInstance) { revenueChartInstance.destroy(); }
+            let revenueByMonth = {};
+            Object.values(orders).forEach(order => {
+                if (order.status === 'paid' && order.createdAt) {
+                    const d = new Date(order.createdAt);
+                    const ym = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+                    revenueByMonth[ym] = (revenueByMonth[ym]||0) + (order.total||0);
+                }
+            });
+            const months = Object.keys(revenueByMonth).sort();
+            const revenues = months.map(m => revenueByMonth[m]);
+            setTimeout(() => {
+                revenueChartInstance = new Chart(document.getElementById('revenueChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: months,
+                        datasets: [{
+                            label: 'Doanh thu (VNĐ)',
+                            data: revenues,
+                            backgroundColor: '#FF6B00',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { display: false } },
+                        responsive: true,
+                        scales: { y: { beginAtZero: true, ticks: { callback: v => v.toLocaleString('vi-VN')+'₫' } } }
+                    }
+                });
+                document.getElementById('revenueChartLoading').style.display = 'none';
+            }, 400);
+
+            // 2. Đơn hàng theo trạng thái
+            document.getElementById('orderStatusChartLoading').style.display = '';
+            if (orderStatusChartInstance) { orderStatusChartInstance.destroy(); }
+            let statusCount = { paid: 0, pending: 0, cancel: 0 };
+            Object.values(orders).forEach(order => {
+                if (order.status === 'paid') statusCount.paid++;
+                else if (order.status === 'pending') statusCount.pending++;
+                else statusCount.cancel++;
+            });
+            setTimeout(() => {
+                orderStatusChartInstance = new Chart(document.getElementById('orderStatusChart').getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Đã thanh toán', 'Chờ xử lý', 'Đã hủy'],
+                        datasets: [{
+                            data: [statusCount.paid, statusCount.pending, statusCount.cancel],
+                            backgroundColor: ['#4CAF50', '#FF6B00', '#d33']
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { position: 'bottom' } },
+                        cutout: '70%',
+                        responsive: true
+                    }
+                });
+                document.getElementById('orderStatusChartLoading').style.display = 'none';
+            }, 400);
+
+            // 3. Sản phẩm theo danh mục
+            document.getElementById('productCategoryChartLoading').style.display = '';
+            if (productCategoryChartInstance) { productCategoryChartInstance.destroy(); }
+            setTimeout(() => {
+                productCategoryChartInstance = new Chart(document.getElementById('productCategoryChart').getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: productCategoryLabels,
+                        datasets: [{
+                            label: 'Số sản phẩm',
+                            data: productCategoryCounts,
+                            backgroundColor: '#FF8533',
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        plugins: { legend: { display: false } },
+                        responsive: true,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+                document.getElementById('productCategoryChartLoading').style.display = 'none';
+            }, 400);
+        } catch (error) {
+            console.error('Error loading dashboard:', error);
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Không thể tải dữ liệu dashboard',
+                icon: 'error',
+                confirmButtonColor: '#FF6B00'
+            });
+        }
+    }
+
+    let categoryModal = new bootstrap.Modal(document.getElementById('categoryModal'));
+    let couponModal = new bootstrap.Modal(document.getElementById('couponModal'));
+    let newsModal = new bootstrap.Modal(document.getElementById('newsModal'));
+    let editingCategoryIdx = null;
+    let editingCouponIdx = null;
+    let editingNewsIdx = null;
+
+    // Thêm danh mục
+    $('#btn-add-category').on('click', function() {
+        $('#categoryModalLabel').text('Thêm danh mục');
+        $('#categoryName').val('');
+        $('#categoryIndex').val('');
+        editingCategoryIdx = null;
+        categoryModal.show();
+    });
+
+    // Sửa danh mục
+    $(document).on('click', '.btn-edit-category', function() {
+        const idx = $(this).data('idx');
+        const name = $(this).data('name');
+        $('#categoryModalLabel').text('Sửa danh mục');
+        $('#categoryName').val(name);
+        $('#categoryIndex').val(idx);
+        editingCategoryIdx = idx;
+        categoryModal.show();
+    });
+
+    // Xóa danh mục
+    $(document).on('click', '.btn-delete-category', function() {
+        const idx = $(this).data('idx');
+        Swal.fire({
+            title: 'Xóa danh mục?',
+            text: 'Thao tác này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy',
+            confirmButtonColor: '#FF6B00'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    // Lấy lại categories
+                    const catSnap = await db.ref('categories').once('value');
+                    let categories = catSnap.val() || [];
+                    categories.splice(idx, 1);
+                    await db.ref('categories').set(categories);
+                    Swal.fire('Đã xóa!', '', 'success');
+                    loadCategories(true);
+                    loadDashboard();
+                } catch (error) {
+                    console.error('Error deleting category:', error);
+                    Swal.fire('Lỗi!', 'Không thể xóa danh mục', 'error');
+                }
+            }
+        });
+    });
+
+    // Submit form Thêm/Sửa danh mục
+    $('#categoryForm').on('submit', async function(e) {
+        e.preventDefault();
+        const name = $('#categoryName').val().trim();
+        const idx = $('#categoryIndex').val();
+        if (!name) return;
+        
+        try {
+            // Lấy lại categories
+            const catSnap = await db.ref('categories').once('value');
+            let categories = catSnap.val() || [];
+            if (idx === '' || idx === null || idx === undefined) {
+                // Thêm mới
+                categories.push({
+                    id: name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+                    name,
+                    products: []
+                });
+                await db.ref('categories').set(categories);
+                Swal.fire('Thêm thành công!', '', 'success');
+            } else {
+                // Sửa
+                categories[idx].name = name;
+                await db.ref('categories').set(categories);
+                Swal.fire('Cập nhật thành công!', '', 'success');
+            }
+            categoryModal.hide();
+            loadCategories(true);
+            loadDashboard();
+        } catch (error) {
+            console.error('Error saving category:', error);
+            Swal.fire('Lỗi!', 'Không thể lưu danh mục', 'error');
+        }
+    });
+
+    // Thêm mã giảm giá
+    $('#btn-add-coupon').on('click', function() {
+        $('#couponModalLabel').text('Thêm mã giảm giá');
+        $('#couponCode').val('');
+        $('#couponDescription').val('');
+        $('#couponDiscount').val('');
+        $('#couponType').val('');
+        
+        // Đặt ngày mặc định
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const nextMonth = new Date(now);
+        nextMonth.setMonth(nextMonth.getMonth() + 1);
+        
+        $('#couponStartDate').val(tomorrow.toISOString().slice(0, 16));
+        $('#couponEndDate').val(nextMonth.toISOString().slice(0, 16));
+        $('#couponStatus').val('active');
+        $('#couponIndex').val('');
+        editingCouponIdx = null;
+        
+        // Reset discount field
+        updateDiscountField();
+        couponModal.show();
+    });
+
+    // Cập nhật trường giá trị giảm dựa trên loại
+    function updateDiscountField() {
+        const type = $('#couponType').val();
+        const discountInput = $('#couponDiscount');
+        const discountHelp = $('#discountHelp');
+        
+        if (type === 'percent') {
+            discountInput.attr('step', '0.01');
+            discountInput.attr('min', '0');
+            discountInput.attr('max', '100');
+            discountInput.attr('placeholder', 'VD: 15.5');
+            discountHelp.text('Nhập phần trăm giảm giá (0-100%)');
+        } else if (type === 'fixed') {
+            discountInput.attr('step', '1000');
+            discountInput.attr('min', '0');
+            discountInput.removeAttr('max');
+            discountInput.attr('placeholder', 'VD: 50000');
+            discountHelp.text('Nhập số tiền giảm giá (VNĐ)');
+        } else {
+            discountInput.attr('step', '0.01');
+            discountInput.attr('min', '0');
+            discountInput.removeAttr('max');
+            discountInput.attr('placeholder', 'Chọn loại giảm giá trước');
+            discountHelp.text('Chọn loại giảm giá trước');
+        }
+    }
+
+    // Xử lý thay đổi loại giảm giá
+    $('#couponType').on('change', function() {
+        updateDiscountField();
+        // Reset giá trị khi thay đổi loại
+        $('#couponDiscount').val('');
+    });
+
+    // Sửa mã giảm giá
+    $(document).on('click', '.btn-edit-coupon', function() {
+        const idx = $(this).data('idx');
+        const coupon = $(this).data('coupon');
+        $('#couponModalLabel').text('Sửa mã giảm giá');
+        $('#couponCode').val(coupon.code || '');
+        $('#couponDescription').val(coupon.description || '');
+        $('#couponDiscount').val(coupon.discount || '');
+        $('#couponType').val(coupon.type || '');
+        $('#couponStartDate').val(coupon.startDate || '');
+        $('#couponEndDate').val(coupon.endDate || '');
+        $('#couponStatus').val(coupon.status || 'active');
+        $('#couponIndex').val(idx);
+        editingCouponIdx = idx;
+        
+        // Cập nhật trường giá trị giảm
+        updateDiscountField();
+        couponModal.show();
+    });
+
+    // Xóa mã giảm giá
+    $(document).on('click', '.btn-delete-coupon', function() {
+        const idx = $(this).data('idx');
+        Swal.fire({
+            title: 'Xóa mã giảm giá?',
+            text: 'Thao tác này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy',
+            confirmButtonColor: '#FF6B00'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    // Lấy lại coupons
+                    const couponSnap = await db.ref('coupons').once('value');
+                    let coupons = couponSnap.val() || [];
+                    
+                    // Đảm bảo coupons là array
+                    if (!Array.isArray(coupons)) {
+                        if (coupons && typeof coupons === 'object') {
+                            coupons = Object.values(coupons);
+                        } else {
+                            coupons = [];
+                        }
+                    }
+                    
+                    if (idx >= 0 && idx < coupons.length) {
+                        coupons.splice(idx, 1);
+                        await db.ref('coupons').set(coupons);
+                        Swal.fire('Đã xóa!', '', 'success');
+                    } else {
+                        Swal.fire('Lỗi!', 'Không tìm thấy mã giảm giá để xóa', 'error');
+                    }
+                    loadCoupons(true);
+                    loadDashboard();
+                } catch (error) {
+                    console.error('Error deleting coupon:', error);
+                    Swal.fire('Lỗi!', 'Không thể xóa mã giảm giá', 'error');
+                }
+            }
+        });
+    });
+
+    // Submit form Thêm/Sửa mã giảm giá
+    $('#couponForm').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const code = $('#couponCode').val().trim();
+        const description = $('#couponDescription').val().trim();
+        const discount = parseFloat($('#couponDiscount').val());
+        const type = $('#couponType').val();
+        const startDate = $('#couponStartDate').val();
+        const endDate = $('#couponEndDate').val();
+        const status = $('#couponStatus').val();
+        const idx = $('#couponIndex').val();
+        
+        if (!code || !discount || !type || !startDate || !endDate) {
+            Swal.fire('Lỗi!', 'Vui lòng điền đầy đủ thông tin bắt buộc', 'error');
+            return;
+        }
+        
+        if (discount <= 0) {
+            Swal.fire('Lỗi!', 'Giá trị giảm giá phải lớn hơn 0', 'error');
+            return;
+        }
+        
+        if (type === 'percent') {
+            if (discount > 100) {
+                Swal.fire('Lỗi!', 'Phần trăm giảm giá không được vượt quá 100%', 'error');
+                return;
+            }
+            if (discount % 1 !== 0 && discount % 0.01 !== 0) {
+                Swal.fire('Lỗi!', 'Phần trăm giảm giá chỉ được nhập tối đa 2 chữ số thập phân', 'error');
+                return;
+            }
+        } else if (type === 'fixed') {
+            if (discount < 1000) {
+                Swal.fire('Lỗi!', 'Số tiền giảm giá phải từ 1,000 VNĐ trở lên', 'error');
+                return;
+            }
+            if (discount % 1000 !== 0) {
+                Swal.fire('Lỗi!', 'Số tiền giảm giá phải là bội số của 1,000 VNĐ', 'error');
+                return;
+            }
+        }
+        
+        if (new Date(startDate) >= new Date(endDate)) {
+            Swal.fire('Lỗi!', 'Ngày kết thúc phải sau ngày bắt đầu', 'error');
+            return;
+        }
+        
+        try {
+            // Lấy lại coupons
+            const couponSnap = await db.ref('coupons').once('value');
+            let coupons = couponSnap.val() || [];
+            
+            // Đảm bảo coupons là array
+            if (!Array.isArray(coupons)) {
+                // Nếu coupons là object, chuyển thành array
+                if (coupons && typeof coupons === 'object') {
+                    coupons = Object.values(coupons);
+                } else {
+                    coupons = [];
+                }
+            }
+            
+            const couponData = {
+                code: code.toUpperCase(),
+                description: description,
+                discount: discount,
+                type: type,
+                startDate: startDate,
+                endDate: endDate,
+                status: status,
+                createdAt: new Date().toISOString()
+            };
+            
+            if (idx === '' || idx === null || idx === undefined) {
+                // Thêm mới
+                coupons.push(couponData);
+                await db.ref('coupons').set(coupons);
+                Swal.fire('Thêm thành công!', '', 'success');
+            } else {
+                // Sửa
+                if (idx >= 0 && idx < coupons.length) {
+                    coupons[idx] = { ...coupons[idx], ...couponData };
+                } else {
+                    // Nếu index không hợp lệ, thêm mới
+                    coupons.push(couponData);
+                }
+                await db.ref('coupons').set(coupons);
+                Swal.fire('Cập nhật thành công!', '', 'success');
+            }
+            couponModal.hide();
+            loadCoupons(true);
+            loadDashboard();
+        } catch (error) {
+            console.error('Error saving coupon:', error);
+            Swal.fire('Lỗi!', 'Không thể lưu mã giảm giá', 'error');
+        }
+    });
+
+    // Thêm tin tức
+    $('#btn-add-news').on('click', function() {
+        $('#newsModalLabel').text('Thêm tin tức');
+        $('#newsTitle').val('');
+        $('#newsDescription').val('');
+        $('#newsContent').val('');
+        $('#newsAuthor').val('');
+        $('#newsImage').val('');
+        $('#newsStatus').val('published');
+        $('#newsIndex').val('');
+        editingNewsIdx = null;
+        
+        // Đặt ngày mặc định là hiện tại
+        const now = new Date();
+        $('#newsDate').val(now.toISOString().slice(0, 16));
+        
+        newsModal.show();
+    });
+
+    // Sửa tin tức
+    $(document).on('click', '.btn-edit-news', function() {
+        const idx = $(this).data('idx');
+        const news = $(this).data('news');
+        $('#newsModalLabel').text('Sửa tin tức');
+        $('#newsTitle').val(news.title || '');
+        $('#newsDescription').val(news.description || '');
+        $('#newsContent').val(news.content || '');
+        $('#newsAuthor').val(news.author || '');
+        $('#newsImage').val(news.image || '');
+        $('#newsStatus').val(news.status || 'published');
+        $('#newsDate').val(news.date || '');
+        $('#newsIndex').val(idx);
+        editingNewsIdx = idx;
+        newsModal.show();
+    });
+
+    // Xóa tin tức
+    $(document).on('click', '.btn-delete-news', function() {
+        const idx = $(this).data('idx');
+        Swal.fire({
+            title: 'Xóa tin tức?',
+            text: 'Thao tác này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy',
+            confirmButtonColor: '#FF6B00'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    // Lấy lại news
+                    const newsSnap = await db.ref('news').once('value');
+                    let news = newsSnap.val() || [];
+                    
+                    // Đảm bảo news là array
+                    if (!Array.isArray(news)) {
+                        if (news && typeof news === 'object') {
+                            news = Object.values(news);
+                        } else {
+                            news = [];
+                        }
+                    }
+                    
+                    if (idx >= 0 && idx < news.length) {
+                        news.splice(idx, 1);
+                        await db.ref('news').set(news);
+                        Swal.fire('Đã xóa!', '', 'success');
+                    } else {
+                        Swal.fire('Lỗi!', 'Không tìm thấy tin tức để xóa', 'error');
+                    }
+                    loadNews(true);
+                    loadDashboard();
+                } catch (error) {
+                    console.error('Error deleting news:', error);
+                    Swal.fire('Lỗi!', 'Không thể xóa tin tức', 'error');
+                }
+            }
+        });
+    });
+
+    // Submit form Thêm/Sửa tin tức
+    $('#newsForm').on('submit', async function(e) {
+        e.preventDefault();
+        
+        const title = $('#newsTitle').val().trim();
+        const description = $('#newsDescription').val().trim();
+        const content = $('#newsContent').val().trim();
+        const author = $('#newsAuthor').val().trim();
+        const image = $('#newsImage').val().trim();
+        const status = $('#newsStatus').val();
+        const date = $('#newsDate').val();
+        const idx = $('#newsIndex').val();
+        
+        if (!title || !description || !content || !author || !date) {
+            Swal.fire('Lỗi!', 'Vui lòng điền đầy đủ thông tin bắt buộc', 'error');
+            return;
+        }
+        
+        if (title.length < 10) {
+            Swal.fire('Lỗi!', 'Tiêu đề phải có ít nhất 10 ký tự', 'error');
+            return;
+        }
+        
+        if (description.length < 20) {
+            Swal.fire('Lỗi!', 'Mô tả phải có ít nhất 20 ký tự', 'error');
+            return;
+        }
+        
+        if (content.length < 50) {
+            Swal.fire('Lỗi!', 'Nội dung phải có ít nhất 50 ký tự', 'error');
+            return;
+        }
+        
+        try {
+            // Lấy lại news
+            const newsSnap = await db.ref('news').once('value');
+            let news = newsSnap.val() || [];
+            
+            // Đảm bảo news là array
+            if (!Array.isArray(news)) {
+                if (news && typeof news === 'object') {
+                    news = Object.values(news);
+                } else {
+                    news = [];
+                }
+            }
+            
+            const newsData = {
+                title: title,
+                description: description,
+                content: content,
+                author: author,
+                image: image || '',
+                status: status,
+                date: date,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            };
+            
+            if (idx === '' || idx === null || idx === undefined) {
+                // Thêm mới
+                news.push(newsData);
+                await db.ref('news').set(news);
+                Swal.fire('Thêm thành công!', '', 'success');
+            } else {
+                // Sửa
+                if (idx >= 0 && idx < news.length) {
+                    news[idx] = { ...news[idx], ...newsData };
+                    news[idx].updatedAt = new Date().toISOString();
+                } else {
+                    // Nếu index không hợp lệ, thêm mới
+                    news.push(newsData);
+                }
+                await db.ref('news').set(news);
+                Swal.fire('Cập nhật thành công!', '', 'success');
+            }
+            newsModal.hide();
+            loadNews(true);
+            loadDashboard();
+        } catch (error) {
+            console.error('Error saving news:', error);
+            Swal.fire('Lỗi!', 'Không thể lưu tin tức', 'error');
+        }
+    });
+
+    // Load categories table (có nút Sửa/Xóa hoạt động)
+    async function loadCategories(reload = false) {
+        try {
+            const catSnap = await db.ref('categories').once('value');
+            const categories = catSnap.val() || [];
+            const tbody = document.querySelector('#table-categories tbody');
+            tbody.innerHTML = '';
+            categories.forEach((cat, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td>${idx+1}</td>
+                    <td>${cat.name}</td>
+                    <td>${cat.products ? cat.products.length : 0}</td>
+                    <td>
+                        <button class='btn btn-sm btn-info'>Sản phẩm</button>
+                        <button class='btn btn-sm btn-warning btn-edit-category' data-idx='${idx}' data-name='${cat.name}'>Sửa</button>
+                        <button class='btn btn-sm btn-danger btn-delete-category' data-idx='${idx}'>Xóa</button>
+                    </td>
+                </tr>`;
+            });
+            if (reload) {
+                if ($.fn.DataTable.isDataTable('#table-categories')) {
+                    $('#table-categories').DataTable().destroy();
+                }
+            }
+            $('#table-categories').DataTable();
+        } catch (error) {
+            console.error('Error loading categories:', error);
+        }
+    }
+
+    // Load orders table
+    async function loadOrders() {
+        try {
+            const orderSnap = await db.ref('orders').once('value');
+            const orders = orderSnap.val() || {};
+            const tbody = document.querySelector('#table-orders tbody');
+            tbody.innerHTML = '';
+            Object.values(orders).forEach((order, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td>${idx+1}</td>
+                    <td>${order.customer?.firstName || ''} ${order.customer?.lastName || ''}</td>
+                    <td>${order.customer?.phone || ''}</td>
+                    <td>${(order.total || 0).toLocaleString('vi-VN')}₫</td>
+                    <td><span class="badge badge-${order.status === 'paid' ? 'paid' : order.status === 'pending' ? 'pending' : 'cancel'}">${order.status}</span></td>
+                    <td>${order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : ''}</td>
+                    <td><button class='btn btn-sm btn-info'>Chi tiết</button></td>
+                </tr>`;
+            });
+            $('#table-orders').DataTable();
+        } catch (error) {
+            console.error('Error loading orders:', error);
+        }
+    }
+
+    // Load users table
+    async function loadUsers() {
+        try {
+            const userSnap = await db.ref('users').once('value');
+            const users = userSnap.val() || {};
+            const tbody = document.querySelector('#table-users tbody');
+            tbody.innerHTML = '';
+            Object.values(users).forEach((user, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td>${idx+1}</td>
+                    <td>${user.displayName || ''}</td>
+                    <td>${user.email || ''}</td>
+                    <td>${user.phone || ''}</td>
+                    <td>${user.provider || ''}</td>
+                    <td>${user.googleData ? user.googleData.created_at : ''}</td>
+                    <td><button class='btn btn-sm btn-warning'>Sửa</button> <button class='btn btn-sm btn-danger'>Xóa</button></td>
+                </tr>`;
+            });
+            $('#table-users').DataTable();
+        } catch (error) {
+            console.error('Error loading users:', error);
+        }
+    }
+
+    // Load contacts table
+    async function loadContacts() {
+        try {
+            const contactSnap = await db.ref('contacts').once('value');
+            const contacts = contactSnap.val() || {};
+            const tbody = document.querySelector('#table-contacts tbody');
+            tbody.innerHTML = '';
+            Object.values(contacts).forEach((contact, idx) => {
+                tbody.innerHTML += `<tr>
+                    <td>${idx+1}</td>
+                    <td>${contact.name || ''}</td>
+                    <td>${contact.email || ''}</td>
+                    <td>${contact.phone || ''}</td>
+                    <td>${contact.message || ''}</td>
+                    <td>${contact.createdAt ? new Date(contact.createdAt).toLocaleString('vi-VN') : ''}</td>
+                    <td><button class='btn btn-sm btn-danger'>Xóa</button></td>
+                </tr>`;
+            });
+            $('#table-contacts').DataTable();
+        } catch (error) {
+            console.error('Error loading contacts:', error);
+        }
+    }
+
+    // Load coupons table
+    async function loadCoupons(reload = false) {
+        try {
+            const couponSnap = await db.ref('coupons').once('value');
+            let coupons = couponSnap.val() || [];
+            const tbody = document.querySelector('#table-coupons tbody');
+            tbody.innerHTML = '';
+            
+            // Đảm bảo coupons là array
+            if (!Array.isArray(coupons)) {
+                if (coupons && typeof coupons === 'object') {
+                    coupons = Object.values(coupons);
+                } else {
+                    coupons = [];
+                }
+            }
+            
+            if (coupons.length > 0) {
+                coupons.forEach((coupon, idx) => {
+                    const startDate = coupon.startDate ? new Date(coupon.startDate).toLocaleDateString('vi-VN') : '';
+                    const endDate = coupon.endDate ? new Date(coupon.endDate).toLocaleDateString('vi-VN') : '';
+                    const discountText = coupon.type === 'percent' ? `${coupon.discount}%` : `${coupon.discount?.toLocaleString('vi-VN')}₫`;
+                    
+                    tbody.innerHTML += `<tr>
+                        <td>${idx+1}</td>
+                        <td><strong>${coupon.code || ''}</strong></td>
+                        <td>${coupon.description || ''}</td>
+                        <td>${discountText}</td>
+                        <td>${coupon.type === 'percent' ? 'Phần trăm' : 'Số tiền cố định'}</td>
+                        <td>${startDate}</td>
+                        <td>${endDate}</td>
+                        <td><span class="badge badge-${coupon.status === 'active' ? 'paid' : 'cancel'}">${coupon.status === 'active' ? 'Kích hoạt' : 'Không kích hoạt'}</span></td>
+                        <td>
+                            <button class='btn btn-sm btn-warning btn-edit-coupon' data-idx='${idx}' data-coupon='${JSON.stringify(coupon).replace(/'/g, "&#39;")}'>Sửa</button> 
+                            <button class='btn btn-sm btn-danger btn-delete-coupon' data-idx='${idx}'>Xóa</button>
+                        </td>
+                    </tr>`;
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted">Chưa có mã giảm giá nào</td></tr>';
+            }
+            
+            if (reload) {
+                if ($.fn.DataTable.isDataTable('#table-coupons')) {
+                    $('#table-coupons').DataTable().destroy();
+                }
+            }
+            $('#table-coupons').DataTable();
+        } catch (error) {
+            console.error('Error loading coupons:', error);
+        }
+    }
+
+    // Load news table
+    async function loadNews(reload = false) {
+        try {
+            const newsSnap = await db.ref('news').once('value');
+            let news = newsSnap.val() || [];
+            const tbody = document.querySelector('#table-news tbody');
+            tbody.innerHTML = '';
+            
+            // Đảm bảo news là array
+            if (!Array.isArray(news)) {
+                if (news && typeof news === 'object') {
+                    news = Object.values(news);
+                } else {
+                    news = [];
+                }
+            }
+            
+            if (news.length > 0) {
+                news.forEach((item, idx) => {
+                    const date = item.date ? new Date(item.date).toLocaleDateString('vi-VN') : '';
+                    const status = item.status === 'published' ? 'Đã đăng' : 'Bản nháp';
+                    const statusClass = item.status === 'published' ? 'paid' : 'cancel';
+                    
+                    tbody.innerHTML += `<tr>
+                        <td>${idx+1}</td>
+                        <td><strong>${item.title || ''}</strong></td>
+                        <td>${item.description || ''}</td>
+                        <td>${item.author || ''}</td>
+                        <td>${date}</td>
+                        <td><span class="badge badge-${statusClass}">${status}</span></td>
+                        <td>
+                            <button class='btn btn-sm btn-warning btn-edit-news' data-idx='${idx}' data-news='${JSON.stringify(item).replace(/'/g, "&#39;")}'>Sửa</button> 
+                            <button class='btn btn-sm btn-danger btn-delete-news' data-idx='${idx}'>Xóa</button>
+                        </td>
+                    </tr>`;
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Chưa có tin tức nào</td></tr>';
+            }
+            
+            if (reload) {
+                if ($.fn.DataTable.isDataTable('#table-news')) {
+                    $('#table-news').DataTable().destroy();
+                }
+            }
+            $('#table-news').DataTable();
+        } catch (error) {
+            console.error('Error loading news:', error);
+        }
+    }
+
+    // Initialize page
+    // The auth state observer will handle showing login or admin content
+    </script>
+</body>
+</html> 

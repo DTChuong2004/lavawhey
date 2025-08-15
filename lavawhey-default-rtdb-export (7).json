@@ -320,8 +320,8 @@
       "phone": "01234567890"
     }
   },
-  "coupons": {
-    "SUMMER20": {
+  "coupons": [
+    {
       "code": "SUMMER20",
       "description": "Giảm 20% cho đơn hàng hè",
       "discount": 20,
@@ -329,9 +329,73 @@
       "startDate": "2025-05-01",
       "status": "active",
       "type": "percent"
+    },
+    {
+      "code": "HOILQ2026",
+      "createdAt": "2025-08-10T15:15:04.136Z",
+      "description": "Ngay hoi Lq",
+      "discount": 20,
+      "endDate": "2025-09-10T15:14",
+      "startDate": "2025-08-11T15:14",
+      "status": "active",
+      "type": "percent"
+    },
+    {
+      "code": "LQ2026",
+      "createdAt": "2025-08-10T15:16:05.003Z",
+      "description": "Ngay hoi lien quan",
+      "discount": 50000,
+      "endDate": "2025-09-10T15:15",
+      "startDate": "2025-08-11T15:15",
+      "status": "active",
+      "type": "fixed"
     }
-  },
+  ],
   "invoices": {
+    "35722013": {
+      "coupon": "SUMMER20",
+      "createdAt": "2025-08-10T14:23:21.365Z",
+      "customer": {
+        "address": "Cần thơ",
+        "email": "dangthienchuong250604@gmail.com",
+        "firstName": "Chương",
+        "lastName": "Đặng",
+        "note": "",
+        "phone": "01234567890"
+      },
+      "discountAmount": 660000,
+      "items": [
+        {
+          "id": "bcaa-411",
+          "image": "https://th.bing.com/th/id/OIP.IbAceuvnVouuV8nzbN9M1wHaJd?rs=1&pid=ImgDetMain",
+          "name": "BCAA 4:1:1",
+          "price": 950000,
+          "quantity": 1
+        },
+        {
+          "id": "bcaa-energy",
+          "image": "https://th.bing.com/th/id/OIP.WM2QWW6nyznBpyN_JMsCZAHaHa?rs=1&pid=ImgDetMain",
+          "name": "BCAA Energy",
+          "price": 1100000,
+          "quantity": 1
+        },
+        {
+          "id": "whey-mass",
+          "image": "https://fullydosed.in/wp-content/uploads/2019/11/mass-gainer.png",
+          "name": "Whey Protein Mass Gainer",
+          "price": 1800000,
+          "quantity": 1
+        }
+      ],
+      "orderKey": "ORDER_1754835722013",
+      "total": 3850000,
+      "vnp_Amount": "385000000",
+      "vnp_BankCode": "NCB",
+      "vnp_OrderInfo": "Thanh+toan+don+hang+35722013",
+      "vnp_PayDate": "20250810212421",
+      "vnp_TransactionNo": "15124884",
+      "vnp_TxnRef": "35722013"
+    },
     "64275610": {
       "coupon": "SUMMER20",
       "createdAt": "2025-06-17T12:45:04.294Z",
@@ -363,6 +427,51 @@
       "vnp_TxnRef": "64275610"
     }
   },
+  "news": [
+    null,
+    {
+      "author": "LavaWhey",
+      "content": "Whey protein là nguồn protein chất lượng cao, giúp tăng cơ, phục hồi sau tập luyện và hỗ trợ giảm cân hiệu quả. Sử dụng whey đúng cách sẽ giúp bạn đạt được mục tiêu thể hình nhanh hơn.",
+      "date": "2024-06-01",
+      "description": "Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.",
+      "id": "1",
+      "image": "https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png",
+      "tags": [
+        "whey",
+        "dinh dưỡng",
+        "tập gym"
+      ],
+      "title": "Whey Protein: Lợi ích và cách sử dụng hiệu quả"
+    },
+    {
+      "author": "LavaWhey",
+      "content": "BCAA là chuỗi axit amin thiết yếu giúp phục hồi cơ bắp, giảm đau nhức và tăng hiệu suất tập luyện. Bổ sung BCAA đúng thời điểm sẽ tối ưu hóa kết quả tập luyện.",
+      "date": "2024-06-03",
+      "description": "Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.",
+      "id": "2",
+      "image": "https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png",
+      "tags": [
+        "bcaa",
+        "phục hồi",
+        "tập luyện"
+      ],
+      "title": "BCAA là gì? Tác dụng của BCAA trong tập luyện"
+    },
+    {
+      "author": "LavaWhey",
+      "content": "Pre-workout chứa các thành phần giúp tăng năng lượng, tập trung và sức bền. Sử dụng đúng liều lượng sẽ giúp bạn đạt hiệu quả tối đa mà không gây mệt mỏi.",
+      "date": "2024-06-05",
+      "description": "Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!",
+      "id": "3",
+      "image": "https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png",
+      "tags": [
+        "pre-workout",
+        "năng lượng",
+        "tập gym"
+      ],
+      "title": "Pre-workout: Bí quyết tăng năng lượng trước khi tập"
+    }
+  ],
   "orders": {
     "ORDER_1750164275610": {
       "coupon": "SUMMER20",
@@ -394,6 +503,51 @@
       "vnp_PayDate": "20250617194543",
       "vnp_TransactionNo": "15022988",
       "vnp_TxnRef": "64275610"
+    },
+    "ORDER_1754835722013": {
+      "coupon": "SUMMER20",
+      "createdAt": "2025-08-10T14:22:02.013Z",
+      "customer": {
+        "address": "Cần thơ",
+        "email": "dangthienchuong250604@gmail.com",
+        "firstName": "Chương",
+        "lastName": "Đặng",
+        "note": "",
+        "phone": "01234567890"
+      },
+      "discountAmount": 660000,
+      "id": "ORDER_1754835722013",
+      "items": [
+        {
+          "id": "bcaa-411",
+          "image": "https://th.bing.com/th/id/OIP.IbAceuvnVouuV8nzbN9M1wHaJd?rs=1&pid=ImgDetMain",
+          "name": "BCAA 4:1:1",
+          "price": 950000,
+          "quantity": 1
+        },
+        {
+          "id": "bcaa-energy",
+          "image": "https://th.bing.com/th/id/OIP.WM2QWW6nyznBpyN_JMsCZAHaHa?rs=1&pid=ImgDetMain",
+          "name": "BCAA Energy",
+          "price": 1100000,
+          "quantity": 1
+        },
+        {
+          "id": "whey-mass",
+          "image": "https://fullydosed.in/wp-content/uploads/2019/11/mass-gainer.png",
+          "name": "Whey Protein Mass Gainer",
+          "price": 1800000,
+          "quantity": 1
+        }
+      ],
+      "paymentStatus": "success",
+      "status": "paid",
+      "total": 3850000,
+      "userId": "KrrIsbVNW7cp2cbEkYEYU0wK2Ss1",
+      "vnp_BankCode": "NCB",
+      "vnp_PayDate": "20250810212421",
+      "vnp_TransactionNo": "15124884",
+      "vnp_TxnRef": "35722013"
     }
   },
   "users": {
@@ -409,14 +563,38 @@
         "created_at": "Tue, 10 Jun 2025 05:46:23 GMT",
         "email_verified": true
       },
-      "lastLogin": "2025-06-17T13:24:48.777Z",
+      "lastLogin": "2025-08-12T10:21:25.729Z",
       "phone": "01234567890",
       "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocLTsa2Ey6iTRBYB6jdE6sQQbz-ueo9FRW4FPvKAgeDuOUd1OQ=s96-c",
       "provider": "google",
-      "totalSpent": 0
+      "totalSpent": 5290000
+    },
+    "S9PJCfukPLOt4pdE9u5NezYZyVg2": {
+      "displayName": "Tran Hoang Dang",
+      "email": "soiden2506@gmail.com",
+      "lastLogin": "2025-08-10T14:25:11.391Z",
+      "photoURL": ""
+    },
+    "leAofZuLDPNqGmzSnm7Cjb9diLm1": {
+      "displayName": "",
+      "email": "quantrilavawhey@gmail.com",
+      "lastLogin": "2025-08-10T14:26:59.959Z",
+      "photoURL": ""
+    },
+    "mx3Hs2ZZNERxjuSKyCZDBf4tttE3": {
+      "displayName": "Tran Hoang Huy",
+      "email": "chuchou2525@gmail.com",
+      "lastLogin": "2025-08-10T14:33:25.386Z",
+      "photoURL": ""
     }
   },
   "vnpay_transactions": {
+    "35722013": {
+      "amount": 3850000,
+      "createdAt": "2025-08-10T14:22:02.738Z",
+      "orderKey": "ORDER_1754835722013",
+      "status": "pending"
+    },
     "61700515": {
       "amount": 5100000,
       "createdAt": "2025-06-17T12:01:41.146Z",
@@ -496,36 +674,36 @@
       "status": "pending"
     }
   },
-  "news": {
-    "1": {
-      "id": "1",
-      "title": "Whey Protein: Lợi ích và cách sử dụng hiệu quả",
-      "description": "Khám phá những lợi ích tuyệt vời của whey protein đối với sức khỏe và thể hình.",
-      "image": "https://suckhoehangngay.mediacdn.vn/thumb_w/600/154880486097817600/2020/8/10/20190829063758523105whey-protein-la-gimax-800x800-15970551551471580098420-0-25-468-774-crop-1597055170642656384816.png",
-      "date": "2024-06-01",
-      "author": "LavaWhey",
-      "content": "Whey protein là nguồn protein chất lượng cao, giúp tăng cơ, phục hồi sau tập luyện và hỗ trợ giảm cân hiệu quả. Sử dụng whey đúng cách sẽ giúp bạn đạt được mục tiêu thể hình nhanh hơn.",
-      "tags": ["whey", "dinh dưỡng", "tập gym"]
-    },
-    "2": {
-      "id": "2",
-      "title": "BCAA là gì? Tác dụng của BCAA trong tập luyện",
-      "description": "Tìm hiểu về BCAA và vai trò của nó trong việc phục hồi và phát triển cơ bắp.",
-      "image": "https://gcs.tripi.vn/public-tripi/tripi-feed/img/476514cDF/anh-mo-ta.png",
-      "date": "2024-06-03",
-      "author": "LavaWhey",
-      "content": "BCAA là chuỗi axit amin thiết yếu giúp phục hồi cơ bắp, giảm đau nhức và tăng hiệu suất tập luyện. Bổ sung BCAA đúng thời điểm sẽ tối ưu hóa kết quả tập luyện.",
-      "tags": ["bcaa", "phục hồi", "tập luyện"]
-    },
-    "3": {
-      "id": "3",
-      "title": "Pre-workout: Bí quyết tăng năng lượng trước khi tập",
-      "description": "Pre-workout giúp bạn bùng nổ sức mạnh và tập luyện hiệu quả hơn. Tìm hiểu cách sử dụng đúng!",
-      "image": "https://kienthuc.25fit.net/hubfs/%5B25%20FIT%5D%20Banner%20blog%20%2815%29-Nov-05-2023-04-28-49-0377-PM.png",
-      "date": "2024-06-05",
-      "author": "LavaWhey",
-      "content": "Pre-workout chứa các thành phần giúp tăng năng lượng, tập trung và sức bền. Sử dụng đúng liều lượng sẽ giúp bạn đạt hiệu quả tối đa mà không gây mệt mỏi.",
-      "tags": ["pre-workout", "năng lượng", "tập gym"]
+  "voucher": {
+    "coupons_schema": {
+      "example": {
+        "code": "SUMMER20",
+        "description": "Giảm 20% cho đơn hàng hè",
+        "discount": 20,
+        "endDate": "2025-07-31",
+        "startDate": "2025-05-01",
+        "status": "active",
+        "type": "percent"
+      },
+      "fields": {
+        "code": "VARCHAR(50) - Mã giảm giá",
+        "description": "VARCHAR(255) - Mô tả mã giảm giá",
+        "discount": "DECIMAL(5,2) - Phần trăm hoặc giá trị giảm",
+        "endDate": "DATE (YYYY-MM-DD) - Ngày kết thúc hiệu lực",
+        "startDate": "DATE (YYYY-MM-DD) - Ngày bắt đầu hiệu lực",
+        "status": "VARCHAR(20) - Trạng thái (active/inactive)",
+        "type": "VARCHAR(20) - Loại giảm giá (percent/fixed)"
+      },
+      "mapping": {
+        "giam_gia": "discount",
+        "loai": "type",
+        "ma": "code",
+        "mo_ta": "description",
+        "ngay_bat_dau": "startDate",
+        "ngay_ket_thuc": "endDate",
+        "trang_thai": "status"
+      },
+      "note": "Bảng Mã giảm giá (MaGiamGia) → cấu trúc dữ liệu trong Realtime DB"
     }
   }
 }
